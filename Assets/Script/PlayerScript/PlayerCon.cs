@@ -8,8 +8,11 @@ public class PlayerCon : MonoBehaviour
     private int currentLane = 1;
     private Vector3 targetPos;
 
-    [Header("移動設定")]
+    [Header("レーン移動設定")]
     public float laneChangeSpeed = 10f;
+
+    [Header("前進移動設定")]
+    public float forwardSpeed = 1.0f;
 
     [Header("ジャンプ設定")]
     public float jumpForce = 7f;
@@ -23,6 +26,7 @@ public class PlayerCon : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
     }
 
     public void OnMoveLeft(InputAction.CallbackContext context)
@@ -48,6 +52,9 @@ public class PlayerCon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // --- 前進 ---
+        rb.MovePosition(rb.position + Vector3.forward * forwardSpeed * Time.fixedDeltaTime);
+
         //レーン移動
         targetPos = new Vector3((currentLane - 1) * laneDistance, transform.position.y, transform.position.z);
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * laneChangeSpeed);
