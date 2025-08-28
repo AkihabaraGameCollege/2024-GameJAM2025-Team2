@@ -1,12 +1,23 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameDirectory : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
+    // カウントダウン用スプライト（個別にアサイン）
+    [Header("カウントダウン用スプライト")]
+    [SerializeField] Sprite sprite3 = null;
+    [SerializeField] Sprite sprite2 = null;
+    [SerializeField] Sprite sprite1 = null;
+    [SerializeField] Sprite spriteStart = null;
+    // カウントダウンの画像を表示するImage
+    [SerializeField] Image countdownImage = null;
     // カウントアップの時間を表示するTextMeshProUGUI
     [SerializeField] TextMeshProUGUI countupText = null;
 
+    // カウントダウン開始秒数
+    [SerializeField] int countStartTime = 3;
     // 現在のカウントアップ時間（秒）
     float currentCountup = 0f;
 
@@ -16,7 +27,7 @@ public class GameDirectory : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCountup();
+        StartCoroutine(CountdownAndStartCountup());
     }
 
     // Update is called once per frame
@@ -28,8 +39,29 @@ public class GameDirectory : MonoBehaviour
             currentCountup += Time.deltaTime;
             // テキストに現在の時間を表示（小数点第一位まで、3桁表示）
             countupText.text = "Time : " + currentCountup.ToString("000.0") + " s";
-            Debug.Log("Countup: " + currentCountup); // 追加
         }
+    }
+
+    IEnumerator CountdownAndStartCountup()
+    {
+        countdownImage.gameObject.SetActive(true);
+        countupText.gameObject.SetActive(false);
+
+        // 3
+        countdownImage.sprite = sprite3;
+        yield return new WaitForSeconds(1f);
+        // 2
+        countdownImage.sprite = sprite2;
+        yield return new WaitForSeconds(1f);
+        // 1
+        countdownImage.sprite = sprite1;
+        yield return new WaitForSeconds(1f);
+        // Start!!
+        countdownImage.sprite = spriteStart;
+        yield return new WaitForSeconds(1f);
+
+        countdownImage.gameObject.SetActive(false);
+        StartCountup();
     }
 
     // カウントアップを開始するメソッド
