@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7671452904599404587}
   - component: {fileID: 4066557898859995369}
   - component: {fileID: 6159245327773844066}
+  - component: {fileID: 5230038782370264417}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -328,10 +329,33 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  spinSpeed: 3600
+  spinSpeed: 720
+  spinDuration: 0.5
   knockBackForce: 4
   knockBackUpForce: 1
   invincibleTime: 3
+--- !u!95 &5230038782370264417
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120895623583476829}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 088c188582f8ea94180c50ed62fae385, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9072aa88ffd87a4479920c271178dec0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1838816723270489659
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9130758941986917466
 Transform:
   m_ObjectHideFlags: 0
@@ -434,7 +458,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -632,7 +656,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: a
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 088c188582f8ea94180c50ed62fae385, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

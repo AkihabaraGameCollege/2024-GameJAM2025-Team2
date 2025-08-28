@@ -18,6 +18,7 @@ public class PlayerCon : MonoBehaviour
 
     [Header("ジャンプ設定")]
     public float jumpForce = 7f;
+    public float fallSpeed = 1.0f;
     public float groundCheckDistance = 0.2f;
     public LayerMask groundMask;
     private bool isGrounded;
@@ -25,7 +26,10 @@ public class PlayerCon : MonoBehaviour
     [Header("仮の空中アクション")]
     [Tooltip("前転")]
     public float spinSpeed = 360.0f;
+    public float spinDuration = 0.5f;
     private bool isSpinning = false;
+    private float spinTimer = 0f;
+
 
     [Header("被弾処理")]
     [Tooltip("全体の慣性")]
@@ -37,29 +41,39 @@ public class PlayerCon : MonoBehaviour
     private bool isInvincible = false;
     private bool canControl = true;
 
+    private Animator playerAnimator;
     private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
         targetX = transform.position.x;
 
     }
 
     private void Update()
     {
+        playerAnimator.SetBool("IsGrounded", isGrounded);
+
+        //空中アクション
         if (isSpinning)
         {
+            spinTimer += Time.deltaTime;
+
             transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
-        }
+        
             // 着地したらリセット
-            if (isGrounded)
+            if (spinTimer >= spinDuration)
             {
                 isSpinning = false;
+                spinTimer = 0f;
                 transform.rotation = Quaternion.identity; // 角度を元に戻す
             }
+        }
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -73,6 +87,11 @@ public class PlayerCon : MonoBehaviour
         float newX = Mathf.Lerp(rb.position.x, targetX, Time.fixedDeltaTime * laneChangeSpeed);
         Vector3 forwardMove = Vector3.forward * forwardSpeed * Time.fixedDeltaTime;
         Vector3 move = new Vector3(newX, rb.position.y, rb.position.z) + forwardMove;
+
+        if(rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallSpeed - 1) * Time.fixedDeltaTime;
+        }
 
         rb.MovePosition(move);
     }
@@ -123,15 +142,19 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed && isGrounded)
         {
+            Debug.Log("ジャンプ中ジャンプアクション実行可");
+            playerAnimator.SetTrigger("Jump");
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
     }
 
     public void OnJumpAction(InputAction.CallbackContext context)
     {
-        if (canControl && context.performed && !isGrounded)
-        { 
+        if (canControl && context.performed && !isGrounded && !isSpinning)
+        {
+            Debug.Log("ジャンプアクション実行した");
             isSpinning = true;
+            spinTimer = 0f;
         }
     }
     #endregion

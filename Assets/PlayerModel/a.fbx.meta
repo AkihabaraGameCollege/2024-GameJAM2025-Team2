@@ -22,7 +22,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -80,7 +80,117 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: a(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body6
+      parentName: a(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Hips
+      parentName: a(Clone)
+      position: {x: -0, y: 1, z: 0}
+      rotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Spine
+      parentName: J_Hips
+      position: {x: -0.79999995, y: 0, z: 0}
+      rotation: {x: 0, y: -0.0041220947, z: -0, w: 0.99999154}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Neck
+      parentName: J_Spine
+      position: {x: -0.22604461, y: 0, z: -1.7769119e-15}
+      rotation: {x: 0.9999551, y: 5.8035354e-19, z: -0.009477893, w: 6.1229596e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Head
+      parentName: J_Neck
+      position: {x: -0.17397304, y: 4.6900244e-32, z: -3.8302692e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Shoulder_Left
+      parentName: J_Spine
+      position: {x: -0.06923454, y: -0.028529476, z: 0.13699974}
+      rotation: {x: -0.33636454, y: 0.36756966, z: 0.5992024, w: 0.62666416}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Upper_Arm_Left
+      parentName: J_Shoulder_Left
+      position: {x: -0.20426533, y: 0.0025286642, z: 0.11919228}
+      rotation: {x: -2.553944e-32, y: 0.26133364, z: 5.8737616e-16, w: 0.9652486}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Lower_Arm_Left
+      parentName: J_Upper_Arm_Left
+      position: {x: -0.5079901, y: 0.010577317, z: -0.00058933784}
+      rotation: {x: -0.72650903, y: 0.00021617586, z: -0.00022855586, w: 0.68715686}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Hand_Left
+      parentName: J_Lower_Arm_Left
+      position: {x: -0.3335995, y: -9.574563e-15, z: -0.002078599}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Shoulder_Right
+      parentName: J_Spine
+      position: {x: -0.0714823, y: -0.0285295, z: -0.13583931}
+      rotation: {x: 0.36239088, y: 0.34129298, z: -0.6296732, w: 0.59640896}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Upper_Arm_Right
+      parentName: J_Shoulder_Right
+      position: {x: 0.2042652, y: -0.0025286626, z: -0.119192205}
+      rotation: {x: 3.19243e-33, y: 0.26133364, z: 1.5418177e-16, w: 0.9652486}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Lower_Arm_Right
+      parentName: J_Upper_Arm_Right
+      position: {x: 0.5079906, y: -0.010583809, z: 0.0005896996}
+      rotation: {x: -0.72650903, y: 0.00021617586, z: -0.00022855586, w: 0.68715686}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Hand_Right
+      parentName: J_Lower_Arm_Right
+      position: {x: 0.333598, y: -3.9035442e-14, z: 0.0020877887}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Upper_Leg_Left
+      parentName: J_Hips
+      position: {x: 0.09796234, y: 0.03779479, z: 0.19148168}
+      rotation: {x: -0.007298687, y: -4.4691566e-19, z: 0.99997336, w: -6.123071e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Lower_Leg_Left
+      parentName: J_Upper_Leg_Left
+      position: {x: -0.3951478, y: -0.009094517, z: -0.005768574}
+      rotation: {x: 0, y: -0.018489858, z: -0, w: 0.99982905}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Foot_Left
+      parentName: J_Lower_Leg_Left
+      position: {x: -0.32007414, y: 0.024094293, z: 0.0071658394}
+      rotation: {x: -0.7403533, y: -0.0682545, z: 0.07605672, w: 0.66440475}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Toes_Left
+      parentName: J_Foot_Left
+      position: {x: -0.14571978, y: -7.105427e-17, z: 5.684342e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Upper_Leg_Right
+      parentName: J_Hips
+      position: {x: 0.097962, y: 0.0377948, z: -0.191482}
+      rotation: {x: 0.000000007450382, y: 0.007298687, z: -5.4379393e-11, w: 0.99997336}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Lower_Leg_Right
+      parentName: J_Upper_Leg_Right
+      position: {x: 0.3951479, y: 0.0090945, z: 0.005768582}
+      rotation: {x: 9.631296e-35, y: -0.018489858, z: 6.1227466e-17, w: 0.99982905}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Foot_Right
+      parentName: J_Lower_Leg_Right
+      position: {x: 0.3200748, y: -0.0240943, z: -0.0071658534}
+      rotation: {x: -0.7403533, y: -0.0682545, z: 0.07605672, w: 0.66440475}
+      scale: {x: 1, y: 1, z: 1}
+    - name: J_Toes_Right
+      parentName: J_Foot_Right
+      position: {x: 0.14571944, y: -0.000000006823018, z: 0.00000006160137}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -89,15 +199,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Body6
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
