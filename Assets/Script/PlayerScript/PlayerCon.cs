@@ -20,6 +20,11 @@ public class PlayerCon : MonoBehaviour
     public LayerMask groundMask;
     private bool isGrounded;
 
+    [Header("仮の空中アクション")]
+    [Tooltip("前転")]
+    public float spinSpeed = 360.0f;
+    private bool isSpinning = false;
+
     private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,6 +33,20 @@ public class PlayerCon : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         targetX = transform.position.x;
 
+    }
+
+    private void Update()
+    {
+        if (isSpinning)
+        {
+            transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
+        }
+            // 着地したらリセット
+            if (isGrounded)
+            {
+                isSpinning = false;
+                transform.rotation = Quaternion.identity; // 角度を元に戻す
+            }
     }
 
     // Update is called once per frame
@@ -68,6 +87,14 @@ public class PlayerCon : MonoBehaviour
         if (context.performed && isGrounded)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
+        }
+    }
+
+    public void OnJumpAction(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isGrounded)
+        { 
+            isSpinning = true;
         }
     }
     #endregion
