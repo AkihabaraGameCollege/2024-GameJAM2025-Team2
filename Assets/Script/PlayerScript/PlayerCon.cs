@@ -25,7 +25,10 @@ public class PlayerCon : MonoBehaviour
     [Header("仮の空中アクション")]
     [Tooltip("前転")]
     public float spinSpeed = 360.0f;
+    public float spinDuration = 0.5f;
     private bool isSpinning = false;
+    private float spinTimer = 0f;
+
 
     [Header("被弾処理")]
     [Tooltip("全体の慣性")]
@@ -49,17 +52,23 @@ public class PlayerCon : MonoBehaviour
 
     private void Update()
     {
+        //空中アクション
         if (isSpinning)
         {
+            spinTimer += Time.deltaTime;
+
             transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
-        }
+        
             // 着地したらリセット
-            if (isGrounded)
+            if (spinTimer >= spinDuration)
             {
                 isSpinning = false;
+                spinTimer = 0f;
                 transform.rotation = Quaternion.identity; // 角度を元に戻す
             }
+        }
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -123,15 +132,18 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed && isGrounded)
         {
+            Debug.Log("ジャンプ中ジャンプアクション実行可");
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
     }
 
     public void OnJumpAction(InputAction.CallbackContext context)
     {
-        if (canControl && context.performed && !isGrounded)
-        { 
+        if (canControl && context.performed && !isGrounded && !isSpinning)
+        {
+            Debug.Log("ジャンプアクション実行した");
             isSpinning = true;
+            spinTimer = 0f;
         }
     }
     #endregion
