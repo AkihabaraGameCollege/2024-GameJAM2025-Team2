@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerCon : MonoBehaviour
 {
@@ -24,6 +26,16 @@ public class PlayerCon : MonoBehaviour
     [Tooltip("前転")]
     public float spinSpeed = 360.0f;
     private bool isSpinning = false;
+
+    [Header("被弾処理")]
+    [Tooltip("全体の慣性")]
+    public float knockBackForce = 5.0f;
+    [Tooltip("上の慣性")]
+    public float knockBackUpForce = 1.0f;
+
+    public float invincibleTime = 3.0f;
+    private bool isInvincible = false;
+    private bool canControl = true;
 
     private Rigidbody rb;
 
@@ -52,6 +64,8 @@ public class PlayerCon : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canControl) return;
+
         // --- 地面判定 (Raycast) ---
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
 
@@ -63,10 +77,33 @@ public class PlayerCon : MonoBehaviour
         rb.MovePosition(move);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") && !isInvincible)
+        {
+            Debug.Log($"{name} が {other.name} に当たった");
+            StartCoroutine(HitRoutine());
+        }
+    }
+
+    private IEnumerator HitRoutine()
+    {
+        isInvincible = true;
+        canControl = false;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.AddForce(new Vector3(0, knockBackUpForce, -1f) * knockBackForce, ForceMode.VelocityChange);
+    
+        yield return new WaitForSeconds(invincibleTime);
+
+        isInvincible = false;
+        canControl = true;
+    }
+
     #region INputSystem
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (canControl && context.performed)
         {
             currentLane = Mathf.Max(0, currentLane - 1);
             targetX = (currentLane - 1) * laneDistance;
@@ -75,7 +112,7 @@ public class PlayerCon : MonoBehaviour
 
     public void OnMoveRight(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (canControl && context.performed)
         {
             currentLane = Mathf.Min(2, currentLane + 1);
             targetX = (currentLane - 1) * laneDistance;
@@ -84,7 +121,7 @@ public class PlayerCon : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded)
+        if (canControl && context.performed && isGrounded)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
@@ -92,7 +129,7 @@ public class PlayerCon : MonoBehaviour
 
     public void OnJumpAction(InputAction.CallbackContext context)
     {
-        if (context.performed && !isGrounded)
+        if (canControl && context.performed && !isGrounded)
         { 
             isSpinning = true;
         }
