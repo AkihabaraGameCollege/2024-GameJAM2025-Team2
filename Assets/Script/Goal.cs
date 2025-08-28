@@ -7,7 +7,7 @@ public class Goal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("ResultScene");
             Debug.Log("ƒS[ƒ‹‚É‚É“’B");
         }
     }

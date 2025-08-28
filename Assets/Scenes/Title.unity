@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 12410552}
   - component: {fileID: 12410551}
   - component: {fileID: 12410550}
+  - component: {fileID: 12410553}
   m_Layer: 5
   m_Name: SoundSettingButton
   m_TagString: Untagged
@@ -201,7 +202,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 12410551}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 12410553}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowSoundSettingsAndHideMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &12410551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +253,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12410548}
   m_CullTransparentMesh: 1
+--- !u!114 &12410553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12410548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &62483252
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 124713390}
   m_Layer: 5
-  m_Name: Info
+  m_Name: howToPlayUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,6 +714,7 @@ GameObject:
   - component: {fileID: 389070542}
   - component: {fileID: 389070541}
   - component: {fileID: 389070540}
+  - component: {fileID: 389070543}
   m_Layer: 5
   m_Name: StageButton
   m_TagString: Untagged
@@ -754,7 +785,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 389070541}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 389070543}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowStageSelectAndHideMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &389070541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +836,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389070538}
   m_CullTransparentMesh: 1
+--- !u!114 &389070543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389070538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 1542250127}
 --- !u!1 &484957103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1436,7 @@ GameObject:
   - component: {fileID: 903135911}
   - component: {fileID: 903135910}
   - component: {fileID: 903135909}
+  - component: {fileID: 903135912}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1446,7 +1507,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 903135910}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 903135912}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowMenuAndHideSoundSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &903135910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1485,6 +1558,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903135907}
   m_CullTransparentMesh: 1
+--- !u!114 &903135912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903135907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &975060686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1679,7 @@ GameObject:
   - component: {fileID: 1014843557}
   - component: {fileID: 1014843556}
   - component: {fileID: 1014843555}
+  - component: {fileID: 1014843558}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1659,7 +1750,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1014843556}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1014843558}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowMenuAndHideHowToPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1014843556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1698,6 +1801,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014843553}
   m_CullTransparentMesh: 1
+--- !u!114 &1014843558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014843553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &1052938034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,6 +1966,7 @@ GameObject:
   - component: {fileID: 1057061355}
   - component: {fileID: 1057061354}
   - component: {fileID: 1057061353}
+  - component: {fileID: 1057061356}
   m_Layer: 5
   m_Name: InfoButton
   m_TagString: Untagged
@@ -1916,7 +2037,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1057061354}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1057061356}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowHowToPlayAndHideMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1057061354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,6 +2088,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057061351}
   m_CullTransparentMesh: 1
+--- !u!114 &1057061356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057061351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &1213284365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,6 +2797,7 @@ GameObject:
   - component: {fileID: 1329115511}
   - component: {fileID: 1329115510}
   - component: {fileID: 1329115509}
+  - component: {fileID: 1329115512}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -2717,7 +2868,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1329115510}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1329115512}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1329115510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2756,6 +2919,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329115507}
   m_CullTransparentMesh: 1
+--- !u!114 &1329115512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329115507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 0}
+  titleUI: {fileID: 0}
+  howToPlayUI: {fileID: 0}
+  soundSettingsUI: {fileID: 0}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &1346944530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,8 +2948,9 @@ GameObject:
   - component: {fileID: 1346944534}
   - component: {fileID: 1346944533}
   - component: {fileID: 1346944532}
+  - component: {fileID: 1346944535}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ReturnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2838,7 +3019,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1346944533}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1346944535}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowTitleAndHideMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1346944533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,6 +3070,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346944530}
   m_CullTransparentMesh: 1
+--- !u!114 &1346944535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346944530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 0}
 --- !u!1001 &1416409015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3200,6 +3410,7 @@ GameObject:
   - component: {fileID: 1468102465}
   - component: {fileID: 1468102464}
   - component: {fileID: 1468102463}
+  - component: {fileID: 1468102466}
   m_Layer: 5
   m_Name: Stage1Button
   m_TagString: Untagged
@@ -3270,7 +3481,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1468102464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1468102466}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: OnStage1ButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1468102464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3309,6 +3532,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468102461}
   m_CullTransparentMesh: 1
+--- !u!114 &1468102466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468102461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 0}
+  titleUI: {fileID: 0}
+  howToPlayUI: {fileID: 0}
+  soundSettingsUI: {fileID: 0}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &1518722616
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,6 +4281,7 @@ GameObject:
   - component: {fileID: 1791540046}
   - component: {fileID: 1791540045}
   - component: {fileID: 1791540044}
+  - component: {fileID: 1791540047}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -4111,7 +4352,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1791540045}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1791540047}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowMenuAndHideTitle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1791540045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4150,6 +4403,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791540042}
   m_CullTransparentMesh: 1
+--- !u!114 &1791540047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791540042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &1853840078
 GameObject:
   m_ObjectHideFlags: 0
@@ -4437,8 +4707,9 @@ GameObject:
   - component: {fileID: 2028896903}
   - component: {fileID: 2028896902}
   - component: {fileID: 2028896901}
+  - component: {fileID: 2028896904}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ReturnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4507,7 +4778,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2028896902}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2028896904}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: ShowMenuAndHideStageSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2028896902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4546,6 +4829,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028896899}
   m_CullTransparentMesh: 1
+--- !u!114 &2028896904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028896899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 62483252}
+  titleUI: {fileID: 889213034}
+  howToPlayUI: {fileID: 124713389}
+  soundSettingsUI: {fileID: 586154908}
+  stageSelectUI: {fileID: 1542250127}
 --- !u!1 &2034617457
 GameObject:
   m_ObjectHideFlags: 0
