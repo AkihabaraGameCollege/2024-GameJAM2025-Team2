@@ -100,7 +100,7 @@ public class PlayerCon : MonoBehaviour
         canControl = true;
     }
 
-    #region InputSystem
+    #region INputSystem
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
         if (canControl && context.performed)
@@ -136,12 +136,10 @@ public class PlayerCon : MonoBehaviour
     }
     #endregion
 
-    #region  Debug
     private void OnDrawGizmosSelected()
     {
         // デバッグ用に地面判定Rayを可視化
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
-    #endregion
 }
