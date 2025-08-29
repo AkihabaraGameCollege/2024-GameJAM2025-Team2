@@ -118,6 +118,7 @@ public class ScnenManager : MonoBehaviour
     // サウンド設定画面からメニュー画面に戻るメソッド
     public void ShowMenuAndHideSoundSettings()
     {
+        Debug.Log("ShowMenuAndHideSoundSettingsが呼ばれました"); // ← 追加
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         if (menuUI != null) menuUI.SetActive(true);
     }
