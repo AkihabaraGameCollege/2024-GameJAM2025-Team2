@@ -7813,10 +7813,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 308376843441485836, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3243367195596042340, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7856,28 +7852,6 @@ PrefabInstance:
     - target: {fileID: 3243367195596042340, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4066557898859995369, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 961739752}
-    - target: {fileID: 4066557898859995369, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
-      propertyPath: m_Actions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    - target: {fileID: 5230038782370264417, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'J_Hips'\n\tTransform 'J_Spine'\n\tTransform
-        'J_Upper_Leg_Left'\n\tTransform 'J_Foot_Left'\n\tTransform 'J_Head'\n\tTransform
-        'J_Upper_Arm_Left'\n\tTransform 'J_Lower_Arm_Right'\n\tTransform 'J_Lower_Arm_Left'\n\tTransform
-        'J_Upper_Arm_Right'\n\tTransform 'J_Upper_Leg_Right'\n\tand more ...\n\tFrom
-        animation clip 'HappyJump'"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6159245327773844066, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
-      propertyPath: groundCheckDistance
-      value: 1.95
       objectReference: {fileID: 0}
     - target: {fileID: 6891612236255822921, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_Name

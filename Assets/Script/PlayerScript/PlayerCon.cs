@@ -47,13 +47,14 @@ public class PlayerCon : MonoBehaviour
     private bool isInvincible = false;
     private bool canControl = true;
 
-    private Animator playerAnimator;
+    [SerializeField]
+    private Animator playerAnimator = null;
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        playerAnimator = GetComponent<Animator>();
+        //playerAnimator = GetComponent<Animator>();
         targetX = transform.position.x;
 
     }

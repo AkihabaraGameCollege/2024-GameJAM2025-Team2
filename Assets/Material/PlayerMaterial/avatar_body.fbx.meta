@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: d14eeb05417a9994ea5cf991cd72e2a4
+guid: 60c13c99b4bec124395d2199c3d21f39
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 3d805a71307c17b43bc8b7b12b22b425, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: 09f9908538de30a4c8efcfa44639428e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -17,10 +27,7 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'J_Spine' has translation animation that
-      will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 1
@@ -176,7 +183,8 @@ ModelImporter:
     - name: J_Head
       parentName: J_Neck
       position: {x: -0.17397304, y: 4.6900244e-32, z: -3.8302692e-16}
-      rotation: {x: -0.000000044862464, y: 0.00000008940695, z: -0.000000029562454, w: 1}
+      rotation: {x: -0.000000044862464, y: 0.00000008940695, z: -0.000000029562454,
+        w: 1}
       scale: {x: 1.0000004, y: 1.0000004, z: 1.0000005}
     - name: J_Shoulder_Left
       parentName: J_Spine
