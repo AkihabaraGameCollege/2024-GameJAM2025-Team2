@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151257608194906676}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.96, z: 150}
   m_LocalScale: {x: 7, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38,6 +38,142 @@ Transform:
   - {fileID: 6309786631641276802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &351702237765178036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7125172581464039490}
+  - component: {fileID: 5084737493873788443}
+  - component: {fileID: 7885346519329704830}
+  - component: {fileID: 4989426143415342022}
+  - component: {fileID: 8189408505097888660}
+  m_Layer: 3
+  m_Name: Ground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7125172581464039490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351702237765178036}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.01999998, z: 0}
+  m_LocalScale: {x: 0.98571426, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6309786631641276802}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5084737493873788443
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351702237765178036}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7885346519329704830
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351702237765178036}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 94a0f51fd7dc66d4387b65c2f56a45fa, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4989426143415342022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351702237765178036}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8189408505097888660
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351702237765178036}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1301652567432710033
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +203,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7824219096050784380}
   - {fileID: 8554442507719875147}
   - {fileID: 4827666143016763375}
   - {fileID: 724588416450004648}
@@ -219,6 +354,7 @@ Transform:
   - {fileID: 7093629096011722601}
   - {fileID: 5261629868212967226}
   - {fileID: 4558980544126541053}
+  - {fileID: 7125172581464039490}
   m_Father: {fileID: 9125574969466434571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3782175316908289515
@@ -16128,16 +16264,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4051708443543422237}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7930695306835787066}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &73018463847057597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 471136998314962774}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &741045872440529415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 471136998314962774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4051708443543422237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741045872440529415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 741045872440529415}
+--- !u!65 &7930695306835787066
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741045872440529415}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.003116191}
 --- !u!1001 &974176296347164995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16206,11 +16391,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6775134561438741326}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5917858881938284219}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+--- !u!1 &91639896001600530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 974176296347164995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6775134561438741326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91639896001600530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 91639896001600530}
+--- !u!65 &5917858881938284219
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91639896001600530}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0017955904, y: -0.05646068, z: 0.0031171446}
 --- !u!4 &724588416450004648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
@@ -16284,11 +16518,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5840632327676360723}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8679273290649677312}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+--- !u!1 &1213343232911113708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 2024298677375811773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5840632327676360723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213343232911113708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 1213343232911113708}
+--- !u!65 &8679273290649677312
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213343232911113708}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031171446}
 --- !u!4 &1989880276175169366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
@@ -16362,16 +16645,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 704713705638414980}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2267127861457810351}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &2571207978341544083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 2604344429985650552}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2946784225959012905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 2604344429985650552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &704713705638414980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946784225959012905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 2946784225959012905}
+--- !u!65 &2267127861457810351
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946784225959012905}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031171446}
 --- !u!1001 &2696262994669686907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16568,11 +16900,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5770023003462708628}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6748782469429851151}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+--- !u!1 &2640373065558110054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 2910755281452700215}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5770023003462708628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640373065558110054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 2640373065558110054}
+--- !u!65 &6748782469429851151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640373065558110054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031176214}
 --- !u!4 &3454170740510291420 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
@@ -16646,11 +17027,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 387818848289984812}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 321703760018858564}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+--- !u!1 &2792313964056035362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 3026738978022849907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &387818848289984812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792313964056035362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 2792313964056035362}
+--- !u!65 &321703760018858564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792313964056035362}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031171446}
 --- !u!4 &3281886546719677080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
@@ -16724,11 +17154,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1356896855769838875}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6506607009733341240}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+--- !u!1 &2436975165485683277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 3247246865249611548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1356896855769838875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436975165485683277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 2436975165485683277}
+--- !u!65 &6506607009733341240
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436975165485683277}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031171446}
 --- !u!4 &3069819614579476727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
@@ -16930,16 +17409,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8420555138657795009}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5596534942770518458}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &4827666143016763375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 5005163546268194820}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5311011061753832789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 5005163546268194820}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8420555138657795009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311011061753832789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 5311011061753832789}
+--- !u!65 &5596534942770518458
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311011061753832789}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0017955904, y: -0.05646068, z: 0.0031171446}
 --- !u!1001 &5262074627241678812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17136,11 +17664,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1066567172546033414}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7263851668823309734}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+--- !u!1 &4752451936485489515 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 5563476105796027962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1066567172546033414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752451936485489515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 4752451936485489515}
+--- !u!65 &7263851668823309734
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752451936485489515}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.003116191}
 --- !u!4 &5386245195868529105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
@@ -17342,16 +17919,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8471270026933123740}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8149876845761179759}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &6149549737100274229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 5970981019548388830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6781372430654189711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 5970981019548388830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8471270026933123740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6781372430654189711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 6781372430654189711}
+--- !u!65 &8149876845761179759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6781372430654189711}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031166677}
 --- !u!1001 &6471515790063775896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17548,11 +18174,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2562504849159673938}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6877753816752071246}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+--- !u!1 &6279922515241186513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 6622452614109890944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2562504849159673938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279922515241186513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 6279922515241186513}
+--- !u!65 &6877753816752071246
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279922515241186513}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031171446}
 --- !u!4 &6660002435502567019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
@@ -17626,94 +18301,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1466818634731573822}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3912671939936777985}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &7034727574765484079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 7361949464387903428}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7719042962173345687
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5531466510133255300}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.16666667
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.071428545
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.545714
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.013333321
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -138
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-      propertyPath: m_Name
-      value: HeartGem
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
---- !u!4 &7824219096050784380 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
-  m_PrefabInstance: {fileID: 7719042962173345687}
+--- !u!1 &7704409752725021333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 7361949464387903428}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1466818634731573822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704409752725021333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 7704409752725021333}
+--- !u!65 &3912671939936777985
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704409752725021333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0018032198, y: -0.05646068, z: 0.0031171446}
 --- !u!1001 &8159895108768529824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17782,16 +18428,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6557596211919919688}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4938847900769946811}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &8554442507719875147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 8159895108768529824}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9078320682115612913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 8159895108768529824}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6557596211919919688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078320682115612913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 9078320682115612913}
+--- !u!65 &4938847900769946811
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078320682115612913}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0017994051, y: -0.05646068, z: 0.0031171446}
 --- !u!1001 &8468286200950395339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17860,16 +18555,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7204009026116579049}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2499450692484663170}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &8219029822110758432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 8468286200950395339}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8738123192221084826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 8468286200950395339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7204009026116579049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738123192221084826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 1788029501777688237}
+--- !u!65 &2499450692484663170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738123192221084826}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.0017994051, y: -0.05646068, z: 0.0031171446}
 --- !u!1001 &8517119760910702966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17938,16 +18682,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartGem (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      propertyPath: m_TagString
+      value: HeartGem
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7376142616535076967}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5109911950126982200}
   m_SourcePrefab: {fileID: 100100000, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
 --- !u!4 &8194398690584542877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 8517119760910702966}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8859577302750061607 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
+  m_PrefabInstance: {fileID: 8517119760910702966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7376142616535076967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859577302750061607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b51ca2816dc43a1e6f43389b1dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartGem: {fileID: 8859577302750061607}
+--- !u!65 &5109911950126982200
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859577302750061607}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6267927, y: 2.5073924, z: 0.5427259}
+  m_Center: {x: 0.001787961, y: -0.05646068, z: 0.0031171446}
 --- !u!1001 &9082693488943707505
 PrefabInstance:
   m_ObjectHideFlags: 0
