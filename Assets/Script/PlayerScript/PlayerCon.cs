@@ -5,6 +5,8 @@ using System.Collections;
 
 public class PlayerCon : MonoBehaviour
 {
+    //[Header("敵")]
+
     [Header("レーン設定")]
     public float laneDistance = 2.5f;
     private int currentLane = 1;
@@ -18,14 +20,22 @@ public class PlayerCon : MonoBehaviour
 
     [Header("ジャンプ設定")]
     public float jumpForce = 7f;
+    public float fallSpeed = 1.0f;
+    [Header("敵を踏みつけた後のジャンプ設定")]
+    public float doubleJump = 1.2f;
+    public float forwardForce = 5.0f;
+
     public float groundCheckDistance = 0.2f;
     public LayerMask groundMask;
-    private bool isGrounded;
+    [SerializeField] bool  isGrounded;
 
     [Header("仮の空中アクション")]
     [Tooltip("前転")]
     public float spinSpeed = 360.0f;
+    public float spinDuration = 0.5f;
     private bool isSpinning = false;
+    private float spinTimer = 0f;
+
 
     [Header("被弾処理")]
     [Tooltip("全体の慣性")]
@@ -37,31 +47,38 @@ public class PlayerCon : MonoBehaviour
     private bool isInvincible = false;
     private bool canControl = true;
 
+    private Animator playerAnimator;
     private Rigidbody rb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
         targetX = transform.position.x;
 
     }
 
     private void Update()
     {
+        playerAnimator.SetBool("IsGrounded", isGrounded);
+
+        //空中アクション
         if (isSpinning)
         {
+            spinTimer += Time.deltaTime;
+
             transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
-        }
+
             // 着地したらリセット
-            if (isGrounded)
+            if (spinTimer >= spinDuration)
             {
                 isSpinning = false;
+                spinTimer = 0f;
                 transform.rotation = Quaternion.identity; // 角度を元に戻す
             }
+        }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (!canControl) return;
@@ -74,15 +91,43 @@ public class PlayerCon : MonoBehaviour
         Vector3 forwardMove = Vector3.forward * forwardSpeed * Time.fixedDeltaTime;
         Vector3 move = new Vector3(newX, rb.position.y, rb.position.z) + forwardMove;
 
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallSpeed - 1) * Time.fixedDeltaTime;
+        }
+
         rb.MovePosition(move);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !isInvincible)
+        if (other.CompareTag("Enemy"))
         {
-            Debug.Log($"{name} が {other.name} に当たった");
-            StartCoroutine(HitRoutine());
+            if (isSpinning && !isGrounded)
+            {
+                playerAnimator.SetTrigger("JumpAction");
+                Debug.Log("敵を踏んだ");
+                Destroy(other.gameObject);
+
+                //追加ジャンプ
+                Vector3 forwardBoost = transform.forward * forwardForce; // ← 前方向加速の強さ（調整可）
+
+                // ジャンプ + 前方向に勢いを与える
+                rb.linearVelocity = new Vector3(
+                    forwardBoost.x,                  // 前方向X成分
+                    jumpForce * doubleJump,          // 上方向ジャンプ
+                    forwardBoost.z                   // 前方向Z成分
+                );
+                //タイマーリセットしてまた回転できるようにする
+                isSpinning = true;
+                spinTimer = spinDuration;
+            }
+            else if (!isInvincible)
+            {
+                Debug.Log($"{name} が {other.name} に当たった");
+                StartCoroutine(HitRoutine());
+            }
+
         }
     }
 
@@ -93,14 +138,14 @@ public class PlayerCon : MonoBehaviour
 
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(new Vector3(0, knockBackUpForce, -1f) * knockBackForce, ForceMode.VelocityChange);
-    
+
         yield return new WaitForSeconds(invincibleTime);
 
         isInvincible = false;
         canControl = true;
     }
 
-    #region InputSystem
+    #region INputSystem
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
         if (canControl && context.performed)
@@ -123,25 +168,27 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed && isGrounded)
         {
+            Debug.Log("ジャンプ中ジャンプアクション実行可");
+            playerAnimator.SetTrigger("Jump");
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
     }
 
     public void OnJumpAction(InputAction.CallbackContext context)
     {
-        if (canControl && context.performed && !isGrounded)
-        { 
+        if (canControl && context.performed && !isGrounded && !isSpinning)
+        {
+            Debug.Log("ジャンプアクション実行した");
             isSpinning = true;
+            spinTimer = 0f;
         }
     }
     #endregion
 
-    #region  Debug
     private void OnDrawGizmosSelected()
     {
         // デバッグ用に地面判定Rayを可視化
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
-    #endregion
 }

@@ -7875,6 +7875,10 @@ PrefabInstance:
         'J_Upper_Arm_Right'\n\tTransform 'J_Upper_Leg_Right'\n\tand more ...\n\tFrom
         animation clip 'HappyJump'"
       objectReference: {fileID: 0}
+    - target: {fileID: 6159245327773844066, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
+      propertyPath: groundCheckDistance
+      value: 1.95
+      objectReference: {fileID: 0}
     - target: {fileID: 6891612236255822921, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_Name
       value: PlayerLoot
