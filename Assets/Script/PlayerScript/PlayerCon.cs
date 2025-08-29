@@ -29,14 +29,6 @@ public class PlayerCon : MonoBehaviour
     public LayerMask groundMask;
     [SerializeField] bool  isGrounded;
 
-    [Header("仮の空中アクション")]
-    [Tooltip("前転")]
-    public float spinSpeed = 360.0f;
-    public float spinDuration = 0.5f;
-    private bool isSpinning = false;
-    private float spinTimer = 0f;
-
-
     [Header("被弾処理")]
     [Tooltip("全体の慣性")]
     public float knockBackForce = 5.0f;
@@ -62,26 +54,6 @@ public class PlayerCon : MonoBehaviour
     private void Update()
     {
         playerAnimator.SetBool("IsGrounded", isGrounded);
-
-        //空中アクション
-        if (isSpinning)
-        {
-            spinTimer += Time.deltaTime;
-
-<<<<<<< HEAD
-            //transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
-=======
-            transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
->>>>>>> 10cf5ee0fccef5a471c8760f8d4af5b4cb0c6fba
-
-            // 着地したらリセット
-            if (spinTimer >= spinDuration)
-            {
-                isSpinning = false;
-                spinTimer = 0f;
-                transform.rotation = Quaternion.identity; // 角度を元に戻す
-            }
-        }
     }
 
     void FixedUpdate()
@@ -108,10 +80,11 @@ public class PlayerCon : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (isSpinning && !isGrounded)
+            if (!isGrounded)
             {
-                playerAnimator.SetTrigger("JumpAction");
                 Debug.Log("敵を踏んだ");
+                playerAnimator.SetTrigger("JumpAction");
+
                 Destroy(other.gameObject);
 
                 //追加ジャンプ
@@ -123,9 +96,6 @@ public class PlayerCon : MonoBehaviour
                     jumpForce * doubleJump,          // 上方向ジャンプ
                     forwardBoost.z                   // 前方向Z成分
                 );
-                //タイマーリセットしてまた回転できるようにする
-                isSpinning = true;
-                spinTimer = spinDuration;
             }
             else if (!isInvincible)
             {
@@ -141,6 +111,7 @@ public class PlayerCon : MonoBehaviour
         isInvincible = true;
         canControl = false;
 
+        playerAnimator.SetTrigger("TakeHit");
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(new Vector3(0, knockBackUpForce, -1f) * knockBackForce, ForceMode.VelocityChange);
 
@@ -155,6 +126,7 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
+            playerAnimator.SetTrigger("MoveLeft");
             currentLane = Mathf.Max(0, currentLane - 1);
             targetX = (currentLane - 1) * laneDistance;
         }
@@ -164,6 +136,7 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
+            playerAnimator.SetTrigger("MoveRight");
             currentLane = Mathf.Min(2, currentLane + 1);
             targetX = (currentLane - 1) * laneDistance;
         }
@@ -181,11 +154,10 @@ public class PlayerCon : MonoBehaviour
 
     public void OnJumpAction(InputAction.CallbackContext context)
     {
-        if (canControl && context.performed && !isGrounded && !isSpinning)
+        if (canControl && context.performed && !isGrounded)
         {
             Debug.Log("ジャンプアクション実行した");
-            isSpinning = true;
-            spinTimer = 0f;
+            playerAnimator.SetTrigger("JumpAction");
         }
     }
     #endregion
@@ -196,8 +168,6 @@ public class PlayerCon : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 10cf5ee0fccef5a471c8760f8d4af5b4cb0c6fba
+
