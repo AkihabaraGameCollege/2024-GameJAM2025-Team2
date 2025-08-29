@@ -27,7 +27,7 @@ public class PlayerCon : MonoBehaviour
 
     public float groundCheckDistance = 0.2f;
     public LayerMask groundMask;
-    private bool isGrounded;
+    [SerializeField] bool  isGrounded;
 
     [Header("仮の空中アクション")]
     [Tooltip("前転")]
@@ -67,7 +67,11 @@ public class PlayerCon : MonoBehaviour
         {
             spinTimer += Time.deltaTime;
 
+<<<<<<< HEAD
             //transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
+=======
+            transform.Rotate(Vector3.right * spinSpeed * Time.deltaTime, Space.Self);
+>>>>>>> 10cf5ee0fccef5a471c8760f8d4af5b4cb0c6fba
 
             // 着地したらリセット
             if (spinTimer >= spinDuration)
@@ -191,4 +195,8 @@ public class PlayerCon : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 10cf5ee0fccef5a471c8760f8d4af5b4cb0c6fba

@@ -44,23 +44,34 @@ public class UIManager : MonoBehaviour
 
     IEnumerator CountdownAndStartCountup()
     {
+        // タイムスケールを0にしてゲームを一時停止
+        Time.timeScale = 0f;
+
+        countdownImage.sprite = sprite3; // 追加：最初にスプライトを設定
         countdownImage.gameObject.SetActive(true);
         countupText.gameObject.SetActive(false);
 
+        // ここで1秒待つ
+        yield return new WaitForSecondsRealtime(1f);
+
         // 3
         countdownImage.sprite = sprite3;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         // 2
         countdownImage.sprite = sprite2;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         // 1
         countdownImage.sprite = sprite1;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         // Start!!
         countdownImage.sprite = spriteStart;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
 
         countdownImage.gameObject.SetActive(false);
+
+        // タイムスケールを1に戻してゲーム再開
+        Time.timeScale = 1f;
+
         StartCountup();
     }
 
