@@ -9,11 +9,19 @@ using UnityEngine.EventSystems; // 追加
 /// </summary>
 public class SoundManager : MonoBehaviour
 {
+    private static SoundManager instance;
+
     [Header("オーディオミキサーの設定")]
     [SerializeField] private AudioMixer audioMixer; // 全体の音量管理用ミキサー
 
-    [Header("BGMのAudioSource")]
-    [SerializeField] private AudioSource bgmAudioSource; // BGM再生用
+    [Header("タイトルBGMのAudioSource")]
+    [SerializeField] private AudioSource TitlebgmAudioSource; // BGM再生用
+
+    [Header("メニューBGMのAudioSource")]
+    [SerializeField] private AudioSource menuBgmAudioSource; // メニューBGM再生用
+
+    [Header("ステージBGMのAudioSource")]
+    [SerializeField] private AudioSource stageBgmAudioSource; // ステージBGM再生用
 
     [Header("ゲームクリアのSE")]
     [SerializeField] private AudioSource gameClearAudioSource; // ゲームクリア時SE
@@ -72,13 +80,29 @@ public class SoundManager : MonoBehaviour
     // スライダーSEループ再生制御用
     private bool isVolumeSliderSEPlaying = false;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     /// <summary>
     /// 初期化処理。AudioSourceの設定やスライダーの初期値・リスナー登録を行う
     /// </summary>
     private void Start()
     {
         // 各AudioSourceの初期設定（AudioMixerGroup割り当て）
-        SetupAudioSource(bgmAudioSource);
+        SetupAudioSource(TitlebgmAudioSource);
+        SetupAudioSource(menuBgmAudioSource);
+        SetupAudioSource(stageBgmAudioSource);
         SetupAudioSource(gameClearAudioSource);
         SetupAudioSource(playerAutoMoveAudioSource);
         SetupAudioSource(playerLaneMoveAudioSource);
@@ -290,17 +314,45 @@ public class SoundManager : MonoBehaviour
     // --- BGM制御 ---
 
     /// <summary>BGM再生</summary>
-    public void PlayBGM()
+    public void PlayTitleBGM()
     {
-        if (bgmAudioSource != null && !bgmAudioSource.isPlaying)
-            bgmAudioSource.Play();
+        if (TitlebgmAudioSource != null && !TitlebgmAudioSource.isPlaying)
+            TitlebgmAudioSource.Play();
     }
 
     /// <summary>BGM停止</summary>
-    public void StopBGM()
+    public void StopTitleBGM()
     {
-        if (bgmAudioSource != null)
-            bgmAudioSource.Stop();
+        if (TitlebgmAudioSource != null)
+            TitlebgmAudioSource.Stop();
+    }
+
+    /// <summary>メニューBGM再生</summary>
+    public void PlayMenuBGM()
+    {
+        if (menuBgmAudioSource != null && !menuBgmAudioSource.isPlaying)
+            menuBgmAudioSource.Play();
+    }
+
+    /// <summary>メニューBGM停止</summary>
+    public void StopMenuBGM()
+    {
+        if (menuBgmAudioSource != null)
+            menuBgmAudioSource.Stop();
+    }
+
+    /// <summary>ステージBGM再生</summary>
+    public void PlayStageBGM()
+    {
+        if (stageBgmAudioSource != null && !stageBgmAudioSource.isPlaying)
+            stageBgmAudioSource.Play();
+    }
+
+    /// <summary>ステージBGM停止</summary>
+    public void StopStageBGM()
+    {
+        if (stageBgmAudioSource != null)
+            stageBgmAudioSource.Stop();
     }
 
     // --- 音量設定 ---
