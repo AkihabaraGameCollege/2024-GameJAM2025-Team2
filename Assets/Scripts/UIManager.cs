@@ -47,24 +47,32 @@ public class UIManager : MonoBehaviour
         // タイムスケールを0にしてゲームを一時停止
         Time.timeScale = 0f;
 
-        countdownImage.sprite = sprite3; // 追加：最初にスプライトを設定
+        countdownImage.sprite = sprite3;
         countdownImage.gameObject.SetActive(true);
         countupText.gameObject.SetActive(false);
 
-        // ここで1秒待つ
+        // 3
+        SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
+        if (soundManager != null)
+            soundManager.PlayStartCount321Audio();
         yield return new WaitForSecondsRealtime(1f);
 
-        // 3
-        countdownImage.sprite = sprite3;
-        yield return new WaitForSecondsRealtime(1f);
         // 2
         countdownImage.sprite = sprite2;
+        if (soundManager != null)
+            soundManager.PlayStartCount321Audio();
         yield return new WaitForSecondsRealtime(1f);
+
         // 1
         countdownImage.sprite = sprite1;
+        if (soundManager != null)
+            soundManager.PlayStartCount321Audio();
         yield return new WaitForSecondsRealtime(1f);
+
         // Start!!
         countdownImage.sprite = spriteStart;
+        if (soundManager != null)
+            soundManager.PlayStartCountStartAudio();
         yield return new WaitForSecondsRealtime(1f);
 
         countdownImage.gameObject.SetActive(false);
