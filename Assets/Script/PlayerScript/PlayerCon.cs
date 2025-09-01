@@ -28,7 +28,7 @@ public class PlayerCon : MonoBehaviour
 
     public float groundCheckDistance = 0.2f;
     public LayerMask groundMask;
-    [SerializeField] bool  isGrounded;
+    [SerializeField] bool isGrounded;
 
     [Header("被弾処理")]
     [Tooltip("全体の慣性")]
@@ -56,12 +56,18 @@ public class PlayerCon : MonoBehaviour
     private Animator playerAnimator = null;
     private Rigidbody rb;
 
+    // SoundManager参照用
+    private SoundManager soundManager;
+    private bool isAutoMoveSEPlaying = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         //playerAnimator = GetComponent<Animator>();
         targetX = transform.position.x;
 
+        // SoundManagerインスタンス取得
+        soundManager = Object.FindFirstObjectByType<SoundManager>();
     }
 
     private void Update()
@@ -95,6 +101,25 @@ public class PlayerCon : MonoBehaviour
         }
 
         rb.MovePosition(move);
+
+        // --- 自動前進SE再生 ---
+        if (soundManager != null && isGrounded && forwardSpeed > 0)
+        {
+            if (!isAutoMoveSEPlaying)
+            {
+                soundManager.PlayPlayerAutoMoveAudio();
+                isAutoMoveSEPlaying = true;
+            }
+        }
+        else
+        {
+            if (isAutoMoveSEPlaying)
+            {
+                // SoundManager内でAudioSourceをStopする実装がなければ、必要に応じてStop用メソッドを追加してください
+                // 例: soundManager.StopPlayerAutoMoveAudio();
+                isAutoMoveSEPlaying = false;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -106,6 +131,12 @@ public class PlayerCon : MonoBehaviour
                 Debug.Log("敵を踏んだ");
                 jumpActionSe?.Play();
                 playerAnimator.SetTrigger("SuccessJumpAction");
+
+                // 敵撃破SE再生
+                if (soundManager != null)
+                {
+                    soundManager.PlayEnemyDefeatAudio();
+                }
 
                 Destroy(other.gameObject);
 
@@ -155,6 +186,12 @@ public class PlayerCon : MonoBehaviour
             playerAnimator.SetTrigger("MoveLeft");
             currentLane = Mathf.Max(0, currentLane - 1);
             targetX = (currentLane - 1) * laneDistance;
+
+            // レーン移動SE再生
+            if (soundManager != null)
+            {
+                soundManager.PlayPlayerLaneMoveAudio();
+            }
         }
     }
 
@@ -166,6 +203,12 @@ public class PlayerCon : MonoBehaviour
             playerAnimator.SetTrigger("MoveRight");
             currentLane = Mathf.Min(2, currentLane + 1);
             targetX = (currentLane - 1) * laneDistance;
+
+            // レーン移動SE再生
+            if (soundManager != null)
+            {
+                soundManager.PlayPlayerLaneMoveAudio();
+            }
         }
     }
 
@@ -177,16 +220,34 @@ public class PlayerCon : MonoBehaviour
             jumpSe?.Play();
             playerAnimator.SetTrigger("Jump");
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
+
+            // ジャンプSE再生
+            if (soundManager != null)
+            {
+                soundManager.PlayJumpAudio();
+            }
         }
     }
 
+    // トリックアクション時
     public void OnJumpAction(InputAction.CallbackContext context)
     {
         if (canControl && context.performed && !isGrounded)
         {
+<<<<<<< HEAD
             Debug.Log("ジャンプアクション実行 → 攻撃モードON");
             isAttackMode = true;
             //playerAnimator.SetTrigger("NormalJumpAction");
+=======
+            Debug.Log("ジャンプアクション実行した");
+            playerAnimator.SetTrigger("JumpAction");
+
+            // トリックアクションSE再生
+            if (soundManager != null)
+            {
+                soundManager.PlayTrickActionAudio();
+            }
+>>>>>>> df1f2fdd6d32037e1117c91888deb583fa55a2e1
         }
     }
     #endregion
@@ -217,4 +278,3 @@ public class PlayerCon : MonoBehaviour
     }
 
 }
-
