@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class PlayerCon : MonoBehaviour
 {
@@ -34,10 +35,22 @@ public class PlayerCon : MonoBehaviour
     public float knockBackForce = 5.0f;
     [Tooltip("上の慣性")]
     public float knockBackUpForce = 1.0f;
-
+    
+    [Header("無敵時間")]
     public float invincibleTime = 3.0f;
-    private bool isInvincible = false;
-    private bool canControl = true;
+
+    [Header("音量設定")]
+    [SerializeField] AudioMixer audioMixer = null;
+    [SerializeField] AudioSource moveBoolSe;
+    [SerializeField] AudioSource laneMoveSe;
+    [SerializeField] AudioSource takeHitSe;
+    [SerializeField] AudioSource jumpSe;
+    [SerializeField] AudioSource jumpActionSe;
+
+
+    private bool isInvincible = false;    //無敵かどうか
+    private bool canControl = true;       //ヒットした時の硬直
+    [SerializeField] private bool isAttackMode = false;    //ジャンプ中攻撃状態
 
     [SerializeField]
     private Animator playerAnimator = null;
@@ -54,6 +67,14 @@ public class PlayerCon : MonoBehaviour
     private void Update()
     {
         playerAnimator.SetBool("IsGrounded", isGrounded);
+
+        if (isGrounded && isAttackMode)
+        {
+            isAttackMode = false;
+            playerAnimator.ResetTrigger("SuccessJumpAction");
+        }
+
+        MoveSE();
     }
 
     void FixedUpdate()
@@ -80,10 +101,11 @@ public class PlayerCon : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (!isGrounded)
+            if (!isGrounded && isAttackMode)
             {
                 Debug.Log("敵を踏んだ");
-                playerAnimator.SetTrigger("JumpAction");
+                jumpActionSe?.Play();
+                playerAnimator.SetTrigger("SuccessJumpAction");
 
                 Destroy(other.gameObject);
 
@@ -96,6 +118,8 @@ public class PlayerCon : MonoBehaviour
                     jumpForce * doubleJump,          // 上方向ジャンプ
                     forwardBoost.z                   // 前方向Z成分
                 );
+
+                isAttackMode = false;
             }
             else if (!isInvincible)
             {
@@ -111,6 +135,7 @@ public class PlayerCon : MonoBehaviour
         isInvincible = true;
         canControl = false;
 
+        takeHitSe?.Play();
         playerAnimator.SetTrigger("TakeHit");
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(new Vector3(0, knockBackUpForce, -1f) * knockBackForce, ForceMode.VelocityChange);
@@ -126,6 +151,7 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
+            laneMoveSe?.Play();
             playerAnimator.SetTrigger("MoveLeft");
             currentLane = Mathf.Max(0, currentLane - 1);
             targetX = (currentLane - 1) * laneDistance;
@@ -136,6 +162,7 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
+            laneMoveSe?.Play();
             playerAnimator.SetTrigger("MoveRight");
             currentLane = Mathf.Min(2, currentLane + 1);
             targetX = (currentLane - 1) * laneDistance;
@@ -147,6 +174,7 @@ public class PlayerCon : MonoBehaviour
         if (canControl && context.performed && isGrounded)
         {
             Debug.Log("ジャンプ中ジャンプアクション実行可");
+            jumpSe?.Play();
             playerAnimator.SetTrigger("Jump");
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
@@ -156,15 +184,34 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed && !isGrounded)
         {
-            Debug.Log("ジャンプアクション実行した");
-            playerAnimator.SetTrigger("JumpAction");
+            Debug.Log("ジャンプアクション実行 → 攻撃モードON");
+            isAttackMode = true;
+            //playerAnimator.SetTrigger("NormalJumpAction");
         }
     }
     #endregion
 
+    public void MoveSE()
+    {
+        if (isGrounded)
+        {
+            if (!moveBoolSe.isPlaying)
+            {
+                moveBoolSe.Play();
+            }
+        }
+        else
+        {
+            if (moveBoolSe.isPlaying)
+            {
+                moveBoolSe.Stop();
+            }
+        }
+    }
+
+
     private void OnDrawGizmosSelected()
     {
-        // デバッグ用に地面判定Rayを可視化
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
