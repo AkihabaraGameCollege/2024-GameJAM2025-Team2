@@ -234,11 +234,8 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed && !isGrounded)
         {
-<<<<<<< HEAD
             Debug.Log("ジャンプアクション実行 → 攻撃モードON");
             isAttackMode = true;
-            //playerAnimator.SetTrigger("NormalJumpAction");
-=======
             Debug.Log("ジャンプアクション実行した");
             playerAnimator.SetTrigger("JumpAction");
 
@@ -247,7 +244,6 @@ public class PlayerCon : MonoBehaviour
             {
                 soundManager.PlayTrickActionAudio();
             }
->>>>>>> df1f2fdd6d32037e1117c91888deb583fa55a2e1
         }
     }
     #endregion
