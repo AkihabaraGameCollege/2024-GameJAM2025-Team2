@@ -24,12 +24,14 @@ public class PlayerCon : MonoBehaviour
     [Header("敵を踏みつけた後のジャンプ設定")]
     public float doubleJump = 1.2f;
     public float forwardForce = 5.0f;
+    [SerializeField] AudioSource successJumpActionSe;
 
     public float groundCheckDistance = 0.2f;
     public LayerMask groundMask;
     [SerializeField] bool isGrounded;
 
     [Header("被弾処理")]
+    [SerializeField] AudioSource takeHitSe;
     [Tooltip("全体の慣性")]
     public float knockBackForce = 5.0f;
     [Tooltip("上の慣性")]
@@ -38,6 +40,7 @@ public class PlayerCon : MonoBehaviour
     public float invincibleTime = 3.0f;
     private bool isInvincible = false;
     private bool canControl = true;
+    [SerializeField] private bool isAttackMode = false;    //ジャンプ中攻撃状態
 
     [SerializeField]
     private Animator playerAnimator = null;
@@ -60,6 +63,13 @@ public class PlayerCon : MonoBehaviour
     private void Update()
     {
         playerAnimator.SetBool("IsGrounded", isGrounded);
+
+        //ジャンプアクション
+        if (isGrounded && isAttackMode)
+        {
+            isAttackMode = false;
+            playerAnimator.ResetTrigger("JumpAction");
+        }
     }
 
     void FixedUpdate()
@@ -105,9 +115,10 @@ public class PlayerCon : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (!isGrounded)
+            if (!isGrounded && isAttackMode)
             {
                 Debug.Log("敵を踏んだ");
+                successJumpActionSe?.Play();
                 playerAnimator.SetTrigger("JumpAction");
 
                 // 敵撃破SE再生
@@ -127,6 +138,8 @@ public class PlayerCon : MonoBehaviour
                     jumpForce * doubleJump,          // 上方向ジャンプ
                     forwardBoost.z                   // 前方向Z成分
                 );
+
+                isAttackMode = false;//リセット
             }
             else if (!isInvincible)
             {
@@ -142,6 +155,7 @@ public class PlayerCon : MonoBehaviour
         isInvincible = true;
         canControl = false;
 
+        takeHitSe?.Play();
         playerAnimator.SetTrigger("TakeHit");
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(new Vector3(0, knockBackUpForce, -1f) * knockBackForce, ForceMode.VelocityChange);
@@ -206,8 +220,8 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed && !isGrounded)
         {
-            Debug.Log("ジャンプアクション実行した");
-            playerAnimator.SetTrigger("JumpAction");
+            Debug.Log("ジャンプアクション実行 → 攻撃モードON");
+            isAttackMode = true;
 
             // トリックアクションSE再生
             if (soundManager != null)
