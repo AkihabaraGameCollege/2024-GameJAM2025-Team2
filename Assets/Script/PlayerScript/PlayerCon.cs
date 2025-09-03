@@ -119,7 +119,8 @@ public class PlayerCon : MonoBehaviour
             {
                 Debug.Log("敵を踏んだ");
                 successJumpActionSe?.Play();
-                playerAnimator.SetTrigger("JumpAction");
+
+                playerAnimator.Play("JumpAction", 0, 0f);
 
                 // 敵撃破SE再生
                 if (soundManager != null)
@@ -171,10 +172,8 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MoveLeft"))
-            {
-                playerAnimator.SetTrigger("MoveLeft");
-            }
+            playerAnimator.Play("MoveLeft", 0, 0f);
+
             currentLane = Mathf.Max(0, currentLane - 1);
             targetX = (currentLane - 1) * laneDistance;
 
@@ -190,10 +189,8 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MoveRight"))
-            {
-                playerAnimator.SetTrigger("MoveRight");
-            }
+            playerAnimator.Play("MoveRight", 0, 0f);
+
             currentLane = Mathf.Min(2, currentLane + 1);
             targetX = (currentLane - 1) * laneDistance;
 
