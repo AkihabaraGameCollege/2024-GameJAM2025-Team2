@@ -172,7 +172,10 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            playerAnimator.Play("MoveLeft", 0, 0f);
+            if (isGrounded && !isAttackMode)
+            {
+                playerAnimator.Play("MoveLeft", 0, 0f);
+            }
 
             currentLane = Mathf.Max(0, currentLane - 1);
             targetX = (currentLane - 1) * laneDistance;
@@ -189,7 +192,10 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            playerAnimator.Play("MoveRight", 0, 0f);
+            if (isGrounded && !isAttackMode)
+            {
+                playerAnimator.Play("MoveRight", 0, 0f);
+            }
 
             currentLane = Mathf.Min(2, currentLane + 1);
             targetX = (currentLane - 1) * laneDistance;
