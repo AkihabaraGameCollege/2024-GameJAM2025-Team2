@@ -171,7 +171,10 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            playerAnimator.SetTrigger("MoveLeft");
+            if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MoveLeft"))
+            {
+                playerAnimator.SetTrigger("MoveLeft");
+            }
             currentLane = Mathf.Max(0, currentLane - 1);
             targetX = (currentLane - 1) * laneDistance;
 
@@ -187,7 +190,10 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            playerAnimator.SetTrigger("MoveRight");
+            if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MoveRight"))
+            {
+                playerAnimator.SetTrigger("MoveRight");
+            }
             currentLane = Mathf.Min(2, currentLane + 1);
             targetX = (currentLane - 1) * laneDistance;
 
