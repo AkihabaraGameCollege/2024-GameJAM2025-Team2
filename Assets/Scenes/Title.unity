@@ -3503,11 +3503,11 @@ PrefabInstance:
     - target: {fileID: 8916344777985907283, guid: 4c110a3fad4a6cc4fa5084b3e69e6d6b, type: 3}
       propertyPath: seVolumeSlider
       value: 
-      objectReference: {fileID: 376007103}
+      objectReference: {fileID: 376007099}
     - target: {fileID: 8916344777985907283, guid: 4c110a3fad4a6cc4fa5084b3e69e6d6b, type: 3}
       propertyPath: bgmVolumeSlider
       value: 
-      objectReference: {fileID: 376007099}
+      objectReference: {fileID: 376007103}
     - target: {fileID: 8916344777985907283, guid: 4c110a3fad4a6cc4fa5084b3e69e6d6b, type: 3}
       propertyPath: masterVolumeSlider
       value: 
