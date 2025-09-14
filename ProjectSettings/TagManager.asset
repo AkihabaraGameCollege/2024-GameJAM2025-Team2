@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Goal
   - HeartGem
+  - Obstacle
   layers:
   - Default
   - TransparentFX

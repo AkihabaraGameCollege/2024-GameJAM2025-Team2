@@ -7319,7 +7319,7 @@ GameObject:
   - component: {fileID: 5531466510133498722}
   m_Layer: 0
   m_Name: Scoreitem
-  m_TagString: Untagged
+  m_TagString: HeartGem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7414,7 +7414,7 @@ GameObject:
   - component: {fileID: 6373543178072575784}
   m_Layer: 0
   m_Name: EnemyLoot (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7593,7 +7593,7 @@ GameObject:
   - component: {fileID: 4297479517251260355}
   m_Layer: 0
   m_Name: EnemyLoot (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8418,7 +8418,7 @@ GameObject:
   - component: {fileID: 6012831111636285612}
   m_Layer: 0
   m_Name: EnemyLoot (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13518,6 +13518,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy body
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b5f80f94f3fa03b42855f8583706305a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2660149781367514763, guid: b5f80f94f3fa03b42855f8583706305a, type: 3}
       propertyPath: m_TagString
       value: Enemy
@@ -13724,7 +13728,7 @@ GameObject:
   - component: {fileID: 6787340783415756142}
   m_Layer: 0
   m_Name: EnemyLoot
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13781,7 +13785,7 @@ GameObject:
   - component: {fileID: 4353439167622178940}
   m_Layer: 0
   m_Name: EnemyLoot (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14072,7 +14076,7 @@ GameObject:
   - component: {fileID: 3336719530211900480}
   m_Layer: 0
   m_Name: EnemyLoot (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19954,7 +19958,7 @@ GameObject:
   - component: {fileID: 7032818420396659164}
   m_Layer: 0
   m_Name: EnemyLoot (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

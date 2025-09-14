@@ -1,197 +1,190 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; // 追加
 
-/// <summary>
-/// ゲーム全体のサウンド管理を行うクラス
-/// BGM・各種SEの再生、音量設定、AudioMixer連携、設定保存などを担当
-/// </summary>
 public class SoundManager : MonoBehaviour
 {
-    private static SoundManager instance;
-
     [Header("オーディオミキサーの設定")]
-    [SerializeField] private AudioMixer audioMixer; // 全体の音量管理用ミキサー
+    [SerializeField]
+    private AudioMixer audioMixer; // オーディオミキサー
 
-    [Header("タイトルBGMのAudioSource")]
-    [SerializeField] private AudioSource TitlebgmAudioSource; // BGM再生用
+    // タイトル画面用BGMのAudioSource
+    [Header("タイトル画面BGM")]
+    [SerializeField]
+    private AudioSource titleBgmAudioSource;
 
-    [Header("メニューBGMのAudioSource")]
-    [SerializeField] private AudioSource menuBgmAudioSource; // メニューBGM再生用
+    // メニュー画面用BGMのAudioSource
+    [Header("メニュー画面BGM")]
+    [SerializeField]
+    private AudioSource menuBgmAudioSource;
 
-    [Header("ステージBGMのAudioSource")]
-    [SerializeField] private AudioSource stageBgmAudioSource; // ステージBGM再生用
+    // ステージセレクト画面用BGMのAudioSource
+    [Header("ステージセレクトBGM")]
+    [SerializeField]
+    private AudioSource stageSelectBgmAudioSource;
+
+    // ステージ画面用BGMのAudioSource
+    [Header("ステージ画面BGM")]
+    [SerializeField]
+    private AudioSource stageBgmAudioSource;
+
+    // ポーズ画面用BGMのAudioSource
+    [Header("ポーズ画面BGM")]
+    [SerializeField]
+    private AudioSource pauseBgmAudioSource;
+
+    // リザルト画面用BGMのAudioSource
+    [Header("リザルト画面BGM")]
+    [SerializeField]
+    private AudioSource resultBgmAudioSource;
 
     [Header("ゲームクリアのSE")]
-    [SerializeField] private AudioSource gameClearAudioSource; // ゲームクリア時SE
+    [SerializeField]
+    private AudioSource gameClearAudioSource; // ゲームクリアの効果音
 
-    [Header("プレイヤー自動前進時のSE")]
-    [SerializeField] private AudioSource playerAutoMoveAudioSource; // 自動前進SE
+    [Header("クリック音のSE")]
+    [SerializeField]
+    private AudioSource clickAudioSource; // クリック音の効果音
 
-    [Header("プレイヤーレーン移動時のSE")]
-    [SerializeField] private AudioSource playerLaneMoveAudioSource; // レーン移動SE
+    // 自動前進時のSE
+    [Header("自動前進時のSE")]
+    [SerializeField]
+    private AudioSource autoMoveAudioSource; // 自動前進時の効果音
 
+    // レーン移動時のSE
+    [Header("レーン移動時のSE")]
+    [SerializeField]
+    private AudioSource laneMoveAudioSource; // レーン移動時の効果音
+
+    // ジャンプ時のSE
     [Header("ジャンプ時のSE")]
-    [SerializeField] private AudioSource jumpAudioSource; // ジャンプSE
-
-    [Header("敵・障害物に激突（ミス）時のSE")]
-    [SerializeField] private AudioSource hitObstacleAudioSource; // 障害物衝突SE
+    [SerializeField]
+    private AudioSource jumpAudioSource; // ジャンプ時の効果音
 
     [Header("敵撃破時のSE")]
-    [SerializeField] private AudioSource enemyDefeatAudioSource; // 敵撃破SE
+    [SerializeField]
+    private AudioSource enemyDefeatAudioSource; // 敵撃破時の効果音
 
-    [Header("トリックアクション時のSE")]
-    [SerializeField] private AudioSource trickActionAudioSource; // トリックアクションSE
+    // プレイヤーが障害物に激突（ミス）時のSE
+    [Header("障害物激突時のSE")]
+    [SerializeField]
+    private AudioSource playerCrashAudioSource; // 障害物激突時の効果音
 
-    [Header("スタート時カウント321のSE")]
-    [SerializeField] private AudioSource startCount321AudioSource; // カウント321SE
+    // トリックアクションSE
+    [Header("トリックアクション1のSE")]
+    [SerializeField]
+    private AudioSource trickAction1AudioSource; // トリックアクション1の効果音
 
-    [Header("スタート時カウントSTARTのSE")]
-    [SerializeField] private AudioSource startCountStartAudioSource; // カウントSTART SE
+    [Header("トリックアクション2のSE")]
+    [SerializeField]
+    private AudioSource trickAction2AudioSource; // トリックアクション2の効果音
 
-    [Header("ゴール(クリア)時のSE")]
-    [SerializeField] private AudioSource goalAudioSource; // ゴール到達SE
+    // スタート時カウントSE
+    [Header("スタートカウント321のSE")]
+    [SerializeField]
+    private AudioSource startCount321AudioSource; // スタート時カウント321の効果音
 
+    [Header("スタートカウントSTARTのSE")]
+    [SerializeField]
+    private AudioSource startCountStartAudioSource; // スタート時カウントSTARTの効果音
+
+    // ゴール時のSE
+    [Header("ゴール時のSE")]
+    [SerializeField]
+    private AudioSource goalAudioSource; // ゴール時の効果音
+
+    // スコアアイテム獲得時のSE
     [Header("スコアアイテム獲得時のSE")]
-    [SerializeField] private AudioSource scoreItemGetAudioSource; // スコアアイテム取得SE
+    [SerializeField]
+    private AudioSource scoreItemAudioSource; // スコアアイテム獲得時の効果音
 
+    // 加速パネル判定時のSE
     [Header("加速パネル判定時のSE")]
-    [SerializeField] private AudioSource accelPanelAudioSource; // 加速パネルSE
+    [SerializeField]
+    private AudioSource accelPanelAudioSource; // 加速パネル判定時の効果音
 
-    [Header("選択音UIボタン(コントローラーやマウスで選択時)のSE")]
-    [SerializeField] private AudioSource uiSelectAudioSource; // UI選択SE
+    // UI選択音（クリック・コントローラー）
+    [Header("UI選択音（クリック・コントローラー）")]
+    [SerializeField]
+    private AudioSource uiSelectAudioSource; // UI選択時の効果音
 
-    [Header("決定音UIボタン(コントローラーやマウスで選択時)のSE")]
-    [SerializeField] private AudioSource uiSubmitAudioSource; // UI決定SE
+    // UI決定音
+    [Header("UI決定音")]
+    [SerializeField]
+    private AudioSource uiDecideAudioSource; // UI決定時の効果音
 
-    [Header("音量設定つまみ移動時（SE確認）のSE")]
-    [SerializeField] private AudioSource volumeSliderMoveAudioSource; // 音量スライダー移動SE
+    // UI音量設定つまみ移動時（SE確認）
+    [Header("UI音量設定つまみ移動時（SE確認）")]
+    [SerializeField]
+    private AudioSource uiVolumeKnobAudioSource; // UI音量設定つまみ移動時の効果音
 
     [Header("マスター音量スライダー")]
-    [SerializeField] private Slider masterVolumeSlider; // マスター音量調整用
+    [SerializeField]
+    private Slider masterVolumeSlider; // マスター音量スライダー
 
     [Header("SE音量スライダー")]
-    [SerializeField] private Slider seVolumeSlider; // SE音量調整用
+    [SerializeField]
+    private Slider seVolumeSlider; // 効果音音量スライダー
 
     [Header("BGM音量スライダー")]
-    [SerializeField] private Slider bgmVolumeSlider; // BGM音量調整用
+    [SerializeField]
+    private Slider bgmVolumeSlider; // BGM音量スライダー
 
-    // スライダーSEループ再生制御用
-    private bool isVolumeSliderSEPlaying = false;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-
-    /// <summary>
-    /// 初期化処理。AudioSourceの設定やスライダーの初期値・リスナー登録を行う
-    /// </summary>
     private void Start()
     {
-        // 各AudioSourceの初期設定（AudioMixerGroup割り当て）
-        SetupAudioSource(TitlebgmAudioSource);
+        // 各AudioSourceの初期設定
+        SetupAudioSource(titleBgmAudioSource);
         SetupAudioSource(menuBgmAudioSource);
+        SetupAudioSource(stageSelectBgmAudioSource);
         SetupAudioSource(stageBgmAudioSource);
+        SetupAudioSource(pauseBgmAudioSource);
+        SetupAudioSource(resultBgmAudioSource);
         SetupAudioSource(gameClearAudioSource);
-        SetupAudioSource(playerAutoMoveAudioSource);
-        SetupAudioSource(playerLaneMoveAudioSource);
+        SetupAudioSource(clickAudioSource);
+        SetupAudioSource(autoMoveAudioSource);
+        SetupAudioSource(laneMoveAudioSource);
         SetupAudioSource(jumpAudioSource);
-        SetupAudioSource(hitObstacleAudioSource);
         SetupAudioSource(enemyDefeatAudioSource);
-        SetupAudioSource(trickActionAudioSource);
+        SetupAudioSource(playerCrashAudioSource);
+        SetupAudioSource(trickAction1AudioSource);
+        SetupAudioSource(trickAction2AudioSource);
         SetupAudioSource(startCount321AudioSource);
         SetupAudioSource(startCountStartAudioSource);
         SetupAudioSource(goalAudioSource);
-        SetupAudioSource(scoreItemGetAudioSource);
+        SetupAudioSource(scoreItemAudioSource);
         SetupAudioSource(accelPanelAudioSource);
         SetupAudioSource(uiSelectAudioSource);
-        SetupAudioSource(uiSubmitAudioSource);
-        SetupAudioSource(volumeSliderMoveAudioSource);
+        SetupAudioSource(uiDecideAudioSource);
+        SetupAudioSource(uiVolumeKnobAudioSource);
 
-        // 各音量スライダーの初期値設定とイベント登録
+        // マスター音量スライダーの設定
         if (masterVolumeSlider != null)
         {
             masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+            masterVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // 追加
             masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
-            AddSliderPointerEvents(masterVolumeSlider);
         }
+
+        // 効果音音量スライダーの設定
         if (seVolumeSlider != null)
         {
             seVolumeSlider.onValueChanged.AddListener(SetSEVolume);
+            seVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // 追加
             seVolumeSlider.value = PlayerPrefs.GetFloat("SEVolume", 1f);
-            AddSliderPointerEvents(seVolumeSlider);
         }
+
+        // BGM音量スライダーの設定
         if (bgmVolumeSlider != null)
         {
             bgmVolumeSlider.onValueChanged.AddListener(SetBGMVolume);
+            bgmVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // 追加
             bgmVolumeSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
-            AddSliderPointerEvents(bgmVolumeSlider);
         }
 
-        // 保存済み音量設定を反映
+        // シーンをまたいで音量設定を適用
         ApplySavedVolumes();
     }
 
-    /// <summary>
-    /// スライダーにPointerDown/PointerUpイベントを追加
-    /// </summary>
-    private void AddSliderPointerEvents(Slider slider)
-    {
-        var trigger = slider.gameObject.GetComponent<EventTrigger>();
-        if (trigger == null)
-            trigger = slider.gameObject.AddComponent<EventTrigger>();
-
-        // PointerDown
-        var entryDown = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
-        entryDown.callback.AddListener((data) => OnSliderPointerDown());
-        trigger.triggers.Add(entryDown);
-
-        // PointerUp
-        var entryUp = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
-        entryUp.callback.AddListener((data) => OnSliderPointerUp());
-        trigger.triggers.Add(entryUp);
-    }
-
-    /// <summary>
-    /// スライダーを押したときにSEループ再生開始
-    /// </summary>
-    private void OnSliderPointerDown()
-    {
-        if (!isVolumeSliderSEPlaying && volumeSliderMoveAudioSource != null)
-        {
-            volumeSliderMoveAudioSource.loop = true;
-            volumeSliderMoveAudioSource.Play();
-            isVolumeSliderSEPlaying = true;
-        }
-    }
-
-    /// <summary>
-    /// スライダーを離したときにSE停止
-    /// </summary>
-    private void OnSliderPointerUp()
-    {
-        if (isVolumeSliderSEPlaying && volumeSliderMoveAudioSource != null)
-        {
-            volumeSliderMoveAudioSource.Stop();
-            volumeSliderMoveAudioSource.loop = false;
-            isVolumeSliderSEPlaying = false;
-        }
-    }
-
-    /// <summary>
-    /// 保存済みの音量設定をAudioMixerに反映
-    /// </summary>
     private void ApplySavedVolumes()
     {
         float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
@@ -204,182 +197,285 @@ public class SoundManager : MonoBehaviour
         SetBGMVolume(bgmVolume);
     }
 
-    // --- 各種SE再生メソッド ---
+    // タイトル画面BGMを再生
+    public void PlayTitleBGM()
+    {
+        if (titleBgmAudioSource != null)
+        {
+            titleBgmAudioSource.loop = true;
+            titleBgmAudioSource.Play();
+        }
+    }
 
-    /// <summary>ゲームクリアSE再生</summary>
+    // メニュー画面BGMを再生
+    public void PlayMenuBGM()
+    {
+        if (menuBgmAudioSource != null)
+        {
+            menuBgmAudioSource.loop = true;
+            menuBgmAudioSource.Play();
+        }
+    }
+
+    // ステージセレクト画面BGMを再生
+    public void PlayStageSelectBGM()
+    {
+        if (stageSelectBgmAudioSource != null)
+        {
+            stageSelectBgmAudioSource.loop = true;
+            stageSelectBgmAudioSource.Play();
+        }
+    }
+
+    // ステージ画面BGMを再生
+    public void PlayStageBGM()
+    {
+        if (stageBgmAudioSource != null)
+        {
+            stageBgmAudioSource.loop = true;
+            stageBgmAudioSource.Play();
+        }
+    }
+
+    // ポーズ画面BGMを再生
+    public void PlayPauseBGM()
+    {
+        if (pauseBgmAudioSource != null)
+        {
+            pauseBgmAudioSource.loop = true;
+            pauseBgmAudioSource.Play();
+        }
+    }
+
+    // リザルト画面BGMを再生
+    public void PlayResultBGM()
+    {
+        if (resultBgmAudioSource != null)
+        {
+            resultBgmAudioSource.loop = true;
+            resultBgmAudioSource.Play();
+        }
+    }
+
+    // クリア時のSEを再生
     public void PlayGameClearAudio()
     {
         if (gameClearAudioSource != null)
+        {
             gameClearAudioSource.Play();
+        }
     }
 
-    /// <summary>プレイヤー自動前進SE再生</summary>
-    public void PlayPlayerAutoMoveAudio()
+    // BGMを停止（全BGM停止）
+    public void StopAllBgmAudio()
     {
-        if (playerAutoMoveAudioSource != null)
-            playerAutoMoveAudioSource.Play();
+        if (titleBgmAudioSource != null) titleBgmAudioSource.Stop();
+        if (menuBgmAudioSource != null) menuBgmAudioSource.Stop();
+        if (stageSelectBgmAudioSource != null) stageSelectBgmAudioSource.Stop();
+        if (stageBgmAudioSource != null) stageBgmAudioSource.Stop();
+        if (pauseBgmAudioSource != null) pauseBgmAudioSource.Stop();
+        if (resultBgmAudioSource != null) resultBgmAudioSource.Stop();
     }
 
-    /// <summary>プレイヤーレーン移動SE再生</summary>
-    public void PlayPlayerLaneMoveAudio()
+    // クリック音を再生
+    public void PlayClickAudio()
     {
-        if (playerLaneMoveAudioSource != null)
-            playerLaneMoveAudioSource.Play();
+        if (clickAudioSource != null)
+        {
+            clickAudioSource.Play();
+        }
     }
 
-    /// <summary>ジャンプSE再生</summary>
+    // 自動前進時のSEを再生（ループ防止）
+    public void PlayAutoMoveAudio()
+    {
+        if (autoMoveAudioSource != null && !autoMoveAudioSource.isPlaying)
+        {
+            autoMoveAudioSource.Play();
+        }
+    }
+
+    // 自動前進時のSEを停止
+    public void StopAutoMoveAudio()
+    {
+        if (autoMoveAudioSource != null && autoMoveAudioSource.isPlaying)
+        {
+            autoMoveAudioSource.Stop();
+        }
+    }
+
+    // レーン移動時のSEを再生
+    public void PlayLaneMoveAudio()
+    {
+        if (laneMoveAudioSource != null)
+        {
+            laneMoveAudioSource.Play();
+        }
+    }
+
+    // ジャンプ時のSEを再生
     public void PlayJumpAudio()
     {
         if (jumpAudioSource != null)
+        {
             jumpAudioSource.Play();
+        }
     }
 
-    /// <summary>障害物衝突SE再生</summary>
-    public void PlayHitObstacleAudio()
-    {
-        if (hitObstacleAudioSource != null)
-            hitObstacleAudioSource.Play();
-    }
-
-    /// <summary>敵撃破SE再生</summary>
+    // 敵撃破時のSEを再生
     public void PlayEnemyDefeatAudio()
     {
         if (enemyDefeatAudioSource != null)
+        {
             enemyDefeatAudioSource.Play();
+        }
     }
 
-    /// <summary>トリックアクションSE再生</summary>
-    public void PlayTrickActionAudio()
+    // 障害物激突時のSEを再生
+    public void PlayPlayerCrashAudio()
     {
-        if (trickActionAudioSource != null)
-            trickActionAudioSource.Play();
+        if (playerCrashAudioSource != null)
+        {
+            playerCrashAudioSource.Play();
+        }
     }
 
-    /// <summary>スタートカウント321SE再生</summary>
+    // トリックアクション1のSEを再生
+    public void PlayTrickAction1Audio()
+    {
+        if (trickAction1AudioSource != null)
+        {
+            trickAction1AudioSource.Play();
+        }
+    }
+
+    // トリックアクション2のSEを再生
+    public void PlayTrickAction2Audio()
+    {
+        if (trickAction2AudioSource != null)
+        {
+            trickAction2AudioSource.Play();
+        }
+    }
+
+    // スタート時カウント321のSEを再生
     public void PlayStartCount321Audio()
     {
         if (startCount321AudioSource != null)
+        {
             startCount321AudioSource.Play();
+        }
     }
 
-    /// <summary>スタートカウントSTART SE再生</summary>
+    // スタート時カウントSTARTのSEを再生
     public void PlayStartCountStartAudio()
     {
         if (startCountStartAudioSource != null)
+        {
             startCountStartAudioSource.Play();
+        }
     }
 
-    /// <summary>ゴール到達SE再生</summary>
+    // ゴール時のSEを再生
     public void PlayGoalAudio()
     {
         if (goalAudioSource != null)
+        {
             goalAudioSource.Play();
+        }
     }
 
-    /// <summary>スコアアイテム取得SE再生</summary>
-    public void PlayScoreItemGetAudio()
+    // スコアアイテム獲得時のSEを再生
+    public void PlayScoreItemAudio()
     {
-        if (scoreItemGetAudioSource != null)
-            scoreItemGetAudioSource.Play();
+        if (scoreItemAudioSource != null)
+        {
+            scoreItemAudioSource.Play();
+        }
     }
 
-    /// <summary>加速パネルSE再生</summary>
+    // 加速パネル判定時のSEを再生
     public void PlayAccelPanelAudio()
     {
         if (accelPanelAudioSource != null)
+        {
             accelPanelAudioSource.Play();
+        }
     }
 
-    /// <summary>UI選択SE再生</summary>
+    // UI選択音（クリック・コントローラー）を再生（ループ防止）
     public void PlayUISelectAudio()
     {
-        if (uiSelectAudioSource != null)
+        if (uiSelectAudioSource != null && !uiSelectAudioSource.isPlaying)
+        {
             uiSelectAudioSource.Play();
+        }
     }
 
-    /// <summary>UI決定SE再生</summary>
-    public void PlayUISubmitAudio()
+    // UI決定音を再生
+    public void PlayUIDecideAudio()
     {
-        if (uiSubmitAudioSource != null)
-            uiSubmitAudioSource.Play();
+        if (uiDecideAudioSource != null)
+        {
+            uiDecideAudioSource.Play();
+        }
     }
 
-    /// <summary>音量スライダー移動SE再生</summary>
-    public void PlayVolumeSliderMoveAudio()
+    // UI音量設定つまみ移動時（SE確認）を再生（ループ防止）
+    public void PlayUIVolumeKnobAudio()
     {
-        if (volumeSliderMoveAudioSource != null)
-            volumeSliderMoveAudioSource.Play();
+        if (uiVolumeKnobAudioSource != null && !uiVolumeKnobAudioSource.isPlaying)
+        {
+            uiVolumeKnobAudioSource.Play();
+        }
     }
 
-    // --- BGM制御 ---
-
-    /// <summary>BGM再生</summary>
-    public void PlayTitleBGM()
-    {
-        if (TitlebgmAudioSource != null && !TitlebgmAudioSource.isPlaying)
-            TitlebgmAudioSource.Play();
-    }
-
-    /// <summary>BGM停止</summary>
-    public void StopTitleBGM()
-    {
-        if (TitlebgmAudioSource != null)
-            TitlebgmAudioSource.Stop();
-    }
-
-    /// <summary>メニューBGM再生</summary>
-    public void PlayMenuBGM()
-    {
-        if (menuBgmAudioSource != null && !menuBgmAudioSource.isPlaying)
-            menuBgmAudioSource.Play();
-    }
-
-    /// <summary>メニューBGM停止</summary>
-    public void StopMenuBGM()
-    {
-        if (menuBgmAudioSource != null)
-            menuBgmAudioSource.Stop();
-    }
-
-    /// <summary>ステージBGM再生</summary>
-    public void PlayStageBGM()
-    {
-        if (stageBgmAudioSource != null && !stageBgmAudioSource.isPlaying)
-            stageBgmAudioSource.Play();
-    }
-
-    /// <summary>ステージBGM停止</summary>
-    public void StopStageBGM()
-    {
-        if (stageBgmAudioSource != null)
-            stageBgmAudioSource.Stop();
-    }
-
-    // --- 音量設定 ---
-
-    /// <summary>BGM音量を設定し保存</summary>
+    // BGM音量を設定（全BGMに適用）
     public void SetBGMVolume(float volume)
     {
+        float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
         if (audioMixer != null)
         {
-            float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
             audioMixer.SetFloat("BGMVolume", dbVolume);
             PlayerPrefs.SetFloat("BGMVolume", volume);
         }
+        if (titleBgmAudioSource != null) titleBgmAudioSource.volume = volume;
+        if (menuBgmAudioSource != null) menuBgmAudioSource.volume = volume;
+        if (stageSelectBgmAudioSource != null) stageSelectBgmAudioSource.volume = volume;
+        if (stageBgmAudioSource != null) stageBgmAudioSource.volume = volume;
+        if (pauseBgmAudioSource != null) pauseBgmAudioSource.volume = volume;
+        if (resultBgmAudioSource != null) resultBgmAudioSource.volume = volume;
     }
 
-    /// <summary>SE音量を設定し保存</summary>
+    // 効果音音量を設定（全SEに適用）
     public void SetSEVolume(float volume)
     {
+        float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
         if (audioMixer != null)
         {
-            float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
             audioMixer.SetFloat("SEVolume", dbVolume);
             PlayerPrefs.SetFloat("SEVolume", volume);
         }
+        if (gameClearAudioSource != null) gameClearAudioSource.volume = volume;
+        if (clickAudioSource != null) clickAudioSource.volume = volume;
+        if (autoMoveAudioSource != null) autoMoveAudioSource.volume = volume;
+        if (laneMoveAudioSource != null) laneMoveAudioSource.volume = volume;
+        if (jumpAudioSource != null) jumpAudioSource.volume = volume;
+        if (enemyDefeatAudioSource != null) enemyDefeatAudioSource.volume = volume;
+        if (playerCrashAudioSource != null) playerCrashAudioSource.volume = volume;
+        if (trickAction1AudioSource != null) trickAction1AudioSource.volume = volume;
+        if (trickAction2AudioSource != null) trickAction2AudioSource.volume = volume;
+        if (startCount321AudioSource != null) startCount321AudioSource.volume = volume;
+        if (startCountStartAudioSource != null) startCountStartAudioSource.volume = volume;
+        if (goalAudioSource != null) goalAudioSource.volume = volume;
+        if (scoreItemAudioSource != null) scoreItemAudioSource.volume = volume;
+        if (accelPanelAudioSource != null) accelPanelAudioSource.volume = volume;
+        if (uiSelectAudioSource != null) uiSelectAudioSource.volume = volume;
+        if (uiDecideAudioSource != null) uiDecideAudioSource.volume = volume;
+        if (uiVolumeKnobAudioSource != null) uiVolumeKnobAudioSource.volume = volume;
     }
 
-    /// <summary>マスター音量を設定し保存</summary>
+    // マスター音量を設定
     public void SetMasterVolume(float volume)
     {
         if (audioMixer != null)
@@ -390,12 +486,10 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// AudioSourceにAudioMixerGroup(SEGroup)を割り当てる
-    /// </summary>
+    // AudioSourceの初期設定
     private void SetupAudioSource(AudioSource audioSource)
     {
-        if (audioSource != null && audioMixer != null)
+        if (audioSource != null)
         {
             var seGroups = audioMixer.FindMatchingGroups("SEGroup");
             if (seGroups.Length > 0)
@@ -405,17 +499,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// アプリ終了時にサウンド設定をリセット
-    /// </summary>
+    // ゲーム終了時に呼ばれるメソッド
     private void OnApplicationQuit()
     {
         ResetSoundSettings();
     }
 
-    /// <summary>
-    /// サウンド設定(PlayerPrefs)をリセット
-    /// </summary>
+    // サウンド設定をリセットするメソッド
     private void ResetSoundSettings()
     {
         PlayerPrefs.DeleteKey("MasterVolume");

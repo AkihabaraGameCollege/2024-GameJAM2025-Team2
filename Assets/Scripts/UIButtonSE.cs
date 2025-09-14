@@ -19,12 +19,12 @@ public class UIButtonSE : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointe
     // 決定時（コントローラーの決定ボタンやEnterキー）
     public void OnSubmit(BaseEventData eventData)
     {
-        soundManager?.PlayUISubmitAudio();
+        soundManager?.PlayUIDecideAudio();
     }
 
     // マウスクリック時
     public void OnPointerClick(PointerEventData eventData)
     {
-        soundManager?.PlayUISubmitAudio();
+        soundManager?.PlayUIDecideAudio();
     }
 }

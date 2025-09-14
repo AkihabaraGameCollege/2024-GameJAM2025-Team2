@@ -46,6 +46,9 @@ public class PlayerCon : MonoBehaviour
     private Animator playerAnimator = null;
     private Rigidbody rb;
 
+    // 連続ジャンプアクション管理用変数
+    private int consecutiveJumpActions = 0;
+
     // SoundManager参照用
     private SoundManager soundManager;
     private bool isAutoMoveSEPlaying = false;
@@ -91,12 +94,12 @@ public class PlayerCon : MonoBehaviour
 
         rb.MovePosition(move);
 
-        // --- 自動前進SE再生 ---
+        // --- 自動前進SE再生・停止 ---
         if (soundManager != null && isGrounded && forwardSpeed > 0)
         {
             if (!isAutoMoveSEPlaying)
             {
-                soundManager.PlayPlayerAutoMoveAudio();
+                soundManager.PlayAutoMoveAudio();
                 isAutoMoveSEPlaying = true;
             }
         }
@@ -104,8 +107,7 @@ public class PlayerCon : MonoBehaviour
         {
             if (isAutoMoveSEPlaying)
             {
-                // SoundManager内でAudioSourceをStopする実装がなければ、必要に応じてStop用メソッドを追加してください
-                // 例: soundManager.StopPlayerAutoMoveAudio();
+                soundManager.StopAutoMoveAudio();
                 isAutoMoveSEPlaying = false;
             }
         }
@@ -131,23 +133,49 @@ public class PlayerCon : MonoBehaviour
                 Destroy(other.gameObject);
 
                 //追加ジャンプ
-                Vector3 forwardBoost = transform.forward * forwardForce; // ← 前方向加速の強さ（調整可）
+                Vector3 forwardBoost = transform.forward * forwardForce;
 
-                // ジャンプ + 前方向に勢いを与える
                 rb.linearVelocity = new Vector3(
-                    forwardBoost.x,                  // 前方向X成分
-                    jumpForce * doubleJump,          // 上方向ジャンプ
-                    forwardBoost.z                   // 前方向Z成分
+                    forwardBoost.x,
+                    jumpForce * doubleJump,
+                    forwardBoost.z
                 );
 
-                isAttackMode = false;//リセット
+                // --- 連続ジャンプアクション判定・SE再生 ---
+                consecutiveJumpActions++;
+                if (soundManager != null)
+                {
+                    if (consecutiveJumpActions >= 2)
+                    {
+                        soundManager.PlayTrickAction2Audio();
+                        Debug.Log("トリックアクション2のSEを再生");
+                    }
+                    else
+                    {
+                        soundManager.PlayTrickAction1Audio();
+                        Debug.Log("トリックアクション1のSEを再生");
+                    }
+                }
+
+                isAttackMode = false;
             }
             else if (!isInvincible)
             {
                 Debug.Log($"{name} が {other.name} に当たった");
                 StartCoroutine(HitRoutine());
             }
-
+        }
+        else if (other.CompareTag("Obstacle"))
+        {
+            if (!isInvincible)
+            {
+                Debug.Log($"{name} が障害物 {other.name} に激突");
+                if (soundManager != null)
+                {
+                    soundManager.PlayPlayerCrashAudio();
+                }
+                StartCoroutine(HitRoutine());
+            }
         }
     }
 
@@ -183,7 +211,7 @@ public class PlayerCon : MonoBehaviour
             // レーン移動SE再生
             if (soundManager != null)
             {
-                soundManager.PlayPlayerLaneMoveAudio();
+                soundManager.PlayLaneMoveAudio();
             }
         }
     }
@@ -203,7 +231,7 @@ public class PlayerCon : MonoBehaviour
             // レーン移動SE再生
             if (soundManager != null)
             {
-                soundManager.PlayPlayerLaneMoveAudio();
+                soundManager.PlayLaneMoveAudio();
             }
         }
     }
@@ -235,7 +263,7 @@ public class PlayerCon : MonoBehaviour
             // トリックアクションSE再生
             if (soundManager != null)
             {
-                soundManager.PlayTrickActionAudio();
+                soundManager.PlayTrickAction1Audio();
             }
         }
     }

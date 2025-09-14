@@ -13,24 +13,10 @@ public class ScnenManager : MonoBehaviour
     // ステージ選択画面UIを表示し、メニューを非表示にするメソッドに変更
     [SerializeField] private GameObject stageSelectUI;
 
-    // サウンド管理用のSoundManager参照
-    private SoundManager soundManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        soundManager = Object.FindFirstObjectByType<SoundManager>();
-        // 初期状態に応じてBGMを再生
-        if (titleUI != null && titleUI.activeSelf)
-        {
-            soundManager?.PlayTitleBGM();
-            soundManager?.StopMenuBGM();
-        }
-        else if (menuUI != null && menuUI.activeSelf)
-        {
-            soundManager?.PlayMenuBGM();
-            soundManager?.StopTitleBGM();
-        }
     }
 
     // Update is called once per frame
@@ -45,8 +31,6 @@ public class ScnenManager : MonoBehaviour
         if (menuUI != null) menuUI.SetActive(true);
         if (titleUI != null) titleUI.SetActive(false);
 
-        soundManager?.PlayMenuBGM();
-        soundManager?.StopTitleBGM();
     }
 
     // タイトルをアクティブ、メニューを非アクティブにするメソッド
@@ -55,8 +39,6 @@ public class ScnenManager : MonoBehaviour
         if (menuUI != null) menuUI.SetActive(false);
         if (titleUI != null) titleUI.SetActive(true);
 
-        soundManager?.PlayTitleBGM();
-        soundManager?.StopMenuBGM();
     }
 
     // ステージ選択画面UIを表示するメソッド
@@ -70,27 +52,18 @@ public class ScnenManager : MonoBehaviour
     // ステージ1へ遷移する処理
     public void OnStage1ButtonClicked()
     {
-        soundManager?.PlayStageBGM();
-        soundManager?.StopMenuBGM();
-        soundManager?.StopTitleBGM();
         SceneManager.LoadScene("PlayerStageTestScene");
     }
 
     // ステージ2へ遷移する処理
     public void OnStage2ButtonClicked()
     {
-        soundManager?.PlayStageBGM();
-        soundManager?.StopMenuBGM();
-        soundManager?.StopTitleBGM();
         SceneManager.LoadScene("PlayerStage2Scene");
     }
 
     // ステージ3へ遷移する処理
     public void OnStage3ButtonClicked()
     {
-        soundManager?.PlayStageBGM();
-        soundManager?.StopMenuBGM();
-        soundManager?.StopTitleBGM();
         SceneManager.LoadScene("PlayerStage3Scene");
     }
 
@@ -104,10 +77,6 @@ public class ScnenManager : MonoBehaviour
     // リザルト画面から次のステージシーンに遷移する仮実装メソッド
     public void GoToResultScene()
     {
-        soundManager?.StopStageBGM();      // まず停止
-        soundManager?.PlayStageBGM();      // 再生（必ず頭から）
-        soundManager?.StopMenuBGM();
-        soundManager?.StopTitleBGM();
         SceneManager.LoadScene("ResultScene");
     }
 

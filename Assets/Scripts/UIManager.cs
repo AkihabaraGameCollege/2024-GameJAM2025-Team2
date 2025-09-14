@@ -44,7 +44,9 @@ public class UIManager : MonoBehaviour
 
     IEnumerator CountdownAndStartCountup()
     {
-        // タイムスケールを0にしてゲームを一時停止
+        // SoundManagerのインスタンス取得（新推奨方式）
+        SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
+
         Time.timeScale = 0f;
 
         countdownImage.sprite = sprite3;
@@ -52,32 +54,26 @@ public class UIManager : MonoBehaviour
         countupText.gameObject.SetActive(false);
 
         // 3
-        SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
-        if (soundManager != null)
-            soundManager.PlayStartCount321Audio();
+        soundManager?.PlayStartCount321Audio();
         yield return new WaitForSecondsRealtime(1f);
 
         // 2
         countdownImage.sprite = sprite2;
-        if (soundManager != null)
-            soundManager.PlayStartCount321Audio();
+        soundManager?.PlayStartCount321Audio();
         yield return new WaitForSecondsRealtime(1f);
 
         // 1
         countdownImage.sprite = sprite1;
-        if (soundManager != null)
-            soundManager.PlayStartCount321Audio();
+        soundManager?.PlayStartCount321Audio();
         yield return new WaitForSecondsRealtime(1f);
 
         // Start!!
         countdownImage.sprite = spriteStart;
-        if (soundManager != null)
-            soundManager.PlayStartCountStartAudio();
+        soundManager?.PlayStartCountStartAudio(); // START用SE
         yield return new WaitForSecondsRealtime(1f);
 
         countdownImage.gameObject.SetActive(false);
 
-        // タイムスケールを1に戻してゲーム再開
         Time.timeScale = 1f;
 
         StartCountup();
