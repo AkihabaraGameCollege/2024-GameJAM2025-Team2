@@ -130,6 +130,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private Slider bgmVolumeSlider; // BGM音量スライダー
 
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         // 各AudioSourceの初期設定
@@ -430,6 +435,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+
     // BGM音量を設定（全BGMに適用）
     public void SetBGMVolume(float volume)
     {
@@ -511,5 +517,14 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.DeleteKey("MasterVolume");
         PlayerPrefs.DeleteKey("SEVolume");
         PlayerPrefs.DeleteKey("BGMVolume");
+    }
+
+    // ステージBGMのみ停止するメソッドを追加
+    public void StopStageBGM()
+    {
+        if (stageBgmAudioSource != null)
+        {
+            stageBgmAudioSource.Stop();
+        }
     }
 }

@@ -2364,8 +2364,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4703103229487184702, guid: 774fc50be4ac3524aac5c6bdebf8756f, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6bf19373ee87ba84da2d89ac4cb77da0, type: 3}
-  m_Resource: {fileID: 8300000, guid: 6bf19373ee87ba84da2d89ac4cb77da0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 43ef82bfd51cf914bb65139c8eebd41f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 43ef82bfd51cf914bb65139c8eebd41f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2907,7 +2907,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 774fc50be4ac3524aac5c6bdebf8756f, type: 2}
   titleBgmAudioSource: {fileID: 4800474367526422003}
   menuBgmAudioSource: {fileID: 4284465578439694555}
-  stageSelectBgmAudioSource: {fileID: 7919705207697432027}
+  stageSelectBgmAudioSource: {fileID: 4284465578439694555}
   stageBgmAudioSource: {fileID: 7806539823359585564}
   pauseBgmAudioSource: {fileID: 6752451408996165122}
   resultBgmAudioSource: {fileID: 6968896577443795454}
