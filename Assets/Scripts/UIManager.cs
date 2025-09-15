@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI countupText = null;
 
     // カウントダウン開始秒数
-    [SerializeField] int countStartTime = 3;
+    //[SerializeField] int countStartTime = 3;
     // 現在のカウントアップ時間（秒）
     float currentCountup = 0f;
 

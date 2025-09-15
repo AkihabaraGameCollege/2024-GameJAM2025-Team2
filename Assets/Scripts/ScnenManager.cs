@@ -19,7 +19,14 @@ public class ScnenManager : MonoBehaviour
     void Start()
     {
         // SoundManagerをシーン内から取得
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = Object.FindFirstObjectByType<SoundManager>();
+
+        // 最初のタイトル表示時にBGM再生
+        if (soundManager != null && titleUI != null && titleUI.activeSelf)
+        {
+            soundManager.StopAllBgmAudio();
+            soundManager.PlayTitleBGM();
+        }
     }
 
     void Update()

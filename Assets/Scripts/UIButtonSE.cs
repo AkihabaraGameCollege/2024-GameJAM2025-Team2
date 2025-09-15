@@ -7,7 +7,7 @@ public class UIButtonSE : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointe
 
     void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = Object.FindFirstObjectByType<SoundManager>();
     }
 
     // 選択時（コントローラーやTab移動時）

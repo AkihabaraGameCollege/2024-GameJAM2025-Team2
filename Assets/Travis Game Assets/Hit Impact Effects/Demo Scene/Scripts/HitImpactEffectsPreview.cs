@@ -24,10 +24,10 @@ namespace TravisGameAssets
 		public Image rotationIcon;
 		public Image floorIcon;
 		public Image slowMotionIcon;
-		
-		public GameObject light;
-		
-		private GameObject[] hitEffects;
+
+        public GameObject sceneLight;
+
+        private GameObject[] hitEffects;
 
 		private int hitIndex;
 
@@ -175,15 +175,15 @@ namespace TravisGameAssets
 			newColor.a = slowMotion ? 1f : 0.33f;
 			slowMotionIcon.color = newColor;
 		}
-		
-		public void ToggleLighting()
-		{
-			lighting = !lighting;
-			light.SetActive(lighting);
-		}
-		
-		
-		public void NextHit()
+
+        public void ToggleLighting()
+        {
+            lighting = !lighting;
+            sceneLight.SetActive(lighting);
+        }
+
+
+        public void NextHit()
 		{
 			hitIndex++;
 			if(hitIndex >= hitEffects.Length)
