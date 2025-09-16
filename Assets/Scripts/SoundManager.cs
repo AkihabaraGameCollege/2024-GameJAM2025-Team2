@@ -255,6 +255,7 @@ public class SoundManager : MonoBehaviour
     // リザルト画面BGMを再生
     public void PlayResultBGM()
     {
+        // ここにBGM停止処理
         if (resultBgmAudioSource != null)
         {
             resultBgmAudioSource.loop = true;
@@ -276,8 +277,6 @@ public class SoundManager : MonoBehaviour
     {
         
         {
-            // ここにBGM停止処理
-            Debug.Log("StopAllBgmAudio() が呼ばれました");
             // 各BGM AudioSource を停止（nullチェック付き）
             if (titleBgmAudioSource != null) titleBgmAudioSource.Stop();
             if (menuBgmAudioSource != null) menuBgmAudioSource.Stop();
@@ -285,9 +284,6 @@ public class SoundManager : MonoBehaviour
             if (stageBgmAudioSource != null) stageBgmAudioSource.Stop();
             if (pauseBgmAudioSource != null) pauseBgmAudioSource.Stop();
             if (resultBgmAudioSource != null) resultBgmAudioSource.Stop();
-
-
-            Debug.Log("StopAllBgmAudio() が呼ばれ終わりました");
         }
     }
 

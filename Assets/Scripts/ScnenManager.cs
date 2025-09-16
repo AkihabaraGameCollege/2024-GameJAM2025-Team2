@@ -22,10 +22,13 @@ public class ScnenManager : MonoBehaviour
         soundManager = Object.FindFirstObjectByType<SoundManager>();
 
         // 最初のタイトル表示時にBGM再生
-        if (soundManager != null && titleUI != null && titleUI.activeSelf)
         {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayTitleBGM();
+            var soundManager = Object.FindFirstObjectByType<SoundManager>();
+            if (soundManager != null)
+            {
+                soundManager.StopAllBgmAudio();
+                soundManager.PlayResultBGM();
+            }
         }
     }
 
@@ -132,10 +135,10 @@ public class ScnenManager : MonoBehaviour
     public void GoToResultScene()
     {
         SceneManager.LoadScene("ResultScene");
-
         // リザルトBGM再生
         if (soundManager != null)
         {
+            soundManager.StopAutoMoveAudio();
             soundManager.StopAllBgmAudio();
             soundManager.PlayResultBGM();
         }
