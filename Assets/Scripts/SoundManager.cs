@@ -274,12 +274,43 @@ public class SoundManager : MonoBehaviour
     // BGMを停止（全BGM停止）
     public void StopAllBgmAudio()
     {
-        if (titleBgmAudioSource != null) titleBgmAudioSource.Stop();
-        if (menuBgmAudioSource != null) menuBgmAudioSource.Stop();
-        if (stageSelectBgmAudioSource != null) stageSelectBgmAudioSource.Stop();
-        if (stageBgmAudioSource != null) stageBgmAudioSource.Stop();
-        if (pauseBgmAudioSource != null) pauseBgmAudioSource.Stop();
-        if (resultBgmAudioSource != null) resultBgmAudioSource.Stop();
+        
+        {
+            // ここにBGM停止処理
+            Debug.Log("StopAllBgmAudio() が呼ばれました");
+            // 各BGM AudioSource を停止（nullチェック付き）
+            if (titleBgmAudioSource != null) titleBgmAudioSource.Stop();
+            if (menuBgmAudioSource != null) menuBgmAudioSource.Stop();
+            if (stageSelectBgmAudioSource != null) stageSelectBgmAudioSource.Stop();
+            if (stageBgmAudioSource != null) stageBgmAudioSource.Stop();
+            if (pauseBgmAudioSource != null) pauseBgmAudioSource.Stop();
+            if (resultBgmAudioSource != null) resultBgmAudioSource.Stop();
+
+
+            Debug.Log("StopAllBgmAudio() が呼ばれ終わりました");
+        }
+    }
+
+    // SEをすべて停止するメソッド
+    public void StopAllSeAudio()
+    {
+        if (gameClearAudioSource != null) gameClearAudioSource.Stop();
+        if (clickAudioSource != null) clickAudioSource.Stop();
+        if (autoMoveAudioSource != null) autoMoveAudioSource.Stop();
+        if (laneMoveAudioSource != null) laneMoveAudioSource.Stop();
+        if (jumpAudioSource != null) jumpAudioSource.Stop();
+        if (enemyDefeatAudioSource != null) enemyDefeatAudioSource.Stop();
+        if (playerCrashAudioSource != null) playerCrashAudioSource.Stop();
+        if (trickAction1AudioSource != null) trickAction1AudioSource.Stop();
+        if (trickAction2AudioSource != null) trickAction2AudioSource.Stop();
+        if (startCount321AudioSource != null) startCount321AudioSource.Stop();
+        if (startCountStartAudioSource != null) startCountStartAudioSource.Stop();
+        if (goalAudioSource != null) goalAudioSource.Stop();
+        if (scoreItemAudioSource != null) scoreItemAudioSource.Stop();
+        if (accelPanelAudioSource != null) accelPanelAudioSource.Stop();
+        if (uiSelectAudioSource != null) uiSelectAudioSource.Stop();
+        if (uiDecideAudioSource != null) uiDecideAudioSource.Stop();
+        if (uiVolumeKnobAudioSource != null) uiVolumeKnobAudioSource.Stop();
     }
 
     // クリック音を再生

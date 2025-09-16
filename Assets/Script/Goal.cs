@@ -15,6 +15,9 @@ public class Goal : MonoBehaviour
             SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
             if (soundManager != null)
             {
+                // BGM停止を追加
+                soundManager.StopStageBGM();
+
                 soundManager.PlayGoalAudio();
                 // ゴールSE再生後にシーン遷移
                 StartCoroutine(WaitForGoalSE(soundManager));
@@ -25,17 +28,15 @@ public class Goal : MonoBehaviour
                 SceneManager.LoadScene("ResultScene");
             }
 
-            Debug.Log("ゴールにに到達");
+            Debug.Log("ゴールに到達");
         }
     }
 
     private System.Collections.IEnumerator WaitForGoalSE(SoundManager soundManager)
     {
-        // goalAudioSourceがpublicなら直接参照、privateならSoundManagerにgetter追加推奨
         var goalAudioSourceField = typeof(SoundManager).GetField("goalAudioSource", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         AudioSource goalAudioSource = goalAudioSourceField?.GetValue(soundManager) as AudioSource;
 
-        // goalAudioSourceが取得できた場合のみ待機
         if (goalAudioSource != null)
         {
             while (goalAudioSource.isPlaying)
@@ -43,7 +44,6 @@ public class Goal : MonoBehaviour
                 yield return null;
             }
         }
-        // SE再生終了後にシーン遷移
         SceneManager.LoadScene("ResultScene");
     }
 }

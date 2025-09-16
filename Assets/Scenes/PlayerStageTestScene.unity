@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9174859905409981242, guid: 4c110a3fad4a6cc4fa5084b3e69e6d6b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1709,6 +1713,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bb6f1e59aa15884d8bc23d82a8dd26f, type: 3}
   m_PrefabInstance: {fileID: 2604344429984848030}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1890370381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1890370383}
+  - component: {fileID: 1890370382}
+  m_Layer: 0
+  m_Name: PlayerStageTestSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1890370382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890370381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7b22a5dbc9f548a4434ebe2f14ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1890370383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890370381}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1981190862
 GameObject:
   m_ObjectHideFlags: 0
@@ -8338,6 +8386,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 984913052906693071, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.168199
+      objectReference: {fileID: 0}
+    - target: {fileID: 984913052906693071, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.5003347
+      objectReference: {fileID: 0}
     - target: {fileID: 3243367195596042340, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8389,6 +8445,10 @@ PrefabInstance:
     - target: {fileID: 6891612236255822921, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_Name
       value: PlayerLoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891612236255822921, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21012,3 +21072,4 @@ SceneRoots:
   - {fileID: 579547789}
   - {fileID: 972003311}
   - {fileID: 898016389}
+  - {fileID: 1890370383}
