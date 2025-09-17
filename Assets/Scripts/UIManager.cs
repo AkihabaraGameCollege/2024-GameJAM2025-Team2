@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,8 +13,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] Sprite spriteStart = null;
     // カウントダウンの画像を表示するImage
     [SerializeField] Image countdownImage = null;
-    // カウントアップの時間を表示するTextMeshProUGUI
-    [SerializeField] TextMeshProUGUI countupText = null;
 
     // スコア表示用スプライト（0〜9）
     [Header("スコア表示用スプライト（0〜9）")]
@@ -25,8 +22,21 @@ public class UIManager : MonoBehaviour
     [Header("スコア表示用Image（左から順に最大7個）")]
     [SerializeField] List<Image> scoreImages = new List<Image>();
 
-    // カウントダウン開始秒数
-    //[SerializeField] int countStartTime = 3;
+    // スコアプラス表示用Image
+    [Header("スコアプラス表示用Image")]
+    [SerializeField] Image scorePlusImage = null;
+
+    // スコアプラス表示用Sprite
+    [SerializeField] Sprite scorePlusSprite = null;
+
+    // カウントアップ表示用スプライト（0〜9）
+    [Header("カウントアップ表示用スプライト（0〜9）")]
+    [SerializeField] Sprite[] countupDigitSprites = new Sprite[10];
+
+    // カウントアップ表示用Image（左から順に最大4個など必要数）
+    [Header("カウントアップ表示用Image（左から順に最大4個）")]
+    [SerializeField] List<Image> countupImages = new List<Image>();
+
     // 現在のカウントアップ時間（秒）
     float currentCountup = 0f;
 
@@ -42,6 +52,9 @@ public class UIManager : MonoBehaviour
         StartCoroutine(CountdownAndStartCountup());
         // スコア初期化
         SetScore(0);
+
+        // カウントアップスプライト初期化
+        InitCountupSprites();
     }
 
     // Update is called once per frame
@@ -51,8 +64,9 @@ public class UIManager : MonoBehaviour
         {
             // 経過時間を加算
             currentCountup += Time.deltaTime;
-            // テキストに現在の時間を表示（小数点第一位まで、3桁表示）
-            countupText.text = "Time : " + currentCountup.ToString("000.0") + " s";
+
+            // カウントアップをスプライトで表示
+            UpdateCountupSprites();
         }
     }
 
@@ -65,7 +79,7 @@ public class UIManager : MonoBehaviour
 
         countdownImage.sprite = sprite3;
         countdownImage.gameObject.SetActive(true);
-        countupText.gameObject.SetActive(false);
+        SetCountupSpritesActive(false);
 
         // 3
         soundManager?.PlayStartCount321Audio();
@@ -100,9 +114,9 @@ public class UIManager : MonoBehaviour
         currentCountup = 0f;
         // カウントアップフラグを有効化
         IsCountingup = true;
-        // テキストオブジェクトが存在すれば表示する
-        if (countupText != null)
-            countupText.gameObject.SetActive(true);
+        // カウントアップスプライト表示
+        SetCountupSpritesActive(true);
+        UpdateCountupSprites();
     }
 
     // カウントアップを停止するメソッド
@@ -110,24 +124,27 @@ public class UIManager : MonoBehaviour
     {
         // カウントアップフラグを無効化
         IsCountingup = false;
+        // カウントアップスプライト非表示
+        SetCountupSpritesActive(false);
     }
 
-    // カウントアップをリセットし、テキストも初期化するメソッド
+    // カウントアップをリセットし、スプライトも初期化するメソッド
     public void ResetCountup()
     {
         // 経過時間をリセット
         currentCountup = 0f;
-        // テキストを初期状態に戻す
-        countupText.text = "Time : 000.0 s";
+        // カウントアップスプライト初期化
+        InitCountupSprites();
     }
 
     // スコアをセットして表示を更新
     public void SetScore(int score)
     {
-        currentScore = score;
+        // スコアが0未満の場合は0にする
+        currentScore = Mathf.Max(0, score);
 
         // 表示する桁数を決定（0なら1桁、以降スコアの桁数分表示、最大7桁）
-        int digitCount = Mathf.Max(1, score.ToString().Length);
+        int digitCount = Mathf.Max(1, currentScore.ToString().Length);
         digitCount = Mathf.Min(digitCount, scoreImages.Count);
 
         // 必要なImageだけ表示
@@ -137,14 +154,88 @@ public class UIManager : MonoBehaviour
         // 各桁の数字をスプライトで表示
         for (int i = 0; i < digitCount; i++)
         {
-            int digit = (score / (int)Mathf.Pow(10, digitCount - i - 1)) % 10;
+            int digit = (currentScore / (int)Mathf.Pow(10, digitCount - i - 1)) % 10;
+            digit = Mathf.Clamp(digit, 0, digitSprites.Length - 1);
             scoreImages[i].sprite = digitSprites[digit];
+        }
+
+        // スコアプラスImageの位置調整（右隣に配置）
+        if (scorePlusImage != null)
+        {
+            if (digitCount > 0)
+            {
+                RectTransform lastDigitRect = scoreImages[digitCount - 1].rectTransform;
+                RectTransform plusRect = scorePlusImage.rectTransform;
+
+                // 同じ親にしてローカル座標で配置
+                plusRect.SetParent(lastDigitRect.parent, false);
+                // 右隣に配置（X方向にサイズ分ずらす）
+                plusRect.anchoredPosition = lastDigitRect.anchoredPosition + new Vector2(lastDigitRect.sizeDelta.x, 0);
+            }
         }
     }
 
-    // スコア加算例
+    // スコア加算
     public void AddScore(int add)
     {
         SetScore(currentScore + add);
+        StartCoroutine(ShowScorePlusImage());
+    }
+
+    // スコアプラスImageを一時的に表示するコルーチン
+    IEnumerator ShowScorePlusImage()
+    {
+        if (scorePlusImage != null && scorePlusSprite != null)
+        {
+            scorePlusImage.sprite = scorePlusSprite;
+            scorePlusImage.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f); // 表示時間は調整可能
+            scorePlusImage.gameObject.SetActive(false);
+        }
+    }
+
+    // カウントアップ表示用スプライト初期化
+    void InitCountupSprites()
+    {
+        // 全て非表示
+        SetCountupSpritesActive(false);
+        // 1の位のみ0で初期化
+        if (countupImages.Count > 0)
+        {
+            countupImages[0].gameObject.SetActive(true);
+            countupImages[0].sprite = countupDigitSprites[0];
+        }
+    }
+
+    // カウントアップスプライトの表示/非表示制御
+    void SetCountupSpritesActive(bool active)
+    {
+        for (int i = 0; i < countupImages.Count; i++)
+            countupImages[i].gameObject.SetActive(active && i == 0); // 初期は1の位のみ
+    }
+
+    // カウントアップ値をスプライトで表示
+    void UpdateCountupSprites()
+    {
+        // 小数点以下切り捨て（整数表示）
+        int count = Mathf.FloorToInt(currentCountup);
+
+        // 表示する桁数（1の位のみ→10,100で増加）
+        int digitCount = 1;
+        if (count >= 100) digitCount = 3;
+        else if (count >= 10) digitCount = 2;
+
+        digitCount = Mathf.Min(digitCount, countupImages.Count);
+
+        // 必要なImageだけ表示
+        for (int i = 0; i < countupImages.Count; i++)
+            countupImages[i].gameObject.SetActive(i < digitCount);
+
+        // 各桁の数字をスプライトで表示
+        for (int i = 0; i < digitCount; i++)
+        {
+            int digit = (count / (int)Mathf.Pow(10, digitCount - i - 1)) % 10;
+            countupImages[i].sprite = countupDigitSprites[digit];
+        }
     }
 }
