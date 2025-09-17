@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ScnenManager : MonoBehaviour
 {
@@ -27,13 +29,26 @@ public class ScnenManager : MonoBehaviour
             if (soundManager != null)
             {
                 soundManager.StopAllBgmAudio();
-                soundManager.PlayResultBGM();
+                soundManager.PlayTitleBGM(); // ←ここを修正
             }
         }
+        // タイトル画面表示時に最初のボタンを選択
+        SelectFirstButton(titleUI);
     }
 
     void Update()
     {
+    }
+
+    // 指定UI内の最初のButtonを選択する共通メソッド
+    private void SelectFirstButton(GameObject uiRoot)
+    {
+        if (uiRoot == null) return;
+        var button = uiRoot.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
     }
 
     // Menuをアクティブ、Titleを非アクティブにするメソッド
@@ -41,6 +56,9 @@ public class ScnenManager : MonoBehaviour
     {
         if (menuUI != null) menuUI.SetActive(true);
         if (titleUI != null) titleUI.SetActive(false);
+
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(menuUI);
 
         // メニューBGM再生
         if (soundManager != null)
@@ -56,6 +74,9 @@ public class ScnenManager : MonoBehaviour
         if (menuUI != null) menuUI.SetActive(false);
         if (titleUI != null) titleUI.SetActive(true);
 
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(titleUI);
+
         // タイトルBGM再生
         if (soundManager != null)
         {
@@ -69,6 +90,9 @@ public class ScnenManager : MonoBehaviour
     {
         if (menuUI != null) menuUI.SetActive(false);
         if (stageSelectUI != null) stageSelectUI.SetActive(true);
+
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(stageSelectUI);
 
         // ステージセレクトBGM再生
         if (soundManager != null)
@@ -123,6 +147,9 @@ public class ScnenManager : MonoBehaviour
         if (stageSelectUI != null) stageSelectUI.SetActive(false);
         if (menuUI != null) menuUI.SetActive(true);
 
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(menuUI);
+
         // メニューBGM再生
         if (soundManager != null)
         {
@@ -148,6 +175,9 @@ public class ScnenManager : MonoBehaviour
     public void GoToTitleScene()
     {
         SceneManager.LoadScene("Title");
+
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(titleUI);
 
         // タイトルBGM再生
         if (soundManager != null)
@@ -176,6 +206,9 @@ public class ScnenManager : MonoBehaviour
         if (menuUI != null) menuUI.SetActive(false);
         if (howToPlayUI != null) howToPlayUI.SetActive(true);
 
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(howToPlayUI);
+
         // メニューBGM再生（専用BGMがなければメニューBGM）
         if (soundManager != null)
         {
@@ -189,6 +222,9 @@ public class ScnenManager : MonoBehaviour
     {
         if (howToPlayUI != null) howToPlayUI.SetActive(false);
         if (menuUI != null) menuUI.SetActive(true);
+
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(menuUI);
 
         // メニューBGM再生
         if (soundManager != null)
@@ -204,6 +240,9 @@ public class ScnenManager : MonoBehaviour
         if (menuUI != null) menuUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(true);
 
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(soundSettingsUI);
+
         // メニューBGM再生（専用BGMがなければメニューBGM）
         if (soundManager != null)
         {
@@ -218,6 +257,9 @@ public class ScnenManager : MonoBehaviour
         Debug.Log("ShowMenuAndHideSoundSettingsが呼ばれました");
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         if (menuUI != null) menuUI.SetActive(true);
+
+        // コントローラー対応: 最初のボタンを選択
+        SelectFirstButton(menuUI);
 
         // メニューBGM再生
         if (soundManager != null)
