@@ -53,6 +53,9 @@ public class PlayerCon : MonoBehaviour
     private SoundManager soundManager;
     private bool isAutoMoveSEPlaying = false;
 
+    // UIManager参照用
+    private UIManager uiManager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -61,6 +64,9 @@ public class PlayerCon : MonoBehaviour
 
         // SoundManagerインスタンス取得
         soundManager = Object.FindFirstObjectByType<SoundManager>();
+
+        // UIManagerインスタンス取得
+        uiManager = Object.FindFirstObjectByType<UIManager>();
     }
 
     private void Update()
@@ -157,11 +163,24 @@ public class PlayerCon : MonoBehaviour
                     }
                 }
 
+                // スコア+250加算
+                if (uiManager != null)
+                {
+                    uiManager.AddScore(250);
+                }
+
                 isAttackMode = false;
             }
             else if (!isInvincible)
             {
                 Debug.Log($"{name} が {other.name} に当たった");
+                
+                // スコア-200減算
+                if (uiManager != null)
+                {
+                    uiManager.AddScore(-200);
+                }
+
                 StartCoroutine(HitRoutine());
             }
         }
@@ -264,6 +283,12 @@ public class PlayerCon : MonoBehaviour
             if (soundManager != null)
             {
                 soundManager.PlayTrickAction1Audio();
+            }
+
+            // スコア+50加算
+            if (uiManager != null)
+            {
+                uiManager.AddScore(50);
             }
         }
     }

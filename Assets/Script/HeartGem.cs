@@ -5,6 +5,7 @@ public class HeartGem : MonoBehaviour
     public GameObject heartGem;
 
     private SoundManager soundManager;
+    private UIManager uiManager; // ’Ç‰Á
 
     private void Start()
     {
@@ -13,6 +14,9 @@ public class HeartGem : MonoBehaviour
 
         // SoundManager‚ÌŽæ“¾
         soundManager = Object.FindFirstObjectByType<SoundManager>();
+
+        // UIManager‚ÌŽæ“¾
+        uiManager = Object.FindFirstObjectByType<UIManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +30,12 @@ public class HeartGem : MonoBehaviour
             if (soundManager != null)
             {
                 soundManager.PlayScoreItemAudio();
+            }
+
+            // ƒXƒRƒA‰ÁŽZ
+            if (uiManager != null)
+            {
+                uiManager.AddScore(100);
             }
         }
     }

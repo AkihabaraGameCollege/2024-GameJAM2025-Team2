@@ -1,33 +1,47 @@
-using System.Collections;
+ï»¿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    // ƒJƒEƒ“ƒgƒ_ƒEƒ“—pƒXƒvƒ‰ƒCƒgiŒÂ•Ê‚ÉƒAƒTƒCƒ“j
-    [Header("ƒJƒEƒ“ƒgƒ_ƒEƒ“—pƒXƒvƒ‰ƒCƒg")]
+    // ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ç”¨ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆï¼ˆå€‹åˆ¥ã«ã‚¢ã‚µã‚¤ãƒ³ï¼‰
+    [Header("ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ç”¨ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ")]
     [SerializeField] Sprite sprite3 = null;
     [SerializeField] Sprite sprite2 = null;
     [SerializeField] Sprite sprite1 = null;
     [SerializeField] Sprite spriteStart = null;
-    // ƒJƒEƒ“ƒgƒ_ƒEƒ“‚Ì‰æ‘œ‚ğ•\¦‚·‚éImage
+    // ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®ç”»åƒã‚’è¡¨ç¤ºã™ã‚‹Image
     [SerializeField] Image countdownImage = null;
-    // ƒJƒEƒ“ƒgƒAƒbƒv‚ÌŠÔ‚ğ•\¦‚·‚éTextMeshProUGUI
+    // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ã®æ™‚é–“ã‚’è¡¨ç¤ºã™ã‚‹TextMeshProUGUI
     [SerializeField] TextMeshProUGUI countupText = null;
 
-    // ƒJƒEƒ“ƒgƒ_ƒEƒ“ŠJn•b”
+    // ã‚¹ã‚³ã‚¢è¡¨ç¤ºç”¨ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆï¼ˆ0ã€œ9ï¼‰
+    [Header("ã‚¹ã‚³ã‚¢è¡¨ç¤ºç”¨ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆï¼ˆ0ã€œ9ï¼‰")]
+    [SerializeField] Sprite[] digitSprites = new Sprite[10];
+
+    // ã‚¹ã‚³ã‚¢è¡¨ç¤ºç”¨Imageï¼ˆæœ€å¤§7æ¡åˆ†ï¼‰
+    [Header("ã‚¹ã‚³ã‚¢è¡¨ç¤ºç”¨Imageï¼ˆå·¦ã‹ã‚‰é †ã«æœ€å¤§7å€‹ï¼‰")]
+    [SerializeField] List<Image> scoreImages = new List<Image>();
+
+    // ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³é–‹å§‹ç§’æ•°
     //[SerializeField] int countStartTime = 3;
-    // Œ»İ‚ÌƒJƒEƒ“ƒgƒAƒbƒvŠÔi•bj
+    // ç¾åœ¨ã®ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—æ™‚é–“ï¼ˆç§’ï¼‰
     float currentCountup = 0f;
 
-    // ƒJƒEƒ“ƒgƒAƒbƒv’†‚©‚Ç‚¤‚©‚ğ¦‚·ƒtƒ‰ƒO
+    // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ä¸­ã‹ã©ã†ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°
     public bool IsCountingup { get; private set; } = false;
+
+    // ç¾åœ¨ã®ã‚¹ã‚³ã‚¢
+    int currentScore = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(CountdownAndStartCountup());
+        // ã‚¹ã‚³ã‚¢åˆæœŸåŒ–
+        SetScore(0);
     }
 
     // Update is called once per frame
@@ -35,16 +49,16 @@ public class UIManager : MonoBehaviour
     {
         if (IsCountingup)
         {
-            // Œo‰ßŠÔ‚ğ‰ÁZ
+            // çµŒéæ™‚é–“ã‚’åŠ ç®—
             currentCountup += Time.deltaTime;
-            // ƒeƒLƒXƒg‚ÉŒ»İ‚ÌŠÔ‚ğ•\¦i¬”“_‘æˆêˆÊ‚Ü‚ÅA3Œ…•\¦j
+            // ãƒ†ã‚­ã‚¹ãƒˆã«ç¾åœ¨ã®æ™‚é–“ã‚’è¡¨ç¤ºï¼ˆå°æ•°ç‚¹ç¬¬ä¸€ä½ã¾ã§ã€3æ¡è¡¨ç¤ºï¼‰
             countupText.text = "Time : " + currentCountup.ToString("000.0") + " s";
         }
     }
 
     IEnumerator CountdownAndStartCountup()
     {
-        // SoundManager‚ÌƒCƒ“ƒXƒ^ƒ“ƒXæ“¾iV„§•û®j
+        // SoundManagerã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å–å¾—ï¼ˆæ–°æ¨å¥¨æ–¹å¼ï¼‰
         SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
 
         Time.timeScale = 0f;
@@ -69,7 +83,7 @@ public class UIManager : MonoBehaviour
 
         // Start!!
         countdownImage.sprite = spriteStart;
-        soundManager?.PlayStartCountStartAudio(); // START—pSE
+        soundManager?.PlayStartCountStartAudio(); // STARTç”¨SE
         yield return new WaitForSecondsRealtime(1f);
 
         countdownImage.gameObject.SetActive(false);
@@ -79,31 +93,58 @@ public class UIManager : MonoBehaviour
         StartCountup();
     }
 
-    // ƒJƒEƒ“ƒgƒAƒbƒv‚ğŠJn‚·‚éƒƒ\ƒbƒh
+    // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ã‚’é–‹å§‹ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void StartCountup()
     {
-        // Œo‰ßŠÔ‚ğƒŠƒZƒbƒg
+        // çµŒéæ™‚é–“ã‚’ãƒªã‚»ãƒƒãƒˆ
         currentCountup = 0f;
-        // ƒJƒEƒ“ƒgƒAƒbƒvƒtƒ‰ƒO‚ğ—LŒø‰»
+        // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ãƒ•ãƒ©ã‚°ã‚’æœ‰åŠ¹åŒ–
         IsCountingup = true;
-        // ƒeƒLƒXƒgƒIƒuƒWƒFƒNƒg‚ª‘¶İ‚·‚ê‚Î•\¦‚·‚é
+        // ãƒ†ã‚­ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå­˜åœ¨ã™ã‚Œã°è¡¨ç¤ºã™ã‚‹
         if (countupText != null)
             countupText.gameObject.SetActive(true);
     }
 
-    // ƒJƒEƒ“ƒgƒAƒbƒv‚ğ’â~‚·‚éƒƒ\ƒbƒh
+    // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ã‚’åœæ­¢ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void StopCountup()
     {
-        // ƒJƒEƒ“ƒgƒAƒbƒvƒtƒ‰ƒO‚ğ–³Œø‰»
+        // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ãƒ•ãƒ©ã‚°ã‚’ç„¡åŠ¹åŒ–
         IsCountingup = false;
     }
 
-    // ƒJƒEƒ“ƒgƒAƒbƒv‚ğƒŠƒZƒbƒg‚µAƒeƒLƒXƒg‚à‰Šú‰»‚·‚éƒƒ\ƒbƒh
+    // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ã‚’ãƒªã‚»ãƒƒãƒˆã—ã€ãƒ†ã‚­ã‚¹ãƒˆã‚‚åˆæœŸåŒ–ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ResetCountup()
     {
-        // Œo‰ßŠÔ‚ğƒŠƒZƒbƒg
+        // çµŒéæ™‚é–“ã‚’ãƒªã‚»ãƒƒãƒˆ
         currentCountup = 0f;
-        // ƒeƒLƒXƒg‚ğ‰Šúó‘Ô‚É–ß‚·
+        // ãƒ†ã‚­ã‚¹ãƒˆã‚’åˆæœŸçŠ¶æ…‹ã«æˆ»ã™
         countupText.text = "Time : 000.0 s";
+    }
+
+    // ã‚¹ã‚³ã‚¢ã‚’ã‚»ãƒƒãƒˆã—ã¦è¡¨ç¤ºã‚’æ›´æ–°
+    public void SetScore(int score)
+    {
+        currentScore = score;
+
+        // è¡¨ç¤ºã™ã‚‹æ¡æ•°ã‚’æ±ºå®šï¼ˆ0ãªã‚‰1æ¡ã€ä»¥é™ã‚¹ã‚³ã‚¢ã®æ¡æ•°åˆ†è¡¨ç¤ºã€æœ€å¤§7æ¡ï¼‰
+        int digitCount = Mathf.Max(1, score.ToString().Length);
+        digitCount = Mathf.Min(digitCount, scoreImages.Count);
+
+        // å¿…è¦ãªImageã ã‘è¡¨ç¤º
+        for (int i = 0; i < scoreImages.Count; i++)
+            scoreImages[i].gameObject.SetActive(i < digitCount);
+
+        // å„æ¡ã®æ•°å­—ã‚’ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã§è¡¨ç¤º
+        for (int i = 0; i < digitCount; i++)
+        {
+            int digit = (score / (int)Mathf.Pow(10, digitCount - i - 1)) % 10;
+            scoreImages[i].sprite = digitSprites[digit];
+        }
+    }
+
+    // ã‚¹ã‚³ã‚¢åŠ ç®—ä¾‹
+    public void AddScore(int add)
+    {
+        SetScore(currentScore + add);
     }
 }
