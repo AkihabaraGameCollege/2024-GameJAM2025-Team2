@@ -219,18 +219,25 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            if (isGrounded && !isAttackMode)
-            {
-                playerAnimator.Play("MoveLeft", 0, 0f);
-            }
+            int nextLane = Mathf.Max(0, currentLane - 1);
+            float nextX = (nextLane - 1) * laneDistance;
 
-            currentLane = Mathf.Max(0, currentLane - 1);
-            targetX = (currentLane - 1) * laneDistance;
-
-            // レーン移動SE再生
-            if (soundManager != null)
+            Vector3 checkDir = Vector3.left;//障害物がなかったら移動
+            if (!Physics.Raycast(transform.position, checkDir, laneDistance, groundMask))
             {
-                soundManager.PlayLaneMoveAudio();
+                if (isGrounded && !isAttackMode)
+                {
+                    playerAnimator.Play("MoveLeft", 0, 0f);
+                }
+
+                currentLane = nextLane;
+                targetX = nextX;
+
+                // レーン移動SE再生
+                if (soundManager != null)
+                {
+                    soundManager.PlayLaneMoveAudio();
+                }
             }
         }
     }
@@ -239,18 +246,26 @@ public class PlayerCon : MonoBehaviour
     {
         if (canControl && context.performed)
         {
-            if (isGrounded && !isAttackMode)
-            {
-                playerAnimator.Play("MoveRight", 0, 0f);
-            }
+            int nextLane = Mathf.Min(2, currentLane + 1);
+            float nextX = (nextLane - 1) * laneDistance;
 
-            currentLane = Mathf.Min(2, currentLane + 1);
-            targetX = (currentLane - 1) * laneDistance;
-
-            // レーン移動SE再生
-            if (soundManager != null)
+            //障害物がなかったら
+            Vector3 checkDir = Vector3.right;//右移動
+            if (!Physics.Raycast(transform.position, checkDir, laneDistance, groundMask))
             {
-                soundManager.PlayLaneMoveAudio();
+                if (isGrounded && !isAttackMode)
+                {
+                    playerAnimator.Play("MoveRight", 0, 0f);
+                }
+
+                currentLane = nextLane;
+                targetX = nextX;
+
+                // レーン移動SE再生
+                if (soundManager != null)
+                {
+                    soundManager.PlayLaneMoveAudio();
+                }
             }
         }
     }
