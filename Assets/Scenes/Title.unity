@@ -1000,6 +1000,7 @@ GameObject:
   - component: {fileID: 484957107}
   - component: {fileID: 484957106}
   - component: {fileID: 484957105}
+  - component: {fileID: 484957109}
   - component: {fileID: 484957108}
   m_Layer: 5
   m_Name: Stage2Button
@@ -1071,7 +1072,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 484957106}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 484957109}
+        m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
+        m_MethodName: OnStage2ButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &484957106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,6 +1135,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac517f4d108c65c48aa692a6249a0dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &484957109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484957103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 0}
+  titleUI: {fileID: 0}
+  howToPlayUI: {fileID: 0}
+  soundSettingsUI: {fileID: 0}
+  stageSelectUI: {fileID: 0}
 --- !u!1 &586154908
 GameObject:
   m_ObjectHideFlags: 0

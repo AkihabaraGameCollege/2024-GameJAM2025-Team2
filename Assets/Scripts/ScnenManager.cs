@@ -102,7 +102,7 @@ public class ScnenManager : MonoBehaviour
     // ステージ1へ遷移する処理
     public void OnStage1ButtonClicked()
     {
-        SceneManager.LoadScene("PlayerStageTestScene");
+        SceneManager.LoadScene("PlayerStage1Scene");
 
         // ステージBGM再生
         if (soundManager != null)
