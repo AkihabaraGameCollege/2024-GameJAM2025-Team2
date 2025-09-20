@@ -25,7 +25,7 @@ public class Goal : MonoBehaviour
             else
             {
                 // SoundManagerが見つからない場合は即シーン遷移
-                LoadNextScene();
+                SceneManager.LoadScene("ResultScene");
             }
 
             Debug.Log("ゴールに到達");
@@ -45,20 +45,5 @@ public class Goal : MonoBehaviour
             }
         }
         SceneManager.LoadScene("ResultScene");
-    }
-
-    //ステージ２の追加で変更
-    private void LoadNextScene()
-    {
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        if (currentScene == "PlayerStage1Scene")
-        {
-            SceneManager.LoadScene("PlayerStage2Scene");
-        }
-        else if (currentScene == "PlayerStage2Scene")
-        {
-            SceneManager.LoadScene("ResultScene");
-        }
     }
 }

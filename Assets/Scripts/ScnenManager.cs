@@ -187,6 +187,12 @@ public class ScnenManager : MonoBehaviour
     // 任意のシーン名でリトライできるメソッドを追加
     public void RetryScene(string sceneName)
     {
+        if (string.IsNullOrEmpty(sceneName))//とりあえずnullに
+        {
+            Debug.LogWarning("RetryScene:遷移できません");
+            return;
+        }
+
         SceneManager.LoadScene(sceneName);
 
         // ステージBGM再生
