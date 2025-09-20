@@ -88,19 +88,42 @@ public class PlayerCon : MonoBehaviour
         // --- 地面判定 (Raycast) ---
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
 
-        //レーン移動,前進
-        float newX = Mathf.Lerp(rb.position.x, targetX, Time.fixedDeltaTime * laneChangeSpeed);
-        Vector3 forwardMove = Vector3.forward * forwardSpeed * Time.fixedDeltaTime;
-        Vector3 move = new Vector3(newX, rb.position.y, rb.position.z) + forwardMove;
+        HandleMovement();//移動処理
 
+        HandleAutoMoveAudio();//前進SE
+    }
+
+    private void HandleMovement()
+    {
+        float newX = Mathf.Lerp(rb.position.x, targetX, Time.fixedDeltaTime * laneChangeSpeed);
+        rb.position = new Vector3(newX, rb.position.y, rb.position.z);
+
+        // --- 前進方向を地形の法線に沿わせる ---
+        Vector3 forwardDir = Vector3.forward;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.5f, groundMask))
+        {
+            // 地形の傾斜に沿った前進方向を計算
+            forwardDir = Vector3.ProjectOnPlane(Vector3.forward, hit.normal).normalized;
+        }
+
+        // Rigidbody の velocity を使って移動（坂も登れる）
+        Vector3 velocity = rb.linearVelocity;
+        velocity.x = 0; // XはLane移動で制御
+        velocity.z = forwardDir.z * forwardSpeed;
+        if (forwardDir.x != 0) velocity.x = forwardDir.x * forwardSpeed;
+
+        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+
+        //落下
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallSpeed - 1) * Time.fixedDeltaTime;
         }
+    }
 
-        rb.MovePosition(move);
-
-        // --- 自動前進SE再生・停止 ---
+    private void HandleAutoMoveAudio()
+    {
         if (soundManager != null && isGrounded && forwardSpeed > 0)
         {
             if (!isAutoMoveSEPlaying)
