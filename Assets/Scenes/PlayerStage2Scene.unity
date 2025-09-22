@@ -7282,6 +7282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueEnemy (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2177073671473708411, guid: 446c78a411870344fbc78380ca93c0a3, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4887661684715888985, guid: 446c78a411870344fbc78380ca93c0a3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.87999976

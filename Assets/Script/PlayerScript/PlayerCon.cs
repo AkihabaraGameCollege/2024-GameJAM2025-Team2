@@ -24,6 +24,9 @@ public class PlayerCon : MonoBehaviour
     [SerializeField] private Material greenMaterial;
     [SerializeField] private Material redMaterial;
     [SerializeField] private Renderer playerBoardRenderer;
+    [Header("色を切り換えた時のエフェクト")]
+    [SerializeField] private GameObject laneChangeEffectPrefab; // 色切り換えるときのエフェクト
+    [SerializeField] private Transform laneEffectPoint;
 
     // --------------------
     // 前進・ジャンプ設定
@@ -286,6 +289,14 @@ public class PlayerCon : MonoBehaviour
                 playerBoardRenderer.material = redMaterial;
                 break;
         }
+
+        if (laneChangeEffectPrefab != null && laneEffectPoint != null)
+        {
+            GameObject effect = Instantiate(laneChangeEffectPrefab, laneEffectPoint.position, Quaternion.identity);
+            effect.transform.SetParent(laneEffectPoint); // プレイヤーに追従させたいなら
+            Destroy(effect,2.0f);
+        }
+
     }
 
     #region INputSystem

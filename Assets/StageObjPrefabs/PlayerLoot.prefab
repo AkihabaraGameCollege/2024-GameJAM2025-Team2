@@ -70,6 +70,7 @@ Transform:
   m_Children:
   - {fileID: 7595923575232745124}
   - {fileID: 8430877386569821891}
+  - {fileID: 2767258833775814021}
   m_Father: {fileID: 3243367195596042340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &882748222895982149
@@ -363,6 +364,8 @@ MonoBehaviour:
   greenMaterial: {fileID: 2100000, guid: 3b3fe71f7be450641a3712692e330828, type: 2}
   redMaterial: {fileID: 2100000, guid: 08627b6ade858af4d834bcadc53dd25a, type: 2}
   playerBoardRenderer: {fileID: 2943708533528510182}
+  laneChangeEffectPrefab: {fileID: 5870402923275372439, guid: 58e60493c81b2904dabecf31f98b5310, type: 3}
+  laneEffectPoint: {fileID: 2767258833775814021}
   forwardSpeed: 10
   jumpForce: 5
   fallSpeed: 6
@@ -574,6 +577,68 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6071835035524535811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2767258833775814021}
+  - component: {fileID: 2532818441135189146}
+  - component: {fileID: 8406267871491668938}
+  m_Layer: 0
+  m_Name: ChangeColorPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2767258833775814021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6071835035524535811}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.675, y: 0.685, z: -0.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6999797450648023521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2532818441135189146
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6071835035524535811}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &8406267871491668938
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6071835035524535811}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6891612236255822921
 GameObject:
   m_ObjectHideFlags: 0
