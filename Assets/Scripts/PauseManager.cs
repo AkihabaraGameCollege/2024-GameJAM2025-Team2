@@ -1,40 +1,75 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 /// <summary>
-/// ƒQ[ƒ€‚Ìƒ|[ƒYŠÇ—‚ğs‚¤ƒNƒ‰ƒXB
-/// ƒ|[ƒYUIA‘€ìà–¾UIAƒTƒEƒ“ƒhİ’èUI‚Ì•\¦Ø‘Ö‚âAƒQ[ƒ€‚Ìˆê’â~EÄŠJAƒŠƒgƒ‰ƒCEƒ^ƒCƒgƒ‹‰æ–Ê‚Ö‚Ì‘JˆÚ‚ğ§Œä‚·‚éB
+/// ã‚²ãƒ¼ãƒ ã®ãƒãƒ¼ã‚ºç®¡ç†ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹ã€‚
+/// ãƒãƒ¼ã‚ºUIã®è¡¨ç¤ºãƒ»éè¡¨ç¤ºã€æ“ä½œèª¬æ˜ãƒ»ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šUIã®åˆ‡ã‚Šæ›¿ãˆã€ãƒªãƒˆãƒ©ã‚¤ãƒ»ã‚¿ã‚¤ãƒˆãƒ«æˆ»ã‚Šãªã©ã‚’åˆ¶å¾¡ã™ã‚‹ã€‚
 /// </summary>
 public class PauseManager : MonoBehaviour
 {
-    private PlayerInput playerInput; // ƒvƒŒƒCƒ„[‚Ì“ü—ÍŠÇ—
-    private InputAction pauseAction; // ƒ|[ƒY—p‚Ì“ü—ÍƒAƒNƒVƒ‡ƒ“
-    private bool isPaused = false;   // ƒQ[ƒ€‚ªƒ|[ƒY’†‚©‚Ç‚¤‚©
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å…¥åŠ›ç®¡ç†
+    private PlayerInput playerInput;
+    // ãƒãƒ¼ã‚ºç”¨ã®å…¥åŠ›ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
+    private InputAction pauseAction;
+    // ãƒãƒ¼ã‚ºçŠ¶æ…‹ã‹ã©ã†ã‹
+    private bool isPaused = false;
 
-    [SerializeField] private GameObject pauseUI;        // ƒ|[ƒYƒƒjƒ…[UI
-    [SerializeField] private GameObject operationUI;    // ‘€ìà–¾UI
-    [SerializeField] private GameObject soundSettingsUI;// ƒTƒEƒ“ƒhİ’èUI
-    [SerializeField] private string retrySceneName;     // ƒŠƒgƒ‰ƒC‚Éƒ[ƒh‚·‚éƒV[ƒ“–¼
+    // ãƒãƒ¼ã‚ºUIã®GameObject
+    [SerializeField] private GameObject pauseUI;
+    // æ“ä½œèª¬æ˜UIã®GameObject
+    [SerializeField] private GameObject operationUI;
+    // ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šUIã®GameObject
+    [SerializeField] private GameObject soundSettingsUI;
+    // ãƒªãƒˆãƒ©ã‚¤æ™‚ã«é·ç§»ã™ã‚‹ã‚·ãƒ¼ãƒ³å
+    [SerializeField] private string retrySceneName;
+    // UIã®ã‚¹ãƒ©ã‚¤ãƒ‰ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ™‚é–“
+    [SerializeField] private float slideDuration = 0.5f;
+
+    // ãƒãƒ¼ã‚ºUIã®CanvasGroupï¼ˆãƒ•ã‚§ãƒ¼ãƒ‰åˆ¶å¾¡ç”¨ï¼‰
+    private CanvasGroup pauseCanvasGroup;
+    // ãƒãƒ¼ã‚ºUIã®RectTransformï¼ˆä½ç½®åˆ¶å¾¡ç”¨ï¼‰
+    private RectTransform pauseRectTransform;
+    // ãƒãƒ¼ã‚ºUIã®ã‚¹ãƒ©ã‚¤ãƒ‰é–‹å§‹ä½ç½®
+    private Vector2 pauseUIStartPos;
+    // ãƒãƒ¼ã‚ºUIã®è¡¨ç¤ºä½ç½®
+    private Vector2 pauseUIEndPos;
+    // ãƒãƒ¼ã‚ºUIã®éè¡¨ç¤ºä½ç½®
+    private Vector2 pauseUIHidePos;
 
     /// <summary>
-    /// ‰Šú‰»ˆ—BPlayerInput‚Ìæ“¾‚Æƒ|[ƒYƒAƒNƒVƒ‡ƒ“‚ÌƒCƒxƒ“ƒg“o˜^AŠeUI‚Ì”ñ•\¦‰»‚ğs‚¤B
+    /// åˆæœŸåŒ–å‡¦ç†ã€‚å„UIã®å‚ç…§å–å¾—ã¨åˆæœŸçŠ¶æ…‹è¨­å®šã€‚
     /// </summary>
     void Awake()
     {
+        // PlayerInputã®å–å¾—ã¨Pauseã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²
         playerInput = Object.FindFirstObjectByType<PlayerInput>();
         if (playerInput != null)
         {
             pauseAction = playerInput.actions["Pause"];
-            pauseAction.performed += OnPause; // ƒ|[ƒY“ü—Í‚ÌƒCƒxƒ“ƒg“o˜^
+            pauseAction.performed += OnPause;
         }
-        if (pauseUI != null) pauseUI.SetActive(false); // ƒ|[ƒYUI”ñ•\¦
-        if (operationUI != null) operationUI.SetActive(false); // ‘€ìà–¾UI”ñ•\¦
-        if (soundSettingsUI != null) soundSettingsUI.SetActive(false); // ƒTƒEƒ“ƒhİ’èUI”ñ•\¦
+        // ãƒãƒ¼ã‚ºUIã®CanvasGroupã¨RectTransformã®å–å¾—ãƒ»åˆæœŸåŒ–
+        if (pauseUI != null)
+        {
+            pauseCanvasGroup = pauseUI.GetComponent<CanvasGroup>();
+            if (pauseCanvasGroup == null)
+                pauseCanvasGroup = pauseUI.AddComponent<CanvasGroup>();
+
+            pauseRectTransform = pauseUI.GetComponent<RectTransform>();
+            pauseUIEndPos = pauseRectTransform.anchoredPosition;
+            pauseUIStartPos = pauseUIEndPos + new Vector2(-pauseRectTransform.rect.width, 0); // å·¦å¤–
+            pauseUIHidePos = pauseUIEndPos + new Vector2(pauseRectTransform.rect.width, 0);   // å³å¤–
+            pauseUI.SetActive(false);
+        }
+        // æ“ä½œèª¬æ˜UIãƒ»ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šUIã®éè¡¨ç¤º
+        if (operationUI != null) operationUI.SetActive(false);
+        if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
     }
 
     /// <summary>
-    /// I—¹ˆ—Bƒ|[ƒYƒAƒNƒVƒ‡ƒ“‚ÌƒCƒxƒ“ƒg“o˜^‰ğœB
+    /// çµ‚äº†æ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²è§£é™¤
     /// </summary>
     void OnDestroy()
     {
@@ -45,126 +80,193 @@ public class PauseManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ|[ƒY“ü—Í‚Ìˆ—BƒQ[ƒ€‚Ìˆê’â~EÄŠJ‚ÆUI‚Ì•\¦Ø‘Ö‚ğs‚¤B
+    /// ãƒãƒ¼ã‚ºå…¥åŠ›æ™‚ã®å‡¦ç†ã€‚ãƒãƒ¼ã‚ºçŠ¶æ…‹ã®åˆ‡ã‚Šæ›¿ãˆã¨UIè¡¨ç¤ºåˆ¶å¾¡ã€‚
     /// </summary>
-    /// <param name="context">“ü—ÍƒAƒNƒVƒ‡ƒ“‚ÌƒRƒ“ƒeƒLƒXƒg</param>
+    /// <param name="context">å…¥åŠ›ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
     private void OnPause(InputAction.CallbackContext context)
     {
-        // ƒGƒXƒP[ƒvƒL[”»’è
         var keyboard = Keyboard.current;
+        // ãƒãƒ¼ã‚ºä¸­ã«ESCã‚­ãƒ¼ã§å¾©å¸°
         if (isPaused && keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
         {
-            ResumeGame(); // ƒ|[ƒY’†‚ÉƒGƒXƒP[ƒvƒL[‚ÅÄŠJ
+            Debug.Log("ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¾ã—ãŸã€‚ãƒãƒ¼ã‚ºè§£é™¤ã—ã¾ã™ã€‚");
+            ResumeGame();
             return;
         }
 
-        isPaused = !isPaused; // ƒ|[ƒYó‘Ô‚ğ”½“]
-        Time.timeScale = isPaused ? 0f : 1f; // ŠÔ‚Ì’â~EÄŠJ
-        if (pauseUI != null) pauseUI.SetActive(isPaused); // ƒ|[ƒYUI•\¦/”ñ•\¦
-        if (operationUI != null) operationUI.SetActive(false); // ‘€ìà–¾UI”ñ•\¦
-        if (soundSettingsUI != null) soundSettingsUI.SetActive(false); // ƒTƒEƒ“ƒhİ’èUI”ñ•\¦
+        // ãƒãƒ¼ã‚ºçŠ¶æ…‹ã®åˆ‡ã‚Šæ›¿ãˆ
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
+
+        // ãƒãƒ¼ã‚ºUIã®è¡¨ç¤ºãƒ»éè¡¨ç¤ºï¼ˆã‚¹ãƒ©ã‚¤ãƒ‰ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ï¼‰
+        if (pauseUI != null)
+        {
+            if (isPaused)
+            {
+                StartCoroutine(SlideInPauseUI());
+            }
+            else
+            {
+                StartCoroutine(SlideOutPauseUI());
+            }
+        }
+        // æ“ä½œèª¬æ˜UIãƒ»ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šUIã®éè¡¨ç¤º
+        if (operationUI != null) operationUI.SetActive(false);
+        if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
     }
 
     /// <summary>
-    /// ƒQ[ƒ€‚ğÄŠJ‚·‚éBƒ|[ƒYó‘Ô‰ğœ‚Æ‘SUI‚Ì”ñ•\¦‰»B
+    /// ãƒãƒ¼ã‚ºUIã‚’ã‚¹ãƒ©ã‚¤ãƒ‰ã‚¤ãƒ³è¡¨ç¤ºã™ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³
+    /// </summary>
+    private IEnumerator SlideInPauseUI()
+    {
+        pauseUI.SetActive(true);
+        pauseCanvasGroup.alpha = 0f;
+        pauseRectTransform.anchoredPosition = pauseUIStartPos;
+
+        float elapsed = 0f;
+        while (elapsed < slideDuration)
+        {
+            float t = elapsed / slideDuration;
+            pauseRectTransform.anchoredPosition = Vector2.Lerp(pauseUIStartPos, pauseUIEndPos, t);
+            pauseCanvasGroup.alpha = t;
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        pauseRectTransform.anchoredPosition = pauseUIEndPos;
+        pauseCanvasGroup.alpha = 1f;
+    }
+
+    /// <summary>
+    /// ãƒãƒ¼ã‚ºUIã‚’ã‚¹ãƒ©ã‚¤ãƒ‰ã‚¢ã‚¦ãƒˆéè¡¨ç¤ºã«ã™ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³
+    /// </summary>
+    private IEnumerator SlideOutPauseUI()
+    {
+        float elapsed = 0f;
+        Vector2 startPos = pauseUIEndPos;
+        Vector2 endPos = pauseUIHidePos;
+        while (elapsed < slideDuration)
+        {
+            float t = elapsed / slideDuration;
+            pauseRectTransform.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            pauseCanvasGroup.alpha = 1f - t;
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        pauseRectTransform.anchoredPosition = endPos;
+        pauseCanvasGroup.alpha = 0f;
+        pauseUI.SetActive(false);
+    }
+
+    /// <summary>
+    /// ã‚²ãƒ¼ãƒ ã‚’å†é–‹ã™ã‚‹ï¼ˆãƒãƒ¼ã‚ºè§£é™¤ï¼‰
     /// </summary>
     public void ResumeGame()
     {
+        Debug.Log("ResumeGameãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         if (isPaused)
         {
             isPaused = false;
             Time.timeScale = 1f;
-            if (pauseUI != null) pauseUI.SetActive(false);
+            if (pauseUI != null) StartCoroutine(SlideOutPauseUI());
             if (operationUI != null) operationUI.SetActive(false);
             if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         }
     }
 
     /// <summary>
-    /// ‘€ìà–¾UI‚ğ•\¦‚µA‘¼‚ÌUI‚ğ”ñ•\¦‚É‚·‚éB
+    /// æ“ä½œèª¬æ˜UIã‚’è¡¨ç¤ºã™ã‚‹
     /// </summary>
     public void ShowOperationUI()
     {
+        Debug.Log("ShowOperationUIãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         if (pauseUI != null) pauseUI.SetActive(false);
         if (operationUI != null) operationUI.SetActive(true);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
     }
 
     /// <summary>
-    /// ‘€ìà–¾UI‚ğ”ñ•\¦‚É‚µAƒ|[ƒYUI‚ğÄ•\¦‚·‚éB
+    /// æ“ä½œèª¬æ˜UIã‚’éè¡¨ç¤ºã«ã—ã€ãƒãƒ¼ã‚ºUIã‚’è¡¨ç¤ºã™ã‚‹
     /// </summary>
     public void HideOperationUI()
     {
+        Debug.Log("HideOperationUIãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         if (operationUI != null) operationUI.SetActive(false);
         if (pauseUI != null) pauseUI.SetActive(true);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
     }
 
     /// <summary>
-    /// ƒ|[ƒYUI‚©‚çƒTƒEƒ“ƒhİ’èUI‚ğ•\¦‚µA‘¼‚ÌUI‚ğ”ñ•\¦‚É‚·‚éB
+    /// ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šUIã‚’è¡¨ç¤ºã™ã‚‹
     /// </summary>
     public void ShowSoundSettingsUI()
     {
+        Debug.Log("ShowSoundSettingsUIãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         if (pauseUI != null) pauseUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(true);
         if (operationUI != null) operationUI.SetActive(false);
     }
 
     /// <summary>
-    /// ƒTƒEƒ“ƒhİ’èUI‚ğ”ñ•\¦‚É‚µAƒ|[ƒYUI‚ğÄ•\¦‚·‚éB
+    /// ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šUIã‚’éè¡¨ç¤ºã«ã—ã€ãƒãƒ¼ã‚ºUIã‚’è¡¨ç¤ºã™ã‚‹
     /// </summary>
     public void HideSoundSettingsUI()
     {
+        Debug.Log("HideSoundSettingsUIãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         if (pauseUI != null) pauseUI.SetActive(true);
         if (operationUI != null) operationUI.SetActive(false);
     }
 
     /// <summary>
-    /// ƒQ[ƒ€‚ğƒŠƒgƒ‰ƒC‚·‚éBƒ|[ƒY‰ğœEUI”ñ•\¦ŒãAw’èƒV[ƒ“‚Ü‚½‚ÍŒ»İ‚ÌƒV[ƒ“‚ğÄƒ[ƒh‚·‚éB
+    /// ã‚²ãƒ¼ãƒ ã‚’ãƒªãƒˆãƒ©ã‚¤ã™ã‚‹ï¼ˆã‚·ãƒ¼ãƒ³å†èª­ã¿è¾¼ã¿ï¼‰
     /// </summary>
     public void RetryGame()
     {
+        Debug.Log("RetryGameãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         isPaused = false;
         Time.timeScale = 1f;
         if (pauseUI != null) pauseUI.SetActive(false);
         if (operationUI != null) operationUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
 
+        // ScnenManagerãŒã‚ã‚Œã°ãã¡ã‚‰ã§ãƒªãƒˆãƒ©ã‚¤ã€ãªã‘ã‚Œã°SceneManagerã§é·ç§»
         var scnenManager = Object.FindFirstObjectByType<ScnenManager>();
         if (scnenManager != null && !string.IsNullOrEmpty(retrySceneName))
         {
-            scnenManager.RetryScene(retrySceneName); // “Æ©‚ÌƒV[ƒ“ŠÇ—‚ª‚ ‚ê‚Î‚»‚¿‚ç‚ğg—p
+            scnenManager.RetryScene(retrySceneName);
         }
         else if (!string.IsNullOrEmpty(retrySceneName))
         {
-            SceneManager.LoadScene(retrySceneName); // w’èƒV[ƒ“–¼‚ÅƒŠƒgƒ‰ƒC
+            SceneManager.LoadScene(retrySceneName);
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Œ»İ‚ÌƒV[ƒ“‚ğÄƒ[ƒh
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
     /// <summary>
-    /// ƒ|[ƒYƒƒjƒ…[‚©‚çƒ^ƒCƒgƒ‹‰æ–Ê‚É–ß‚éBƒ|[ƒY‰ğœEUI”ñ•\¦ŒãAƒ^ƒCƒgƒ‹ƒV[ƒ“‚Ö‘JˆÚB
+    /// ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã«æˆ»ã‚‹
     /// </summary>
     public void ReturnToTitle()
     {
+        Debug.Log("ReturnToTitleãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         isPaused = false;
         Time.timeScale = 1f;
         if (pauseUI != null) pauseUI.SetActive(false);
         if (operationUI != null) operationUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
 
+        // ScnenManagerãŒã‚ã‚Œã°ãã¡ã‚‰ã§ã‚¿ã‚¤ãƒˆãƒ«é·ç§»ã€ãªã‘ã‚Œã°SceneManagerã§é·ç§»
         var scnenManager = Object.FindFirstObjectByType<ScnenManager>();
         if (scnenManager != null)
         {
-            scnenManager.GoToTitleScene(); // “Æ©‚Ìƒ^ƒCƒgƒ‹‘JˆÚ
+            scnenManager.GoToTitleScene();
         }
         else
         {
-            SceneManager.LoadScene("Title"); // ƒfƒtƒHƒ‹ƒg‚Ìƒ^ƒCƒgƒ‹ƒV[ƒ“–¼
+            SceneManager.LoadScene("Title");
         }
     }
 }

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
@@ -11,24 +11,24 @@ public class Goal : MonoBehaviour
         {
             isGoalTriggered = true;
 
-            // ƒS[ƒ‹‚ÌSE‚ğÄ¶
+            // ã‚´ãƒ¼ãƒ«æ™‚ã®SEã‚’å†ç”Ÿ
             SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
             if (soundManager != null)
             {
-                // BGM’â~‚ğ’Ç‰Á
+                // BGMåœæ­¢ã‚’è¿½åŠ 
                 soundManager.StopStageBGM();
 
                 soundManager.PlayGoalAudio();
-                // ƒS[ƒ‹SEÄ¶Œã‚ÉƒV[ƒ“‘JˆÚ
+                // ã‚´ãƒ¼ãƒ«SEå†ç”Ÿå¾Œã«ã‚·ãƒ¼ãƒ³é·ç§»
                 StartCoroutine(WaitForGoalSE(soundManager));
             }
             else
             {
-                // SoundManager‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚Í‘¦ƒV[ƒ“‘JˆÚ
+                // SoundManagerãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯å³ã‚·ãƒ¼ãƒ³é·ç§»
                 SceneManager.LoadScene("ResultScene");
             }
 
-            Debug.Log("ƒS[ƒ‹‚É“’B");
+            Debug.Log("ã‚´ãƒ¼ãƒ«ã«åˆ°é”");
         }
     }
 

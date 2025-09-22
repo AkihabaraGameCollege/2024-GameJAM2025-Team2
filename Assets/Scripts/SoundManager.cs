@@ -1,134 +1,134 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    [Header("ƒI[ƒfƒBƒIƒ~ƒLƒT[‚Ìİ’è")]
+    [Header("ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒŸã‚­ã‚µãƒ¼ã®è¨­å®š")]
     [SerializeField]
-    private AudioMixer audioMixer; // ƒI[ƒfƒBƒIƒ~ƒLƒT[
+    private AudioMixer audioMixer; // ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒŸã‚­ã‚µãƒ¼
 
-    // ƒ^ƒCƒgƒ‹‰æ–Ê—pBGM‚ÌAudioSource
-    [Header("ƒ^ƒCƒgƒ‹‰æ–ÊBGM")]
+    // ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ç”¨BGMã®AudioSource
+    [Header("ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢BGM")]
     [SerializeField]
     private AudioSource titleBgmAudioSource;
 
-    // ƒƒjƒ…[‰æ–Ê—pBGM‚ÌAudioSource
-    [Header("ƒƒjƒ…[‰æ–ÊBGM")]
+    // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ç”¨BGMã®AudioSource
+    [Header("ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢BGM")]
     [SerializeField]
     private AudioSource menuBgmAudioSource;
 
-    // ƒXƒe[ƒWƒZƒŒƒNƒg‰æ–Ê—pBGM‚ÌAudioSource
-    [Header("ƒXƒe[ƒWƒZƒŒƒNƒgBGM")]
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚»ãƒ¬ã‚¯ãƒˆç”»é¢ç”¨BGMã®AudioSource
+    [Header("ã‚¹ãƒ†ãƒ¼ã‚¸ã‚»ãƒ¬ã‚¯ãƒˆBGM")]
     [SerializeField]
     private AudioSource stageSelectBgmAudioSource;
 
-    // ƒXƒe[ƒW‰æ–Ê—pBGM‚ÌAudioSource
-    [Header("ƒXƒe[ƒW‰æ–ÊBGM")]
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ç”»é¢ç”¨BGMã®AudioSource
+    [Header("ã‚¹ãƒ†ãƒ¼ã‚¸ç”»é¢BGM")]
     [SerializeField]
     private AudioSource stageBgmAudioSource;
 
-    // ƒ|[ƒY‰æ–Ê—pBGM‚ÌAudioSource
-    [Header("ƒ|[ƒY‰æ–ÊBGM")]
+    // ãƒãƒ¼ã‚ºç”»é¢ç”¨BGMã®AudioSource
+    [Header("ãƒãƒ¼ã‚ºç”»é¢BGM")]
     [SerializeField]
     private AudioSource pauseBgmAudioSource;
 
-    // ƒŠƒUƒ‹ƒg‰æ–Ê—pBGM‚ÌAudioSource
-    [Header("ƒŠƒUƒ‹ƒg‰æ–ÊBGM")]
+    // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ç”¨BGMã®AudioSource
+    [Header("ãƒªã‚¶ãƒ«ãƒˆç”»é¢BGM")]
     [SerializeField]
     private AudioSource resultBgmAudioSource;
 
-    [Header("ƒQ[ƒ€ƒNƒŠƒA‚ÌSE")]
+    [Header("ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã®SE")]
     [SerializeField]
-    private AudioSource gameClearAudioSource; // ƒQ[ƒ€ƒNƒŠƒA‚ÌŒø‰Ê‰¹
+    private AudioSource gameClearAudioSource; // ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã®åŠ¹æœéŸ³
 
-    [Header("ƒNƒŠƒbƒN‰¹‚ÌSE")]
+    [Header("ã‚¯ãƒªãƒƒã‚¯éŸ³ã®SE")]
     [SerializeField]
-    private AudioSource clickAudioSource; // ƒNƒŠƒbƒN‰¹‚ÌŒø‰Ê‰¹
+    private AudioSource clickAudioSource; // ã‚¯ãƒªãƒƒã‚¯éŸ³ã®åŠ¹æœéŸ³
 
-    // ©“®‘Oi‚ÌSE
-    [Header("©“®‘Oi‚ÌSE")]
+    // è‡ªå‹•å‰é€²æ™‚ã®SE
+    [Header("è‡ªå‹•å‰é€²æ™‚ã®SE")]
     [SerializeField]
-    private AudioSource autoMoveAudioSource; // ©“®‘Oi‚ÌŒø‰Ê‰¹
+    private AudioSource autoMoveAudioSource; // è‡ªå‹•å‰é€²æ™‚ã®åŠ¹æœéŸ³
 
-    // ƒŒ[ƒ“ˆÚ“®‚ÌSE
-    [Header("ƒŒ[ƒ“ˆÚ“®‚ÌSE")]
+    // ãƒ¬ãƒ¼ãƒ³ç§»å‹•æ™‚ã®SE
+    [Header("ãƒ¬ãƒ¼ãƒ³ç§»å‹•æ™‚ã®SE")]
     [SerializeField]
-    private AudioSource laneMoveAudioSource; // ƒŒ[ƒ“ˆÚ“®‚ÌŒø‰Ê‰¹
+    private AudioSource laneMoveAudioSource; // ãƒ¬ãƒ¼ãƒ³ç§»å‹•æ™‚ã®åŠ¹æœéŸ³
 
-    // ƒWƒƒƒ“ƒv‚ÌSE
-    [Header("ƒWƒƒƒ“ƒv‚ÌSE")]
+    // ã‚¸ãƒ£ãƒ³ãƒ—æ™‚ã®SE
+    [Header("ã‚¸ãƒ£ãƒ³ãƒ—æ™‚ã®SE")]
     [SerializeField]
-    private AudioSource jumpAudioSource; // ƒWƒƒƒ“ƒv‚ÌŒø‰Ê‰¹
+    private AudioSource jumpAudioSource; // ã‚¸ãƒ£ãƒ³ãƒ—æ™‚ã®åŠ¹æœéŸ³
 
-    [Header("“GŒ‚”j‚ÌSE")]
+    [Header("æ•µæ’ƒç ´æ™‚ã®SE")]
     [SerializeField]
-    private AudioSource enemyDefeatAudioSource; // “GŒ‚”j‚ÌŒø‰Ê‰¹
+    private AudioSource enemyDefeatAudioSource; // æ•µæ’ƒç ´æ™‚ã®åŠ¹æœéŸ³
 
-    // ƒvƒŒƒCƒ„[‚ªáŠQ•¨‚ÉŒƒ“Ëiƒ~ƒXj‚ÌSE
-    [Header("áŠQ•¨Œƒ“Ë‚ÌSE")]
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒéšœå®³ç‰©ã«æ¿€çªï¼ˆãƒŸã‚¹ï¼‰æ™‚ã®SE
+    [Header("éšœå®³ç‰©æ¿€çªæ™‚ã®SE")]
     [SerializeField]
-    private AudioSource playerCrashAudioSource; // áŠQ•¨Œƒ“Ë‚ÌŒø‰Ê‰¹
+    private AudioSource playerCrashAudioSource; // éšœå®³ç‰©æ¿€çªæ™‚ã®åŠ¹æœéŸ³
 
-    // ƒgƒŠƒbƒNƒAƒNƒVƒ‡ƒ“SE
-    [Header("ƒgƒŠƒbƒNƒAƒNƒVƒ‡ƒ“1‚ÌSE")]
+    // ãƒˆãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³SE
+    [Header("ãƒˆãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³1ã®SE")]
     [SerializeField]
-    private AudioSource trickAction1AudioSource; // ƒgƒŠƒbƒNƒAƒNƒVƒ‡ƒ“1‚ÌŒø‰Ê‰¹
+    private AudioSource trickAction1AudioSource; // ãƒˆãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³1ã®åŠ¹æœéŸ³
 
-    [Header("ƒgƒŠƒbƒNƒAƒNƒVƒ‡ƒ“2‚ÌSE")]
+    [Header("ãƒˆãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³2ã®SE")]
     [SerializeField]
-    private AudioSource trickAction2AudioSource; // ƒgƒŠƒbƒNƒAƒNƒVƒ‡ƒ“2‚ÌŒø‰Ê‰¹
+    private AudioSource trickAction2AudioSource; // ãƒˆãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³2ã®åŠ¹æœéŸ³
 
-    // ƒXƒ^[ƒgƒJƒEƒ“ƒgSE
-    [Header("ƒXƒ^[ƒgƒJƒEƒ“ƒg321‚ÌSE")]
+    // ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã‚«ã‚¦ãƒ³ãƒˆSE
+    [Header("ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ãƒˆ321ã®SE")]
     [SerializeField]
-    private AudioSource startCount321AudioSource; // ƒXƒ^[ƒgƒJƒEƒ“ƒg321‚ÌŒø‰Ê‰¹
+    private AudioSource startCount321AudioSource; // ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã‚«ã‚¦ãƒ³ãƒˆ321ã®åŠ¹æœéŸ³
 
-    [Header("ƒXƒ^[ƒgƒJƒEƒ“ƒgSTART‚ÌSE")]
+    [Header("ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ãƒˆSTARTã®SE")]
     [SerializeField]
-    private AudioSource startCountStartAudioSource; // ƒXƒ^[ƒgƒJƒEƒ“ƒgSTART‚ÌŒø‰Ê‰¹
+    private AudioSource startCountStartAudioSource; // ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã‚«ã‚¦ãƒ³ãƒˆSTARTã®åŠ¹æœéŸ³
 
-    // ƒS[ƒ‹‚ÌSE
-    [Header("ƒS[ƒ‹‚ÌSE")]
+    // ã‚´ãƒ¼ãƒ«æ™‚ã®SE
+    [Header("ã‚´ãƒ¼ãƒ«æ™‚ã®SE")]
     [SerializeField]
-    private AudioSource goalAudioSource; // ƒS[ƒ‹‚ÌŒø‰Ê‰¹
+    private AudioSource goalAudioSource; // ã‚´ãƒ¼ãƒ«æ™‚ã®åŠ¹æœéŸ³
 
-    // ƒXƒRƒAƒAƒCƒeƒ€Šl“¾‚ÌSE
-    [Header("ƒXƒRƒAƒAƒCƒeƒ€Šl“¾‚ÌSE")]
+    // ã‚¹ã‚³ã‚¢ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—æ™‚ã®SE
+    [Header("ã‚¹ã‚³ã‚¢ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—æ™‚ã®SE")]
     [SerializeField]
-    private AudioSource scoreItemAudioSource; // ƒXƒRƒAƒAƒCƒeƒ€Šl“¾‚ÌŒø‰Ê‰¹
+    private AudioSource scoreItemAudioSource; // ã‚¹ã‚³ã‚¢ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—æ™‚ã®åŠ¹æœéŸ³
 
-    // ‰Á‘¬ƒpƒlƒ‹”»’è‚ÌSE
-    [Header("‰Á‘¬ƒpƒlƒ‹”»’è‚ÌSE")]
+    // åŠ é€Ÿãƒ‘ãƒãƒ«åˆ¤å®šæ™‚ã®SE
+    [Header("åŠ é€Ÿãƒ‘ãƒãƒ«åˆ¤å®šæ™‚ã®SE")]
     [SerializeField]
-    private AudioSource accelPanelAudioSource; // ‰Á‘¬ƒpƒlƒ‹”»’è‚ÌŒø‰Ê‰¹
+    private AudioSource accelPanelAudioSource; // åŠ é€Ÿãƒ‘ãƒãƒ«åˆ¤å®šæ™‚ã®åŠ¹æœéŸ³
 
-    // UI‘I‘ğ‰¹iƒNƒŠƒbƒNEƒRƒ“ƒgƒ[ƒ‰[j
-    [Header("UI‘I‘ğ‰¹iƒNƒŠƒbƒNEƒRƒ“ƒgƒ[ƒ‰[j")]
+    // UIé¸æŠéŸ³ï¼ˆã‚¯ãƒªãƒƒã‚¯ãƒ»ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ï¼‰
+    [Header("UIé¸æŠéŸ³ï¼ˆã‚¯ãƒªãƒƒã‚¯ãƒ»ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ï¼‰")]
     [SerializeField]
-    private AudioSource uiSelectAudioSource; // UI‘I‘ğ‚ÌŒø‰Ê‰¹
+    private AudioSource uiSelectAudioSource; // UIé¸æŠæ™‚ã®åŠ¹æœéŸ³
 
-    // UIŒˆ’è‰¹
-    [Header("UIŒˆ’è‰¹")]
+    // UIæ±ºå®šéŸ³
+    [Header("UIæ±ºå®šéŸ³")]
     [SerializeField]
-    private AudioSource uiDecideAudioSource; // UIŒˆ’è‚ÌŒø‰Ê‰¹
+    private AudioSource uiDecideAudioSource; // UIæ±ºå®šæ™‚ã®åŠ¹æœéŸ³
 
-    // UI‰¹—Êİ’è‚Â‚Ü‚İˆÚ“®iSEŠm”Fj
-    [Header("UI‰¹—Êİ’è‚Â‚Ü‚İˆÚ“®iSEŠm”Fj")]
+    // UIéŸ³é‡è¨­å®šã¤ã¾ã¿ç§»å‹•æ™‚ï¼ˆSEç¢ºèªï¼‰
+    [Header("UIéŸ³é‡è¨­å®šã¤ã¾ã¿ç§»å‹•æ™‚ï¼ˆSEç¢ºèªï¼‰")]
     [SerializeField]
-    private AudioSource uiVolumeKnobAudioSource; // UI‰¹—Êİ’è‚Â‚Ü‚İˆÚ“®‚ÌŒø‰Ê‰¹
+    private AudioSource uiVolumeKnobAudioSource; // UIéŸ³é‡è¨­å®šã¤ã¾ã¿ç§»å‹•æ™‚ã®åŠ¹æœéŸ³
 
-    [Header("ƒ}ƒXƒ^[‰¹—ÊƒXƒ‰ƒCƒ_[")]
+    [Header("ãƒã‚¹ã‚¿ãƒ¼éŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼")]
     [SerializeField]
-    private Slider masterVolumeSlider; // ƒ}ƒXƒ^[‰¹—ÊƒXƒ‰ƒCƒ_[
+    private Slider masterVolumeSlider; // ãƒã‚¹ã‚¿ãƒ¼éŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 
-    [Header("SE‰¹—ÊƒXƒ‰ƒCƒ_[")]
+    [Header("SEéŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼")]
     [SerializeField]
-    private Slider seVolumeSlider; // Œø‰Ê‰¹‰¹—ÊƒXƒ‰ƒCƒ_[
+    private Slider seVolumeSlider; // åŠ¹æœéŸ³éŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 
-    [Header("BGM‰¹—ÊƒXƒ‰ƒCƒ_[")]
+    [Header("BGMéŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼")]
     [SerializeField]
-    private Slider bgmVolumeSlider; // BGM‰¹—ÊƒXƒ‰ƒCƒ_[
+    private Slider bgmVolumeSlider; // BGMéŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 
 
     private void Awake()
@@ -137,7 +137,7 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        // ŠeAudioSource‚Ì‰Šúİ’è
+        // å„AudioSourceã®åˆæœŸè¨­å®š
         SetupAudioSource(titleBgmAudioSource);
         SetupAudioSource(menuBgmAudioSource);
         SetupAudioSource(stageSelectBgmAudioSource);
@@ -162,31 +162,31 @@ public class SoundManager : MonoBehaviour
         SetupAudioSource(uiDecideAudioSource);
         SetupAudioSource(uiVolumeKnobAudioSource);
 
-        // ƒ}ƒXƒ^[‰¹—ÊƒXƒ‰ƒCƒ_[‚Ìİ’è
+        // ãƒã‚¹ã‚¿ãƒ¼éŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¨­å®š
         if (masterVolumeSlider != null)
         {
             masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-            masterVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // ’Ç‰Á
+            masterVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // è¿½åŠ 
             masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
         }
 
-        // Œø‰Ê‰¹‰¹—ÊƒXƒ‰ƒCƒ_[‚Ìİ’è
+        // åŠ¹æœéŸ³éŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¨­å®š
         if (seVolumeSlider != null)
         {
             seVolumeSlider.onValueChanged.AddListener(SetSEVolume);
-            seVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // ’Ç‰Á
+            seVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // è¿½åŠ 
             seVolumeSlider.value = PlayerPrefs.GetFloat("SEVolume", 1f);
         }
 
-        // BGM‰¹—ÊƒXƒ‰ƒCƒ_[‚Ìİ’è
+        // BGMéŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®è¨­å®š
         if (bgmVolumeSlider != null)
         {
             bgmVolumeSlider.onValueChanged.AddListener(SetBGMVolume);
-            bgmVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // ’Ç‰Á
+            bgmVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // è¿½åŠ 
             bgmVolumeSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
         }
 
-        // ƒV[ƒ“‚ğ‚Ü‚½‚¢‚Å‰¹—Êİ’è‚ğ“K—p
+        // ã‚·ãƒ¼ãƒ³ã‚’ã¾ãŸã„ã§éŸ³é‡è¨­å®šã‚’é©ç”¨
         ApplySavedVolumes();
     }
 
@@ -202,7 +202,7 @@ public class SoundManager : MonoBehaviour
         SetBGMVolume(bgmVolume);
     }
 
-    // ƒ^ƒCƒgƒ‹‰æ–ÊBGM‚ğÄ¶
+    // ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢BGMã‚’å†ç”Ÿ
     public void PlayTitleBGM()
     {
         if (titleBgmAudioSource != null)
@@ -212,7 +212,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒƒjƒ…[‰æ–ÊBGM‚ğÄ¶
+    // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢BGMã‚’å†ç”Ÿ
     public void PlayMenuBGM()
     {
         if (menuBgmAudioSource != null)
@@ -222,7 +222,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒXƒe[ƒWƒZƒŒƒNƒg‰æ–ÊBGM‚ğÄ¶
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚»ãƒ¬ã‚¯ãƒˆç”»é¢BGMã‚’å†ç”Ÿ
     public void PlayStageSelectBGM()
     {
         if (stageSelectBgmAudioSource != null)
@@ -232,7 +232,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒXƒe[ƒW‰æ–ÊBGM‚ğÄ¶
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ç”»é¢BGMã‚’å†ç”Ÿ
     public void PlayStageBGM()
     {
         if (stageBgmAudioSource != null)
@@ -242,7 +242,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒ|[ƒY‰æ–ÊBGM‚ğÄ¶
+    // ãƒãƒ¼ã‚ºç”»é¢BGMã‚’å†ç”Ÿ
     public void PlayPauseBGM()
     {
         if (pauseBgmAudioSource != null)
@@ -252,10 +252,10 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒŠƒUƒ‹ƒg‰æ–ÊBGM‚ğÄ¶
+    // ãƒªã‚¶ãƒ«ãƒˆç”»é¢BGMã‚’å†ç”Ÿ
     public void PlayResultBGM()
     {
-        // ‚±‚±‚ÉBGM’â~ˆ—
+        // ã“ã“ã«BGMåœæ­¢å‡¦ç†
         if (resultBgmAudioSource != null)
         {
             resultBgmAudioSource.loop = true;
@@ -263,7 +263,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒNƒŠƒA‚ÌSE‚ğÄ¶
+    // ã‚¯ãƒªã‚¢æ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayGameClearAudio()
     {
         if (gameClearAudioSource != null)
@@ -272,12 +272,12 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // BGM‚ğ’â~i‘SBGM’â~j
+    // BGMã‚’åœæ­¢ï¼ˆå…¨BGMåœæ­¢ï¼‰
     public void StopAllBgmAudio()
     {
         
         {
-            // ŠeBGM AudioSource ‚ğ’â~inullƒ`ƒFƒbƒN•t‚«j
+            // å„BGM AudioSource ã‚’åœæ­¢ï¼ˆnullãƒã‚§ãƒƒã‚¯ä»˜ãï¼‰
             if (titleBgmAudioSource != null) titleBgmAudioSource.Stop();
             if (menuBgmAudioSource != null) menuBgmAudioSource.Stop();
             if (stageSelectBgmAudioSource != null) stageSelectBgmAudioSource.Stop();
@@ -287,7 +287,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // SE‚ğ‚·‚×‚Ä’â~‚·‚éƒƒ\ƒbƒh
+    // SEã‚’ã™ã¹ã¦åœæ­¢ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void StopAllSeAudio()
     {
         if (gameClearAudioSource != null) gameClearAudioSource.Stop();
@@ -309,7 +309,7 @@ public class SoundManager : MonoBehaviour
         if (uiVolumeKnobAudioSource != null) uiVolumeKnobAudioSource.Stop();
     }
 
-    // ƒNƒŠƒbƒN‰¹‚ğÄ¶
+    // ã‚¯ãƒªãƒƒã‚¯éŸ³ã‚’å†ç”Ÿ
     public void PlayClickAudio()
     {
         if (clickAudioSource != null)
@@ -318,7 +318,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ©“®‘Oi‚ÌSE‚ğÄ¶iƒ‹[ƒv–h~j
+    // è‡ªå‹•å‰é€²æ™‚ã®SEã‚’å†ç”Ÿï¼ˆãƒ«ãƒ¼ãƒ—é˜²æ­¢ï¼‰
     public void PlayAutoMoveAudio()
     {
         if (autoMoveAudioSource != null && !autoMoveAudioSource.isPlaying)
@@ -327,7 +327,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ©“®‘Oi‚ÌSE‚ğ’â~
+    // è‡ªå‹•å‰é€²æ™‚ã®SEã‚’åœæ­¢
     public void StopAutoMoveAudio()
     {
         if (autoMoveAudioSource != null && autoMoveAudioSource.isPlaying)
@@ -336,7 +336,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒŒ[ƒ“ˆÚ“®‚ÌSE‚ğÄ¶
+    // ãƒ¬ãƒ¼ãƒ³ç§»å‹•æ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayLaneMoveAudio()
     {
         if (laneMoveAudioSource != null)
@@ -345,7 +345,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒWƒƒƒ“ƒv‚ÌSE‚ğÄ¶
+    // ã‚¸ãƒ£ãƒ³ãƒ—æ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayJumpAudio()
     {
         if (jumpAudioSource != null)
@@ -354,7 +354,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // “GŒ‚”j‚ÌSE‚ğÄ¶
+    // æ•µæ’ƒç ´æ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayEnemyDefeatAudio()
     {
         if (enemyDefeatAudioSource != null)
@@ -363,7 +363,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // áŠQ•¨Œƒ“Ë‚ÌSE‚ğÄ¶
+    // éšœå®³ç‰©æ¿€çªæ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayPlayerCrashAudio()
     {
         if (playerCrashAudioSource != null)
@@ -372,7 +372,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒgƒŠƒbƒNƒAƒNƒVƒ‡ƒ“1‚ÌSE‚ğÄ¶
+    // ãƒˆãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³1ã®SEã‚’å†ç”Ÿ
     public void PlayTrickAction1Audio()
     {
         if (trickAction1AudioSource != null)
@@ -381,7 +381,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒgƒŠƒbƒNƒAƒNƒVƒ‡ƒ“2‚ÌSE‚ğÄ¶
+    // ãƒˆãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³2ã®SEã‚’å†ç”Ÿ
     public void PlayTrickAction2Audio()
     {
         if (trickAction2AudioSource != null)
@@ -390,7 +390,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒXƒ^[ƒgƒJƒEƒ“ƒg321‚ÌSE‚ğÄ¶
+    // ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã‚«ã‚¦ãƒ³ãƒˆ321ã®SEã‚’å†ç”Ÿ
     public void PlayStartCount321Audio()
     {
         if (startCount321AudioSource != null)
@@ -399,7 +399,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒXƒ^[ƒgƒJƒEƒ“ƒgSTART‚ÌSE‚ğÄ¶
+    // ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã‚«ã‚¦ãƒ³ãƒˆSTARTã®SEã‚’å†ç”Ÿ
     public void PlayStartCountStartAudio()
     {
         if (startCountStartAudioSource != null)
@@ -408,7 +408,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒS[ƒ‹‚ÌSE‚ğÄ¶
+    // ã‚´ãƒ¼ãƒ«æ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayGoalAudio()
     {
         if (goalAudioSource != null)
@@ -417,7 +417,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒXƒRƒAƒAƒCƒeƒ€Šl“¾‚ÌSE‚ğÄ¶
+    // ã‚¹ã‚³ã‚¢ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—æ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayScoreItemAudio()
     {
         if (scoreItemAudioSource != null)
@@ -426,7 +426,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ‰Á‘¬ƒpƒlƒ‹”»’è‚ÌSE‚ğÄ¶
+    // åŠ é€Ÿãƒ‘ãƒãƒ«åˆ¤å®šæ™‚ã®SEã‚’å†ç”Ÿ
     public void PlayAccelPanelAudio()
     {
         if (accelPanelAudioSource != null)
@@ -435,7 +435,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // UI‘I‘ğ‰¹iƒNƒŠƒbƒNEƒRƒ“ƒgƒ[ƒ‰[j‚ğÄ¶iƒ‹[ƒv–h~j
+    // UIé¸æŠéŸ³ï¼ˆã‚¯ãƒªãƒƒã‚¯ãƒ»ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ï¼‰ã‚’å†ç”Ÿï¼ˆãƒ«ãƒ¼ãƒ—é˜²æ­¢ï¼‰
     public void PlayUISelectAudio()
     {
         if (uiSelectAudioSource != null && !uiSelectAudioSource.isPlaying)
@@ -444,7 +444,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // UIŒˆ’è‰¹‚ğÄ¶
+    // UIæ±ºå®šéŸ³ã‚’å†ç”Ÿ
     public void PlayUIDecideAudio()
     {
         if (uiDecideAudioSource != null)
@@ -453,7 +453,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // UI‰¹—Êİ’è‚Â‚Ü‚İˆÚ“®iSEŠm”Fj‚ğÄ¶iƒ‹[ƒv–h~j
+    // UIéŸ³é‡è¨­å®šã¤ã¾ã¿ç§»å‹•æ™‚ï¼ˆSEç¢ºèªï¼‰ã‚’å†ç”Ÿï¼ˆãƒ«ãƒ¼ãƒ—é˜²æ­¢ï¼‰
     public void PlayUIVolumeKnobAudio()
     {
         if (uiVolumeKnobAudioSource != null && !uiVolumeKnobAudioSource.isPlaying)
@@ -463,7 +463,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    // BGM‰¹—Ê‚ğİ’èi‘SBGM‚É“K—pj
+    // BGMéŸ³é‡ã‚’è¨­å®šï¼ˆå…¨BGMã«é©ç”¨ï¼‰
     public void SetBGMVolume(float volume)
     {
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
@@ -480,7 +480,7 @@ public class SoundManager : MonoBehaviour
         if (resultBgmAudioSource != null) resultBgmAudioSource.volume = volume;
     }
 
-    // Œø‰Ê‰¹‰¹—Ê‚ğİ’èi‘SSE‚É“K—pj
+    // åŠ¹æœéŸ³éŸ³é‡ã‚’è¨­å®šï¼ˆå…¨SEã«é©ç”¨ï¼‰
     public void SetSEVolume(float volume)
     {
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
@@ -508,7 +508,7 @@ public class SoundManager : MonoBehaviour
         if (uiVolumeKnobAudioSource != null) uiVolumeKnobAudioSource.volume = volume;
     }
 
-    // ƒ}ƒXƒ^[‰¹—Ê‚ğİ’è
+    // ãƒã‚¹ã‚¿ãƒ¼éŸ³é‡ã‚’è¨­å®š
     public void SetMasterVolume(float volume)
     {
         if (audioMixer != null)
@@ -519,7 +519,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // AudioSource‚Ì‰Šúİ’è
+    // AudioSourceã®åˆæœŸè¨­å®š
     private void SetupAudioSource(AudioSource audioSource)
     {
         if (audioSource != null)
@@ -532,13 +532,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ƒQ[ƒ€I—¹‚ÉŒÄ‚Î‚ê‚éƒƒ\ƒbƒh
+    // ã‚²ãƒ¼ãƒ çµ‚äº†æ™‚ã«å‘¼ã°ã‚Œã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     private void OnApplicationQuit()
     {
         ResetSoundSettings();
     }
 
-    // ƒTƒEƒ“ƒhİ’è‚ğƒŠƒZƒbƒg‚·‚éƒƒ\ƒbƒh
+    // ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     private void ResetSoundSettings()
     {
         PlayerPrefs.DeleteKey("MasterVolume");
@@ -546,7 +546,7 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.DeleteKey("BGMVolume");
     }
 
-    // ƒXƒe[ƒWBGM‚Ì‚İ’â~‚·‚éƒƒ\ƒbƒh‚ğ’Ç‰Á
+    // ã‚¹ãƒ†ãƒ¼ã‚¸BGMã®ã¿åœæ­¢ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ 
     public void StopStageBGM()
     {
         if (stageBgmAudioSource != null)
