@@ -15,6 +15,12 @@ public class PlayerCon : MonoBehaviour
     [Header("レーン移動設定")]
     public float laneChangeSpeed = 10f;
 
+    [Header("ArrowBoardの色")]
+    [SerializeField] private Material blueMaterial;
+    [SerializeField] private Material greenMaterial;
+    [SerializeField] private Material redMaterial;
+    [SerializeField] private Renderer playerBoardRenderer;
+
     [Header("前進移動設定")]
     public float forwardSpeed = 1.0f;
 
@@ -170,13 +176,6 @@ public class PlayerCon : MonoBehaviour
                     Instantiate(stompEffectPrefab, other.transform.position, Quaternion.identity);
                 }
 
-                //プレイヤーにエフェクト生成
-                if (playerEffectPrefab != null)
-                {
-                    GameObject effect = Instantiate(playerEffectPrefab, playerEffectPoint.position, Quaternion.identity);
-                    effect.transform.SetParent(playerEffectPoint);
-                }
-
                 Destroy(other.gameObject);
 
                 //追加ジャンプ
@@ -255,6 +254,24 @@ public class PlayerCon : MonoBehaviour
         canControl = true;
     }
 
+    private void UpdatePlayerBoardColor()
+    {
+        if (playerBoardRenderer == null) return;
+
+        switch (currentLane)
+        {
+            case 0: // 左
+                playerBoardRenderer.material = blueMaterial;
+                break;
+            case 1: // 中央
+                playerBoardRenderer.material = greenMaterial;
+                break;
+            case 2: // 右
+                playerBoardRenderer.material = redMaterial;
+                break;
+        }
+    }
+
     #region INputSystem
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
@@ -273,6 +290,7 @@ public class PlayerCon : MonoBehaviour
 
                 currentLane = nextLane;
                 targetX = nextX;
+                UpdatePlayerBoardColor();
 
                 // レーン移動SE再生
                 if (soundManager != null)
@@ -301,6 +319,7 @@ public class PlayerCon : MonoBehaviour
 
                 currentLane = nextLane;
                 targetX = nextX;
+                UpdatePlayerBoardColor();
 
                 // レーン移動SE再生
                 if (soundManager != null)
@@ -334,6 +353,13 @@ public class PlayerCon : MonoBehaviour
         {
             Debug.Log("ジャンプアクション実行 → 攻撃モードON");
             isAttackMode = true;
+
+            //プレイヤーにエフェクト生成
+            if (playerEffectPrefab != null)
+            {
+                GameObject effect = Instantiate(playerEffectPrefab, playerEffectPoint.position, Quaternion.identity);
+                effect.transform.SetParent(playerEffectPoint);
+            }
 
             // トリックアクションSE再生
             if (soundManager != null)
