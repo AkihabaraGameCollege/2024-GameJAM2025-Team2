@@ -298,6 +298,8 @@ MonoBehaviour:
   operationUI: {fileID: 2027985073}
   soundSettingsUI: {fileID: 2016544165}
   retrySceneName: PlayerStage1Scene
+  slideDuration: 0.5
+  firstSelectButton: {fileID: 1703939073}
 --- !u!4 &159852140
 Transform:
   m_ObjectHideFlags: 0

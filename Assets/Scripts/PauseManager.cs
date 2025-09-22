@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 /// <summary>
@@ -37,6 +38,9 @@ public class PauseManager : MonoBehaviour
     private Vector2 pauseUIEndPos;
     // ポーズUIの非表示位置
     private Vector2 pauseUIHidePos;
+
+    // ファーストセレクトボタン（ポーズUI表示時に最初に選択されるボタン）
+    [SerializeField] private GameObject firstSelectButton;
 
     /// <summary>
     /// 初期化処理。各UIの参照取得と初期状態設定。
@@ -135,6 +139,12 @@ public class PauseManager : MonoBehaviour
         }
         pauseRectTransform.anchoredPosition = pauseUIEndPos;
         pauseCanvasGroup.alpha = 1f;
+
+        // ファーストセレクトボタンを選択状態にする
+        if (firstSelectButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstSelectButton);
+        }
     }
 
     /// <summary>

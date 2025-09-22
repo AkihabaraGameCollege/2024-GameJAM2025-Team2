@@ -271,6 +271,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 124713389}
   soundSettingsUI: {fileID: 586154908}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &12410554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +662,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 124713389}
   soundSettingsUI: {fileID: 586154908}
   stageSelectUI: {fileID: 1542250127}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &389070544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,6 +845,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 0}
   soundSettingsUI: {fileID: 0}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!1 &586154908 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4114236489040621419, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
@@ -1558,6 +1579,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 124713389}
   soundSettingsUI: {fileID: 586154908}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &1057061357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2266,6 +2294,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 0}
   soundSettingsUI: {fileID: 0}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &1329115513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2430,6 +2465,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 124713389}
   soundSettingsUI: {fileID: 586154908}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &1346944536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2905,6 +2947,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 0}
   soundSettingsUI: {fileID: 0}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &1468102467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3530,6 +3579,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 124713389}
   soundSettingsUI: {fileID: 586154908}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &1791540048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3969,6 +4025,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 124713389}
   soundSettingsUI: {fileID: 586154908}
   stageSelectUI: {fileID: 1542250127}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &2028896905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4192,6 +4255,103 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098333474}
   m_CullTransparentMesh: 1
+--- !u!1001 &5628431377861494312
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: menuUI
+      value: 
+      objectReference: {fileID: 62483252}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: titleUI
+      value: 
+      objectReference: {fileID: 889213034}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: howToPlayUI
+      value: 
+      objectReference: {fileID: 124713389}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: stageSelectUI
+      value: 
+      objectReference: {fileID: 1542250127}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: soundSettingsUI
+      value: 
+      objectReference: {fileID: 586154908}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedMenuButton
+      value: 
+      objectReference: {fileID: 389070538}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedTitleButton
+      value: 
+      objectReference: {fileID: 1791540042}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedHowToPlayButton
+      value: 
+      objectReference: {fileID: 6287266358142674151}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedStageSelectButton
+      value: 
+      objectReference: {fileID: 1468102461}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedSoundSettingsButton
+      value: 
+      objectReference: {fileID: 7100937279122461811}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654484688333171274, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_Name
+      value: ScnenManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
 --- !u!1001 &6287266358142674150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4301,6 +4461,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4cab799bb040a448917e175071784fe, type: 3}
+--- !u!1 &6287266358142674151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4277374988920992529, guid: b4cab799bb040a448917e175071784fe, type: 3}
+  m_PrefabInstance: {fileID: 6287266358142674150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7100937279122461810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4410,6 +4575,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+--- !u!1 &7100937279122461811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5762697831089469639, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+  m_PrefabInstance: {fileID: 7100937279122461810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4418,4 +4588,5 @@ SceneRoots:
   - {fileID: 1951795266}
   - {fileID: 1462195880}
   - {fileID: 1416409015}
+  - {fileID: 5628431377861494312}
   - {fileID: 1978885743}

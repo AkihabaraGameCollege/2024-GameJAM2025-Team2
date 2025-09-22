@@ -710,6 +710,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 0}
   soundSettingsUI: {fileID: 0}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!114 &465251897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,6 +962,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 0}
   soundSettingsUI: {fileID: 0}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!1 &668273134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1256,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 0}
   soundSettingsUI: {fileID: 0}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!1 &899178675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,6 +2324,13 @@ MonoBehaviour:
   howToPlayUI: {fileID: 0}
   soundSettingsUI: {fileID: 0}
   stageSelectUI: {fileID: 0}
+  resultUI: {fileID: 0}
+  firstSelectedMenuButton: {fileID: 0}
+  firstSelectedTitleButton: {fileID: 0}
+  firstSelectedHowToPlayButton: {fileID: 0}
+  firstSelectedSoundSettingsButton: {fileID: 0}
+  firstSelectedStageSelectButton: {fileID: 0}
+  firstSelectedResultButton: {fileID: 0}
 --- !u!1 &1786218730
 GameObject:
   m_ObjectHideFlags: 0
@@ -2439,6 +2467,111 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1876916114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: menuUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: titleUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: resultUI
+      value: 
+      objectReference: {fileID: 431260643}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: howToPlayUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: stageSelectUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: soundSettingsUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedMenuButton
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedTitleButton
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedResultButton
+      value: 
+      objectReference: {fileID: 541618774}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedHowToPlayButton
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedStageSelectButton
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948879008895677528, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: firstSelectedSoundSettingsButton
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138487236865817750, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654484688333171274, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: m_Name
+      value: ScnenManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
 --- !u!1 &1962814466
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,3 +3720,4 @@ SceneRoots:
   - {fileID: 984913054168141937}
   - {fileID: 431260647}
   - {fileID: 289305228}
+  - {fileID: 1876916114}
