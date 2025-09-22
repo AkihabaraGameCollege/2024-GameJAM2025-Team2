@@ -5,67 +5,83 @@ using System.Collections;
 
 public class PlayerCon : MonoBehaviour
 {
-    //[Header("敵")]
-
+    // --------------------
+    // レーン移動設定
+    // --------------------
     [Header("レーン設定")]
-    public float laneDistance = 2.5f;
+    [SerializeField] private float laneDistance = 2.5f;
     private int currentLane = 1;
     private float targetX;
 
     [Header("レーン移動設定")]
-    public float laneChangeSpeed = 10f;
+    [SerializeField] private float laneChangeSpeed = 10f;
 
+    // --------------------
+    // プレイヤーカラー設定
+    // --------------------
     [Header("ArrowBoardの色")]
     [SerializeField] private Material blueMaterial;
     [SerializeField] private Material greenMaterial;
     [SerializeField] private Material redMaterial;
     [SerializeField] private Renderer playerBoardRenderer;
 
+    // --------------------
+    // 前進・ジャンプ設定
+    // --------------------
     [Header("前進移動設定")]
-    public float forwardSpeed = 1.0f;
+    [SerializeField] private float forwardSpeed = 1.0f;
 
     [Header("ジャンプ設定")]
-    public float jumpForce = 7f;
-    public float fallSpeed = 1.0f;
+    [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float fallSpeed = 1.0f;
+
     [Header("敵を踏みつけた後のジャンプ設定")]
-    public float doubleJump = 1.2f;
-    public float forwardForce = 5.0f;
-    [SerializeField] AudioSource successJumpActionSe;
+    [SerializeField] private float doubleJump = 1.2f;
+    [SerializeField] private float forwardForce = 5.0f;
+    [SerializeField] private AudioSource successJumpActionSe;
+
+    // --------------------
+    // エフェクト
+    // --------------------
     [Header("エフェクト")]
     [SerializeField] private GameObject stompEffectPrefab; // 敵に出すエフェクト
+    [SerializeField] private Transform playerEffectPoint; //　プレイヤーがエフェクトをだすポイント
+    [SerializeField] private GameObject playerEffectPrefab; // プレイヤーに出すエフェクト
 
-    [SerializeField] private Transform playerEffectPoint;
-    [SerializeField] private GameObject playerEffectPrefab;// プレイヤーに出すエフェクト
+    // --------------------
+    // 地面判定
+    // --------------------
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private bool isGrounded;
 
-    public float groundCheckDistance = 0.2f;
-    public LayerMask groundMask;
-    [SerializeField] bool isGrounded;
-
+    // --------------------
+    // 被弾処理
+    // --------------------
     [Header("被弾処理")]
-    [SerializeField] AudioSource takeHitSe;
+    [SerializeField] private AudioSource takeHitSe;
     [Tooltip("全体の慣性")]
-    public float knockBackForce = 5.0f;
-    [Tooltip("上の慣性")]
-    public float knockBackUpForce = 1.0f;
-
-    public float invincibleTime = 3.0f;
+    [SerializeField] private float knockBackForce = 5.0f;
+    [Tooltip("上方向の慣性")]
+    [SerializeField] private float knockBackUpForce = 1.0f;
+    [SerializeField] private float invincibleTime = 3.0f;
     private bool isInvincible = false;
     private bool canControl = true;
-    [SerializeField] private bool isAttackMode = false;    //ジャンプ中攻撃状態
 
-    [SerializeField]
-    private Animator playerAnimator = null;
+    // --------------------
+    // 攻撃・アニメーション
+    // --------------------
+    [SerializeField] private bool isAttackMode = false; // ジャンプ中攻撃状態
+    [SerializeField] private Animator playerAnimator = null;
+
+    // --------------------
+    // 内部管理用
+    // --------------------
     private Rigidbody rb;
-
-    // 連続ジャンプアクション管理用変数
-    private int consecutiveJumpActions = 0;
-
-    // SoundManager参照用
-    private SoundManager soundManager;
+    private int consecutiveJumpActions = 0; // 連続ジャンプアクション管理
+    private SoundManager soundManager;      // SoundManager参照用
     private bool isAutoMoveSEPlaying = false;
-
-    // UIManager参照用
-    private UIManager uiManager;
+    private UIManager uiManager;            // UIManager参照用
 
     void Start()
     {
@@ -359,6 +375,7 @@ public class PlayerCon : MonoBehaviour
             {
                 GameObject effect = Instantiate(playerEffectPrefab, playerEffectPoint.position, Quaternion.identity);
                 effect.transform.SetParent(playerEffectPoint);
+                Destroy(effect, 2.0f);
             }
 
             // トリックアクションSE再生
