@@ -25,6 +25,11 @@ public class PlayerCon : MonoBehaviour
     public float doubleJump = 1.2f;
     public float forwardForce = 5.0f;
     [SerializeField] AudioSource successJumpActionSe;
+    [Header("エフェクト")]
+    [SerializeField] private GameObject stompEffectPrefab; // 敵に出すエフェクト
+
+    [SerializeField] private Transform playerEffectPoint;
+    [SerializeField] private GameObject playerEffectPrefab;// プレイヤーに出すエフェクト
 
     public float groundCheckDistance = 0.2f;
     public LayerMask groundMask;
@@ -157,6 +162,19 @@ public class PlayerCon : MonoBehaviour
                 if (soundManager != null)
                 {
                     soundManager.PlayEnemyDefeatAudio();
+                }
+
+                //敵にエフェクト生成
+                if (stompEffectPrefab != null)
+                {
+                    Instantiate(stompEffectPrefab, other.transform.position, Quaternion.identity);
+                }
+
+                //プレイヤーにエフェクト生成
+                if (playerEffectPrefab != null)
+                {
+                    GameObject effect = Instantiate(playerEffectPrefab, playerEffectPoint.position, Quaternion.identity);
+                    effect.transform.SetParent(playerEffectPoint);
                 }
 
                 Destroy(other.gameObject);
