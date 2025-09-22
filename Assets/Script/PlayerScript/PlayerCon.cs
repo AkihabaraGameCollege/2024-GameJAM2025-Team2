@@ -215,7 +215,7 @@ public class PlayerCon : MonoBehaviour
             else if (!isInvincible)
             {
                 Debug.Log($"{name} が {other.name} に当たった");
-                
+
                 // スコア-200減算
                 if (uiManager != null)
                 {
