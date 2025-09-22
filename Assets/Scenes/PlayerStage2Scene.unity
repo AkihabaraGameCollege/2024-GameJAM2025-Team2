@@ -653,6 +653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4209265777221877461, guid: 7404239d4db4dc2459e2a4f98ca8e29e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: acaaf4a38017ed34b898c9e518950a1e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2839,6 +2843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedEnemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4209265777221877461, guid: 7404239d4db4dc2459e2a4f98ca8e29e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 17f2ccba1a65c3b4ba5e210fd6407f3b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3045,6 +3053,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5462225707369413978, guid: 446c78a411870344fbc78380ca93c0a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: acaaf4a38017ed34b898c9e518950a1e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5027,6 +5039,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5462225707369413978, guid: 446c78a411870344fbc78380ca93c0a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: acaaf4a38017ed34b898c9e518950a1e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6487,8 +6503,8 @@ Transform:
   m_GameObject: {fileID: 1438579997}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: -0.49999994, z: -1.5}
-  m_LocalScale: {x: 1, y: 1, z: 4}
+  m_LocalPosition: {x: 0, y: -0.50000006, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1936359884}
@@ -7005,6 +7021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedEnemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4209265777221877461, guid: 7404239d4db4dc2459e2a4f98ca8e29e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: acaaf4a38017ed34b898c9e518950a1e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7388,6 +7408,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 454266069}
     m_Modifications:
+    - target: {fileID: 176304260991575741, guid: ef58f61ae311e0d40aef4bd904eacc14, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 17f2ccba1a65c3b4ba5e210fd6407f3b, type: 2}
     - target: {fileID: 562751917530927225, guid: ef58f61ae311e0d40aef4bd904eacc14, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.88
@@ -8575,6 +8599,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5462225707369413978, guid: 446c78a411870344fbc78380ca93c0a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dca5c1fa2c919284aa878b41f98b4916, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14760,6 +14788,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4209265777221877461, guid: 7404239d4db4dc2459e2a4f98ca8e29e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: acaaf4a38017ed34b898c9e518950a1e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
