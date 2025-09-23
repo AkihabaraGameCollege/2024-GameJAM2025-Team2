@@ -16,22 +16,22 @@ public class Goal : MonoBehaviour
             if (uiManager != null)
             {
                 uiManager.StopCountup();
+
+                // スコアとゴールタイム保存
+                PlayerPrefs.SetInt("ResultScore", uiManager.GetCurrentScore());
+                PlayerPrefs.SetInt("ResultTime", Mathf.FloorToInt(uiManager.GetCurrentCountup()));
             }
 
             // ゴール時のSEを再生
             SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
             if (soundManager != null)
             {
-                // BGM停止を追加
                 soundManager.StopStageBGM();
-
                 soundManager.PlayGoalAudio();
-                // ゴールSE再生後にシーン遷移
                 StartCoroutine(WaitForGoalSE(soundManager));
             }
             else
             {
-                // SoundManagerが見つからない場合は即シーン遷移
                 SceneManager.LoadScene("ResultScene");
             }
 

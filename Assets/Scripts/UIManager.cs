@@ -52,12 +52,20 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(CountdownAndStartCountup());
-        // スコア初期化
-        SetScore(0);
+        // リザルト画面の場合は保存値を表示
+        if (IsResultScene())
+        {
+            ShowResult();
+        }
+        else
+        {
+            StartCoroutine(CountdownAndStartCountup());
+            // スコア初期化
+            SetScore(0);
 
-        // カウントアップスプライト初期化
-        InitCountupSprites();
+            // カウントアップスプライト初期化
+            InitCountupSprites();
+        }
     }
 
     // Update is called once per frame
@@ -243,6 +251,54 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < digitCount; i++)
         {
             int digit = (count / (int)Mathf.Pow(10, digitCount - i - 1)) % 10;
+            countupImages[i].sprite = countupDigitSprites[digit];
+        }
+    }
+
+    // 現在のスコアを取得
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
+
+    // 現在のカウントアップ時間（秒）を取得
+    public float GetCurrentCountup()
+    {
+        return currentCountup;
+    }
+
+    // リザルト画面か判定
+    private bool IsResultScene()
+    {
+        // ResultScene名はプロジェクトに合わせて変更してください
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ResultScene";
+    }
+
+    // リザルト画面用：保存されたスコアとタイムをスプライトで表示
+    public void ShowResult()
+    {
+        int score = PlayerPrefs.GetInt("ResultScore", 0);
+        int time = PlayerPrefs.GetInt("ResultTime", 0);
+
+        SetScore(score);
+        ShowResultTime(time);
+    }
+
+    // ゴールタイムをカウントアップスプライトで表示
+    public void ShowResultTime(int time)
+    {
+        // timeは秒単位（例: 123秒）
+        int digitCount = 1;
+        if (time >= 100) digitCount = 3;
+        else if (time >= 10) digitCount = 2;
+        digitCount = Mathf.Min(digitCount, countupImages.Count);
+
+        for (int i = 0; i < countupImages.Count; i++)
+            countupImages[i].gameObject.SetActive(i < digitCount);
+
+        for (int i = 0; i < digitCount; i++)
+        {
+            int digit = (time / (int)Mathf.Pow(10, digitCount - i - 1)) % 10;
             countupImages[i].sprite = countupDigitSprites[digit];
         }
     }
