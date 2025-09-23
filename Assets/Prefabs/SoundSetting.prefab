@@ -612,7 +612,6 @@ GameObject:
   - component: {fileID: 892527040166978454}
   - component: {fileID: 290870463219183845}
   - component: {fileID: 3497184811554382682}
-  - component: {fileID: 7626985488465275170}
   - component: {fileID: 1732578820807534314}
   m_Layer: 5
   m_Name: Button
@@ -723,7 +722,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7626985488465275170}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScnenManager, Assembly-CSharp
         m_MethodName: ShowMenuAndHideSoundSettings
         m_Mode: 1
@@ -735,23 +734,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7626985488465275170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5762697831089469639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264fca2180a8dbe4ca3a2b67394a985f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuUI: {fileID: 0}
-  titleUI: {fileID: 0}
-  howToPlayUI: {fileID: 0}
-  soundSettingsUI: {fileID: 4114236489040621419}
-  stageSelectUI: {fileID: 0}
 --- !u!114 &1732578820807534314
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,6 +41,13 @@ public class PauseManager : MonoBehaviour
 
     // ファーストセレクトボタン（ポーズUI表示時に最初に選択されるボタン）
     [SerializeField] private GameObject firstSelectButton;
+    // 操作説明UIのファーストセレクトボタン
+    [SerializeField] private GameObject operationFirstSelectButton;
+    // サウンド設定UIのファーストセレクトボタン
+    [SerializeField] private GameObject soundFirstSelectButton;
+
+    // UIManager参照用
+    private UIManager uiManager;
 
     /// <summary>
     /// 初期化処理。各UIの参照取得と初期状態設定。
@@ -70,6 +77,9 @@ public class PauseManager : MonoBehaviour
         // 操作説明UI・サウンド設定UIの非表示
         if (operationUI != null) operationUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
+
+        // UIManagerの参照取得
+        uiManager = Object.FindFirstObjectByType<UIManager>();
     }
 
     /// <summary>
@@ -89,6 +99,13 @@ public class PauseManager : MonoBehaviour
     /// <param name="context">入力アクションのコンテキスト</param>
     private void OnPause(InputAction.CallbackContext context)
     {
+        // カウントダウン中はポーズ不可
+        if (uiManager != null && uiManager.IsCountdown)
+        {
+            Debug.Log("カウントダウン中のためポーズ不可");
+            return;
+        }
+
         var keyboard = Keyboard.current;
         // ポーズ中にESCキーで復帰
         if (isPaused && keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
@@ -193,6 +210,12 @@ public class PauseManager : MonoBehaviour
         if (pauseUI != null) pauseUI.SetActive(false);
         if (operationUI != null) operationUI.SetActive(true);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
+
+        // コントローラー用に最初のボタンを選択
+        if (operationFirstSelectButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(operationFirstSelectButton);
+        }
     }
 
     /// <summary>
@@ -204,6 +227,12 @@ public class PauseManager : MonoBehaviour
         if (operationUI != null) operationUI.SetActive(false);
         if (pauseUI != null) pauseUI.SetActive(true);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
+
+        // ポーズUIのファーストセレクトボタンを選択
+        if (firstSelectButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstSelectButton);
+        }
     }
 
     /// <summary>
@@ -215,6 +244,12 @@ public class PauseManager : MonoBehaviour
         if (pauseUI != null) pauseUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(true);
         if (operationUI != null) operationUI.SetActive(false);
+
+        // コントローラー用に最初のボタンを選択
+        if (soundFirstSelectButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(soundFirstSelectButton);
+        }
     }
 
     /// <summary>
@@ -226,6 +261,12 @@ public class PauseManager : MonoBehaviour
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         if (pauseUI != null) pauseUI.SetActive(true);
         if (operationUI != null) operationUI.SetActive(false);
+
+        // ポーズUIのファーストセレクトボタンを選択
+        if (firstSelectButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstSelectButton);
+        }
     }
 
     /// <summary>
