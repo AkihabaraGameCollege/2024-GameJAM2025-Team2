@@ -33,6 +33,9 @@ public class ScnenManager : MonoBehaviour
     private Dictionary<string, GameObject> uiDict;
     private Dictionary<string, GameObject> buttonDict;
 
+    // 直前のステージ名を記憶する変数をstaticに変更（シーン間で値を保持するため）
+    private static string lastStageSceneName;
+
     void Awake()
     {
         uiDict = new Dictionary<string, GameObject>
@@ -143,7 +146,8 @@ public class ScnenManager : MonoBehaviour
     // ステージ1へ遷移する処理
     public void OnStage1ButtonClicked()
     {
-        SceneManager.LoadScene("PlayerStage1Scene");
+        lastStageSceneName = "PlayerStage1Scene"; // ステージ名を記憶
+        SceneManager.LoadScene(lastStageSceneName);
 
         // ステージBGM再生
         if (soundManager != null)
@@ -156,7 +160,8 @@ public class ScnenManager : MonoBehaviour
     // ステージ2へ遷移する処理
     public void OnStage2ButtonClicked()
     {
-        SceneManager.LoadScene("PlayerStage2Scene");
+        lastStageSceneName = "PlayerStage2Scene"; // ステージ名を記憶
+        SceneManager.LoadScene(lastStageSceneName);
 
         // ステージBGM再生
         if (soundManager != null)
@@ -169,7 +174,8 @@ public class ScnenManager : MonoBehaviour
     // ステージ3へ遷移する処理
     public void OnStage3ButtonClicked()
     {
-        SceneManager.LoadScene("PlayerStage3Scene");
+        lastStageSceneName = "PlayerStage3Scene"; // ステージ名を記憶
+        SceneManager.LoadScene(lastStageSceneName);
 
         // ステージBGM再生
         if (soundManager != null)
@@ -237,6 +243,12 @@ public class ScnenManager : MonoBehaviour
             soundManager.StopAllBgmAudio();
             soundManager.PlayStageBGM();
         }
+    }
+
+    // リザルト画面のリトライボタンから呼び出す用
+    public void OnRetryButtonClicked()
+    {
+        RetryScene(lastStageSceneName);
     }
 
     // 操作説明画面を表示し、メニューを非表示にするメソッド
