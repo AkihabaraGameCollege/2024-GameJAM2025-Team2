@@ -3,64 +3,88 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-/// <summary>
-/// プレイヤーの操作・挙動を管理するクラス
-/// </summary>
 public class PlayerCon : MonoBehaviour
 {
-    //[Header("敵")]
-
+    // --------------------
+    // レーン移動設定
+    // --------------------
     [Header("レーン設定")]
-    public float laneDistance = 2.5f;
+    [SerializeField] private float laneDistance = 2.5f;
     private int currentLane = 1;
     private float targetX;
 
     [Header("レーン移動設定")]
-    public float laneChangeSpeed = 10f;
+    [SerializeField] private float laneChangeSpeed = 10f;
 
+    // --------------------
+    // プレイヤーカラー設定
+    // --------------------
+    [Header("ArrowBoardの色")]
+    [SerializeField] private Material blueMaterial;
+    [SerializeField] private Material greenMaterial;
+    [SerializeField] private Material redMaterial;
+    [SerializeField] private Renderer playerBoardRenderer;
+    [Header("色を切り換えた時のエフェクト")]
+    [SerializeField] private GameObject laneChangeEffectPrefab; // 色切り換えるときのエフェクト
+    [SerializeField] private Transform laneEffectPoint;
+
+    // --------------------
+    // 前進・ジャンプ設定
+    // --------------------
     [Header("前進移動設定")]
-    public float forwardSpeed = 1.0f;
+    [SerializeField] private float forwardSpeed = 1.0f;
 
     [Header("ジャンプ設定")]
-    public float jumpForce = 7f;
-    public float fallSpeed = 1.0f;
+    [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float fallSpeed = 1.0f;
+
     [Header("敵を踏みつけた後のジャンプ設定")]
-    public float doubleJump = 1.2f;
-    public float forwardForce = 5.0f;
-    [SerializeField] AudioSource successJumpActionSe;
+    [SerializeField] private float doubleJump = 1.2f;
+    [SerializeField] private float forwardForce = 5.0f;
+    [SerializeField] private AudioSource successJumpActionSe;
 
-    public float groundCheckDistance = 0.2f;
-    public LayerMask groundMask;
-    [SerializeField] bool isGrounded;
+    // --------------------
+    // エフェクト
+    // --------------------
+    [Header("エフェクト")]
+    [SerializeField] private GameObject stompEffectPrefab; // 敵に出すエフェクト
+    [SerializeField] private Transform playerEffectPoint; //　プレイヤーがエフェクトをだすポイント
+    [SerializeField] private GameObject playerEffectPrefab; // プレイヤーに出すエフェクト
 
+    // --------------------
+    // 地面判定
+    // --------------------
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private bool isGrounded;
+
+    // --------------------
+    // 被弾処理
+    // --------------------
     [Header("被弾処理")]
-    [SerializeField] AudioSource takeHitSe;
+    [SerializeField] private AudioSource takeHitSe;
     [Tooltip("全体の慣性")]
-    public float knockBackForce = 5.0f;
-    [Tooltip("上の慣性")]
-    public float knockBackUpForce = 1.0f;
-
-    public float invincibleTime = 3.0f;
+    [SerializeField] private float knockBackForce = 5.0f;
+    [Tooltip("上方向の慣性")]
+    [SerializeField] private float knockBackUpForce = 1.0f;
+    [SerializeField] private float invincibleTime = 3.0f;
     private bool isInvincible = false;
     private bool canControl = true;
-    [SerializeField] private bool isAttackMode = false;    //ジャンプ中攻撃状態
 
-    [SerializeField]
-    private Animator playerAnimator = null;
+    // --------------------
+    // 攻撃・アニメーション
+    // --------------------
+    [SerializeField] private bool isAttackMode = false; // ジャンプ中攻撃状態
+    [SerializeField] private Animator playerAnimator = null;
+
+    // --------------------
+    // 内部管理用
+    // --------------------
     private Rigidbody rb;
-
-    // 連続ジャンプアクション管理用変数
-    private int consecutiveJumpActions = 0;
-
-    // SoundManager参照用
-    private SoundManager soundManager;
+    private int consecutiveJumpActions = 0; // 連続ジャンプアクション管理
+    private SoundManager soundManager;      // SoundManager参照用
     private bool isAutoMoveSEPlaying = false;
-
-    // UIManager参照用
-    private UIManager uiManager;
-
-    // PauseManager参照用
-    private PauseManager pauseManager;
+    private UIManager uiManager;            // UIManager参照用
 
     void Start()
     {
@@ -73,9 +97,6 @@ public class PlayerCon : MonoBehaviour
 
         // UIManagerインスタンス取得
         uiManager = Object.FindFirstObjectByType<UIManager>();
-
-        // PauseManagerインスタンス取得
-        pauseManager = Object.FindFirstObjectByType<PauseManager>();
     }
 
     private void Update()
@@ -155,7 +176,7 @@ public class PlayerCon : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (!isGrounded && isAttackMode)
+            if (!isGrounded && isAttackMode && Time.timeScale > 0f)
             {
                 Debug.Log("敵を踏んだ");
                 successJumpActionSe?.Play();
@@ -166,6 +187,12 @@ public class PlayerCon : MonoBehaviour
                 if (soundManager != null)
                 {
                     soundManager.PlayEnemyDefeatAudio();
+                }
+
+                //敵にエフェクト生成
+                if (stompEffectPrefab != null)
+                {
+                    Instantiate(stompEffectPrefab, other.transform.position, Quaternion.identity);
                 }
 
                 Destroy(other.gameObject);
@@ -246,13 +273,39 @@ public class PlayerCon : MonoBehaviour
         canControl = true;
     }
 
+    private void UpdatePlayerBoardColor(bool withEffect = true)
+    {
+        if (playerBoardRenderer == null) return;
+
+
+        switch (currentLane)
+        {
+            case 0: // 左
+                playerBoardRenderer.material = blueMaterial;
+                break;
+            case 1: // 中央
+                playerBoardRenderer.material = greenMaterial;
+                break;
+            case 2: // 右
+                playerBoardRenderer.material = redMaterial;
+                break;
+        }
+
+        if (withEffect && Time.timeScale > 0f)
+        {
+            if (laneChangeEffectPrefab != null && laneEffectPoint != null)
+            {
+                GameObject effect = Instantiate(laneChangeEffectPrefab, laneEffectPoint.position, Quaternion.identity);
+                effect.transform.SetParent(laneEffectPoint); // プレイヤーに追従させたいなら
+                Destroy(effect, 2.0f);
+            }
+        }
+    }
+
     #region INputSystem
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
-        // ポーズ中は移動処理を無視
-        if (pauseManager != null && pauseManager.IsPaused) return;
-
-        if (canControl && context.performed)
+        if (canControl && context.performed && Time.timeScale > 0f)
         {
             int nextLane = Mathf.Max(0, currentLane - 1);
             float nextX = (nextLane - 1) * laneDistance;
@@ -267,6 +320,7 @@ public class PlayerCon : MonoBehaviour
 
                 currentLane = nextLane;
                 targetX = nextX;
+                UpdatePlayerBoardColor();
 
                 // レーン移動SE再生
                 if (soundManager != null)
@@ -279,10 +333,7 @@ public class PlayerCon : MonoBehaviour
 
     public void OnMoveRight(InputAction.CallbackContext context)
     {
-        // ポーズ中は移動処理を無視
-        if (pauseManager != null && pauseManager.IsPaused) return;
-
-        if (canControl && context.performed)
+        if (canControl && context.performed && Time.timeScale > 0f)
         {
             int nextLane = Mathf.Min(2, currentLane + 1);
             float nextX = (nextLane - 1) * laneDistance;
@@ -298,6 +349,7 @@ public class PlayerCon : MonoBehaviour
 
                 currentLane = nextLane;
                 targetX = nextX;
+                UpdatePlayerBoardColor();
 
                 // レーン移動SE再生
                 if (soundManager != null)
@@ -310,9 +362,6 @@ public class PlayerCon : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        // ポーズ中はジャンプ処理を無視
-        if (pauseManager != null && pauseManager.IsPaused) return;
-
         if (canControl && context.performed && isGrounded)
         {
             Debug.Log("ジャンプ中ジャンプアクション実行可");
@@ -330,13 +379,18 @@ public class PlayerCon : MonoBehaviour
     // トリックアクション時
     public void OnJumpAction(InputAction.CallbackContext context)
     {
-        // ポーズ中はジャンプアクション処理を無視
-        if (pauseManager != null && pauseManager.IsPaused) return;
-
-        if (canControl && context.performed && !isGrounded)
+        if (canControl && context.performed && !isGrounded && Time.timeScale > 0f)
         {
             Debug.Log("ジャンプアクション実行 → 攻撃モードON");
             isAttackMode = true;
+
+            //プレイヤーにエフェクト生成
+            if (playerEffectPrefab != null)
+            {
+                GameObject effect = Instantiate(playerEffectPrefab, playerEffectPoint.position, Quaternion.identity);
+                effect.transform.SetParent(playerEffectPoint);
+                Destroy(effect, 2.0f);
+            }
 
             // トリックアクションSE再生
             if (soundManager != null)
