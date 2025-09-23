@@ -50,6 +50,11 @@ public class PauseManager : MonoBehaviour
     private UIManager uiManager;
 
     /// <summary>
+    /// ポーズ状態かどうかを取得するプロパティ
+    /// </summary>
+    public bool IsPaused => isPaused;
+
+    /// <summary>
     /// 初期化処理。各UIの参照取得と初期状態設定。
     /// </summary>
     void Awake()

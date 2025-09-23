@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
+/// <summary>
+/// プレイヤーの操作・挙動を管理するクラス
+/// </summary>
 public class PlayerCon : MonoBehaviour
 {
     //[Header("敵")]
@@ -56,6 +59,9 @@ public class PlayerCon : MonoBehaviour
     // UIManager参照用
     private UIManager uiManager;
 
+    // PauseManager参照用
+    private PauseManager pauseManager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -67,6 +73,9 @@ public class PlayerCon : MonoBehaviour
 
         // UIManagerインスタンス取得
         uiManager = Object.FindFirstObjectByType<UIManager>();
+
+        // PauseManagerインスタンス取得
+        pauseManager = Object.FindFirstObjectByType<PauseManager>();
     }
 
     private void Update()
@@ -197,7 +206,7 @@ public class PlayerCon : MonoBehaviour
             else if (!isInvincible)
             {
                 Debug.Log($"{name} が {other.name} に当たった");
-                
+
                 // スコア-200減算
                 if (uiManager != null)
                 {
@@ -240,6 +249,9 @@ public class PlayerCon : MonoBehaviour
     #region INputSystem
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
+        // ポーズ中は移動処理を無視
+        if (pauseManager != null && pauseManager.IsPaused) return;
+
         if (canControl && context.performed)
         {
             int nextLane = Mathf.Max(0, currentLane - 1);
@@ -267,6 +279,9 @@ public class PlayerCon : MonoBehaviour
 
     public void OnMoveRight(InputAction.CallbackContext context)
     {
+        // ポーズ中は移動処理を無視
+        if (pauseManager != null && pauseManager.IsPaused) return;
+
         if (canControl && context.performed)
         {
             int nextLane = Mathf.Min(2, currentLane + 1);
@@ -295,6 +310,9 @@ public class PlayerCon : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        // ポーズ中はジャンプ処理を無視
+        if (pauseManager != null && pauseManager.IsPaused) return;
+
         if (canControl && context.performed && isGrounded)
         {
             Debug.Log("ジャンプ中ジャンプアクション実行可");
@@ -312,6 +330,9 @@ public class PlayerCon : MonoBehaviour
     // トリックアクション時
     public void OnJumpAction(InputAction.CallbackContext context)
     {
+        // ポーズ中はジャンプアクション処理を無視
+        if (pauseManager != null && pauseManager.IsPaused) return;
+
         if (canControl && context.performed && !isGrounded)
         {
             Debug.Log("ジャンプアクション実行 → 攻撃モードON");

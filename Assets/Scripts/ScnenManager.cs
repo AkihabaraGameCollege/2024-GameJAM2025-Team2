@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ScnenManager : MonoBehaviour
 {
@@ -23,10 +24,36 @@ public class ScnenManager : MonoBehaviour
     [SerializeField] private GameObject firstSelectedHowToPlayButton;
     [SerializeField] private GameObject firstSelectedSoundSettingsButton;
     [SerializeField] private GameObject firstSelectedStageSelectButton;
-    [SerializeField] private GameObject firstSelectedResultButton;
+    private GameObject firstSelectedResultButton;
 
     // SoundManagerの参照
     private SoundManager soundManager;
+
+    // UIとボタンを一元管理するDictionary
+    private Dictionary<string, GameObject> uiDict;
+    private Dictionary<string, GameObject> buttonDict;
+
+    void Awake()
+    {
+        uiDict = new Dictionary<string, GameObject>
+        {
+            { "Menu", menuUI },
+            { "Title", titleUI },
+            { "HowToPlay", howToPlayUI },
+            { "SoundSettings", soundSettingsUI },
+            { "StageSelect", stageSelectUI },
+            { "Result", resultUI }
+        };
+        buttonDict = new Dictionary<string, GameObject>
+        {
+            { "Menu", firstSelectedMenuButton },
+            { "Title", firstSelectedTitleButton },
+            { "HowToPlay", firstSelectedHowToPlayButton },
+            { "SoundSettings", firstSelectedSoundSettingsButton },
+            { "StageSelect", firstSelectedStageSelectButton },
+            { "Result", firstSelectedResultButton }
+        };
+    }
 
     void Start()
     {
@@ -50,59 +77,67 @@ public class ScnenManager : MonoBehaviour
     // 指定したGameObjectを選択する共通メソッド
     private void SelectFirstButton(GameObject buttonObj)
     {
-        if (buttonObj == null) return;
+        if (buttonObj == null)
+        {
+            Debug.LogWarning("FirstSelectedButtonが未設定です: " + buttonObj);
+            return;
+        }
+        if (!buttonObj.activeInHierarchy)
+        {
+            Debug.LogWarning("FirstSelectedButtonが非アクティブです: " + buttonObj.name);
+            return;
+        }
         EventSystem.current.SetSelectedGameObject(buttonObj);
+    }
+
+    // 画面名でUIとボタンを切り替える汎用メソッド
+    public void ShowUI(string name)
+    {
+        foreach (var ui in uiDict.Values) ui?.SetActive(false);
+        if (uiDict.TryGetValue(name, out var targetUI)) targetUI?.SetActive(true);
+
+        GameObject button = null;
+        if (buttonDict.TryGetValue(name, out button) && button == null && name == "Result")
+        {
+            // Result画面のファーストセレクトボタンが未設定の場合、firstSelectedResultButtonを設定
+            button = firstSelectedResultButton;
+        }
+        SelectFirstButton(button);
+
+        // BGM再生（画面名で分岐）
+        if (soundManager != null)
+        {
+            soundManager.StopAllBgmAudio();
+            switch (name)
+            {
+                case "Title": soundManager.PlayTitleBGM(); break;
+                case "Menu": soundManager.PlayMenuBGM(); break;
+                case "StageSelect": soundManager.PlayStageSelectBGM(); break;
+                case "Result":
+                    soundManager.StopAutoMoveAudio();
+                    soundManager.PlayResultBGM();
+                    break;
+                default: break;
+            }
+        }
     }
 
     // Menuをアクティブ、Titleを非アクティブにするメソッド
     public void ShowMenuAndHideTitle()
     {
-        if (menuUI != null) menuUI.SetActive(true);
-        if (titleUI != null) titleUI.SetActive(false);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedMenuButton);
-
-        // メニューBGM再生
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayMenuBGM();
-        }
+        ShowUI("Menu");
     }
 
     // タイトルをアクティブ、メニューを非アクティブにするメソッド
     public void ShowTitleAndHideMenu()
     {
-        if (menuUI != null) menuUI.SetActive(false);
-        if (titleUI != null) titleUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedTitleButton);
-
-        // タイトルBGM再生
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayTitleBGM();
-        }
+        ShowUI("Title");
     }
 
     // ステージ選択画面UIを表示するメソッド
     public void ShowStageSelectAndHideMenu()
     {
-        if (menuUI != null) menuUI.SetActive(false);
-        if (stageSelectUI != null) stageSelectUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedStageSelectButton);
-
-        // ステージセレクトBGM再生
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayStageSelectBGM();
-        }
+        ShowUI("StageSelect");
     }
 
     // ステージ1へ遷移する処理
@@ -147,35 +182,13 @@ public class ScnenManager : MonoBehaviour
     // ステージ選択画面からメニュー画面に戻るメソッド
     public void ShowMenuAndHideStageSelect()
     {
-        if (stageSelectUI != null) stageSelectUI.SetActive(false);
-        if (menuUI != null) menuUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedMenuButton);
-
-        // メニューBGM再生
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayMenuBGM();
-        }
+        ShowUI("Menu");
     }
 
     // リザルト画面を表示するメソッド（追加）
     public void ShowResultUI()
     {
-        if (resultUI != null) resultUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedResultButton);
-
-        // リザルトBGM再生
-        if (soundManager != null)
-        {
-            soundManager.StopAutoMoveAudio();
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayResultBGM();
-        }
+        ShowUI("Result");
     }
 
     // リザルト画面から次のステージシーンに遷移する仮実装メソッド
@@ -229,70 +242,26 @@ public class ScnenManager : MonoBehaviour
     // 操作説明画面を表示し、メニューを非表示にするメソッド
     public void ShowHowToPlayAndHideMenu()
     {
-        if (menuUI != null) menuUI.SetActive(false);
-        if (howToPlayUI != null) howToPlayUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedHowToPlayButton);
-
-        // メニューBGM再生（専用BGMがなければメニューBGM）
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayMenuBGM();
-        }
+        ShowUI("HowToPlay");
     }
 
     // 操作説明画面からメニュー画面に戻るメソッド
     public void ShowMenuAndHideHowToPlay()
     {
-        if (howToPlayUI != null) howToPlayUI.SetActive(false);
-        if (menuUI != null) menuUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedMenuButton);
-
-        // メニューBGM再生
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayMenuBGM();
-        }
+        ShowUI("Menu");
     }
 
     // サウンド設定画面を表示し、メニューを非表示にするメソッド
     public void ShowSoundSettingsAndHideMenu()
     {
-        if (menuUI != null) menuUI.SetActive(false);
-        if (soundSettingsUI != null) soundSettingsUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedSoundSettingsButton);
-
-        // メニューBGM再生（専用BGMがなければメニューBGM）
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayMenuBGM();
-        }
+        ShowUI("SoundSettings");
     }
 
     // サウンド設定画面からメニュー画面に戻るメソッド
     public void ShowMenuAndHideSoundSettings()
     {
         Debug.Log("ShowMenuAndHideSoundSettingsが呼ばれました");
-        if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
-        if (menuUI != null) menuUI.SetActive(true);
-
-        // コントローラー対応: 最初のボタンを選択
-        SelectFirstButton(firstSelectedMenuButton);
-
-        // メニューBGM再生
-        if (soundManager != null)
-        {
-            soundManager.StopAllBgmAudio();
-            soundManager.PlayMenuBGM();
-        }
+        ShowUI("Menu");
     }
 
     // ボタンから呼び出すメソッド
