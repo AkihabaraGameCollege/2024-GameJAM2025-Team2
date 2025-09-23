@@ -184,7 +184,10 @@ public class UIManager : MonoBehaviour
     public void AddScore(int add)
     {
         SetScore(currentScore + add);
-        StartCoroutine(ShowScorePlusImage());
+        if (add > 0)
+        {
+            StartCoroutine(ShowScorePlusImage());
+        }
     }
 
     // スコアプラスImageを一時的に表示するコルーチン
