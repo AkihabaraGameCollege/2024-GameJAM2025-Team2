@@ -130,7 +130,7 @@ public class UIManager : MonoBehaviour
         // カウントアップフラグを無効化
         IsCountingup = false;
         // カウントアップスプライト非表示
-        SetCountupSpritesActive(false);
+        //SetCountupSpritesActive(false);
     }
 
     // カウントアップをリセットし、スプライトも初期化するメソッド

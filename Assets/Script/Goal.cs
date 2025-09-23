@@ -11,6 +11,13 @@ public class Goal : MonoBehaviour
         {
             isGoalTriggered = true;
 
+            // カウントアップ停止
+            UIManager uiManager = Object.FindFirstObjectByType<UIManager>();
+            if (uiManager != null)
+            {
+                uiManager.StopCountup();
+            }
+
             // ゴール時のSEを再生
             SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
             if (soundManager != null)
