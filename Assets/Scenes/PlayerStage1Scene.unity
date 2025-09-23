@@ -1342,7 +1342,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11829687, y: -0.41900265, z: 0.05516273, w: 0.8985542}
-  m_LocalPosition: {x: 12.168199, y: 5.924355, z: -4.5003343}
+  m_LocalPosition: {x: 12.055624, y: 6.472801, z: -4.405873}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3151,6 +3151,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3164437831418444662, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.87058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164437831418444662, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164437831418444662, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.98039216
+      objectReference: {fileID: 0}
     - target: {fileID: 3497184811554382682, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.87058824
@@ -3306,6 +3318,30 @@ PrefabInstance:
     - target: {fileID: 6756541730580270822, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633692198684564269, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.87058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633692198684564269, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633692198684564269, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.98039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883652394904110880, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.87058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883652394904110880, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883652394904110880, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.98039216
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8970,6 +9006,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 159852139}
+    - target: {fileID: 585222203913890503, guid: 4cc41bd29844a46418137f5ed6aaa251, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1060422598986501697, guid: 4cc41bd29844a46418137f5ed6aaa251, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -10103,11 +10143,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984913052906693071, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.168199
+      value: 12.055624
       objectReference: {fileID: 0}
     - target: {fileID: 984913052906693071, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.5003347
+      value: -4.405873
       objectReference: {fileID: 0}
     - target: {fileID: 3243367195596042340, guid: 4564ebf853bee774fa6067d446614cac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15237,6 +15277,10 @@ PrefabInstance:
       propertyPath: operationUI
       value: 
       objectReference: {fileID: 2027985073}
+    - target: {fileID: 3638776300997761640, guid: 495c279ef4162254f879a6b33a1b78f9, type: 3}
+      propertyPath: retrySceneName
+      value: PlayerStage1Scene
+      objectReference: {fileID: 0}
     - target: {fileID: 3638776300997761640, guid: 495c279ef4162254f879a6b33a1b78f9, type: 3}
       propertyPath: soundSettingsUI
       value: 

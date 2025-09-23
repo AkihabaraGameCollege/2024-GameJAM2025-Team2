@@ -414,4 +414,9 @@ public class PlayerCon : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
 
+    public void SetControlEnabled(bool enabled)
+    {
+        canControl = enabled;
+    }
+
 }

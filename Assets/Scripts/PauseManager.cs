@@ -49,6 +49,9 @@ public class PauseManager : MonoBehaviour
     // UIManager参照用
     private UIManager uiManager;
 
+    // コルーチン管理用
+    private Coroutine pauseUICoroutine;
+
     /// <summary>
     /// ポーズ状態かどうかを取得するプロパティ
     /// </summary>
@@ -124,16 +127,30 @@ public class PauseManager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
 
+        // プレイヤー操作の有効/無効切り替え
+        var playerCon = Object.FindFirstObjectByType<PlayerCon>();
+        if (playerCon != null)
+        {
+            playerCon.SetControlEnabled(!isPaused); // ポーズ中は操作不可
+        }
+
         // ポーズUIの表示・非表示（スライドアニメーション）
         if (pauseUI != null)
         {
+            // 既存のコルーチンがあれば停止
+            if (pauseUICoroutine != null)
+            {
+                StopCoroutine(pauseUICoroutine);
+                pauseUICoroutine = null;
+            }
+
             if (isPaused)
             {
-                StartCoroutine(SlideInPauseUI());
+                pauseUICoroutine = StartCoroutine(SlideInPauseUI());
             }
             else
             {
-                StartCoroutine(SlideOutPauseUI());
+                pauseUICoroutine = StartCoroutine(SlideOutPauseUI());
             }
         }
         // 操作説明UI・サウンド設定UIの非表示
@@ -167,6 +184,9 @@ public class PauseManager : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(firstSelectButton);
         }
+
+        // コルーチン参照をクリア
+        pauseUICoroutine = null;
     }
 
     /// <summary>
@@ -188,6 +208,9 @@ public class PauseManager : MonoBehaviour
         pauseRectTransform.anchoredPosition = endPos;
         pauseCanvasGroup.alpha = 0f;
         pauseUI.SetActive(false);
+
+        // コルーチン参照をクリア
+        pauseUICoroutine = null;
     }
 
     /// <summary>
@@ -200,7 +223,22 @@ public class PauseManager : MonoBehaviour
         {
             isPaused = false;
             Time.timeScale = 1f;
-            if (pauseUI != null) StartCoroutine(SlideOutPauseUI());
+
+            // プレイヤー操作を有効化
+            var playerCon = Object.FindFirstObjectByType<PlayerCon>();
+            if (playerCon != null)
+            {
+                playerCon.SetControlEnabled(true);
+            }
+
+            // 既存のコルーチンがあれば停止
+            if (pauseUICoroutine != null)
+            {
+                StopCoroutine(pauseUICoroutine);
+                pauseUICoroutine = null;
+            }
+
+            if (pauseUI != null) pauseUICoroutine = StartCoroutine(SlideOutPauseUI());
             if (operationUI != null) operationUI.SetActive(false);
             if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         }
@@ -282,6 +320,21 @@ public class PauseManager : MonoBehaviour
         Debug.Log("RetryGameボタンが押されました");
         isPaused = false;
         Time.timeScale = 1f;
+
+        // プレイヤー操作を有効化
+        var playerCon = Object.FindFirstObjectByType<PlayerCon>();
+        if (playerCon != null)
+        {
+            playerCon.SetControlEnabled(true);
+        }
+
+        // 既存のコルーチンがあれば停止
+        if (pauseUICoroutine != null)
+        {
+            StopCoroutine(pauseUICoroutine);
+            pauseUICoroutine = null;
+        }
+
         if (pauseUI != null) pauseUI.SetActive(false);
         if (operationUI != null) operationUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
@@ -310,6 +363,21 @@ public class PauseManager : MonoBehaviour
         Debug.Log("ReturnToTitleボタンが押されました");
         isPaused = false;
         Time.timeScale = 1f;
+
+        // プレイヤー操作を有効化
+        var playerCon = Object.FindFirstObjectByType<PlayerCon>();
+        if (playerCon != null)
+        {
+            playerCon.SetControlEnabled(true);
+        }
+
+        // 既存のコルーチンがあれば停止
+        if (pauseUICoroutine != null)
+        {
+            StopCoroutine(pauseUICoroutine);
+            pauseUICoroutine = null;
+        }
+
         if (pauseUI != null) pauseUI.SetActive(false);
         if (operationUI != null) operationUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
