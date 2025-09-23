@@ -1,21 +1,21 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class HeartGem : MonoBehaviour
 {
     public GameObject heartGem;
 
     private SoundManager soundManager;
-    private UIManager uiManager; // ’Ç‰Á
+    private UIManager uiManager; // è¿½åŠ 
 
     private void Start()
     {
         GetComponent<HeartGem>();
         heartGem.SetActive(true);
 
-        // SoundManager‚Ìæ“¾
+        // SoundManagerã®å–å¾—
         soundManager = Object.FindFirstObjectByType<SoundManager>();
 
-        // UIManager‚Ìæ“¾
+        // UIManagerã®å–å¾—
         uiManager = Object.FindFirstObjectByType<UIManager>();
     }
 
@@ -23,16 +23,16 @@ public class HeartGem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("ƒn[ƒgƒWƒFƒ€‚ğæ‚Á‚½");
+            Debug.Log("ãƒãƒ¼ãƒˆã‚¸ã‚§ãƒ ã‚’å–ã£ãŸ");
             heartGem.SetActive(false);
 
-            // ƒXƒRƒAƒAƒCƒeƒ€Šl“¾SE‚ğÄ¶
+            // ã‚¹ã‚³ã‚¢ã‚¢ã‚¤ãƒ†ãƒ ç²å¾—SEã‚’å†ç”Ÿ
             if (soundManager != null)
             {
                 soundManager.PlayScoreItemAudio();
             }
 
-            // ƒXƒRƒA‰ÁZ
+            // ã‚¹ã‚³ã‚¢åŠ ç®—
             if (uiManager != null)
             {
                 uiManager.AddScore(100);

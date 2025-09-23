@@ -1,63 +1,69 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ScnenManager : MonoBehaviour
 {
-    // Menu‚ÆTitle‚ÌQÆ‚ğInspector‚Åİ’è
+    // Menuã¨Titleã®å‚ç…§ã‚’Inspectorã§è¨­å®š
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject titleUI;
-    // ‘€ìà–¾‰æ–Ê‚ÌQÆ‚ğInspector‚Åİ’è
+    // æ“ä½œèª¬æ˜ç”»é¢ã®å‚ç…§ã‚’Inspectorã§è¨­å®š
     [SerializeField] private GameObject howToPlayUI;
-    // ƒTƒEƒ“ƒhİ’è‰æ–Ê‚ÌQÆ‚ğInspector‚Åİ’è
+    // ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šç”»é¢ã®å‚ç…§ã‚’Inspectorã§è¨­å®š
     [SerializeField] private GameObject soundSettingsUI;
-    // ƒXƒe[ƒW‘I‘ğ‰æ–ÊUI‚ğ•\¦‚µAƒƒjƒ…[‚ğ”ñ•\¦‚É‚·‚éƒƒ\ƒbƒh‚É•ÏX
+    // ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠç”»é¢UIã‚’è¡¨ç¤ºã—ã€ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’éè¡¨ç¤ºã«ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã«å¤‰æ›´
     [SerializeField] private GameObject stageSelectUI;
+    // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ã®å‚ç…§ã‚’Inspectorã§è¨­å®š
+    [SerializeField] private GameObject resultUI;
 
-    // SoundManager‚ÌQÆ
+    // å„ç”»é¢ã®æœ€åˆã«é¸æŠã™ã‚‹ãƒœã‚¿ãƒ³ã‚’Inspectorã§è¨­å®š
+    [SerializeField] private GameObject firstSelectedMenuButton;
+    [SerializeField] private GameObject firstSelectedTitleButton;
+    [SerializeField] private GameObject firstSelectedHowToPlayButton;
+    [SerializeField] private GameObject firstSelectedSoundSettingsButton;
+    [SerializeField] private GameObject firstSelectedStageSelectButton;
+    [SerializeField] private GameObject firstSelectedResultButton;
+
+    // SoundManagerã®å‚ç…§
     private SoundManager soundManager;
 
     void Start()
     {
-        // SoundManager‚ğƒV[ƒ““à‚©‚çæ“¾
+        // SoundManagerã‚’ã‚·ãƒ¼ãƒ³å†…ã‹ã‚‰å–å¾—
         soundManager = Object.FindFirstObjectByType<SoundManager>();
 
-        // Å‰‚Ìƒ^ƒCƒgƒ‹•\¦‚ÉBGMÄ¶iƒ^ƒCƒgƒ‹‰æ–Ê‚ªƒAƒNƒeƒBƒu‚Èê‡‚Ì‚İÄ¶j
+        // æœ€åˆã®ã‚¿ã‚¤ãƒˆãƒ«è¡¨ç¤ºæ™‚ã«BGMå†ç”Ÿï¼ˆã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªå ´åˆã®ã¿å†ç”Ÿï¼‰
         if (titleUI != null && titleUI.activeSelf)
         {
             soundManager?.StopAllBgmAudio();
             soundManager?.PlayTitleBGM();
         }
-        // ƒ^ƒCƒgƒ‹‰æ–Ê•\¦‚ÉÅ‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(titleUI);
+        // ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢è¡¨ç¤ºæ™‚ã«æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedTitleButton);
     }
 
     void Update()
     {
     }
 
-    // w’èUI“à‚ÌÅ‰‚ÌButton‚ğ‘I‘ğ‚·‚é‹¤’Êƒƒ\ƒbƒh
-    private void SelectFirstButton(GameObject uiRoot)
+    // æŒ‡å®šã—ãŸGameObjectã‚’é¸æŠã™ã‚‹å…±é€šãƒ¡ã‚½ãƒƒãƒ‰
+    private void SelectFirstButton(GameObject buttonObj)
     {
-        if (uiRoot == null) return;
-        var button = uiRoot.GetComponentInChildren<Button>();
-        if (button != null)
-        {
-            EventSystem.current.SetSelectedGameObject(button.gameObject);
-        }
+        if (buttonObj == null) return;
+        EventSystem.current.SetSelectedGameObject(buttonObj);
     }
 
-    // Menu‚ğƒAƒNƒeƒBƒuATitle‚ğ”ñƒAƒNƒeƒBƒu‚É‚·‚éƒƒ\ƒbƒh
+    // Menuã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã€Titleã‚’éã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowMenuAndHideTitle()
     {
         if (menuUI != null) menuUI.SetActive(true);
         if (titleUI != null) titleUI.SetActive(false);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(menuUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedMenuButton);
 
-        // ƒƒjƒ…[BGMÄ¶
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -65,16 +71,16 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒ^ƒCƒgƒ‹‚ğƒAƒNƒeƒBƒuAƒƒjƒ…[‚ğ”ñƒAƒNƒeƒBƒu‚É‚·‚éƒƒ\ƒbƒh
+    // ã‚¿ã‚¤ãƒˆãƒ«ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã€ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’éã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowTitleAndHideMenu()
     {
         if (menuUI != null) menuUI.SetActive(false);
         if (titleUI != null) titleUI.SetActive(true);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(titleUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedTitleButton);
 
-        // ƒ^ƒCƒgƒ‹BGMÄ¶
+        // ã‚¿ã‚¤ãƒˆãƒ«BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -82,16 +88,16 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒXƒe[ƒW‘I‘ğ‰æ–ÊUI‚ğ•\¦‚·‚éƒƒ\ƒbƒh
+    // ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠç”»é¢UIã‚’è¡¨ç¤ºã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowStageSelectAndHideMenu()
     {
         if (menuUI != null) menuUI.SetActive(false);
         if (stageSelectUI != null) stageSelectUI.SetActive(true);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(stageSelectUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedStageSelectButton);
 
-        // ƒXƒe[ƒWƒZƒŒƒNƒgBGMÄ¶
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚»ãƒ¬ã‚¯ãƒˆBGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -99,12 +105,12 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒXƒe[ƒW1‚Ö‘JˆÚ‚·‚éˆ—
+    // ã‚¹ãƒ†ãƒ¼ã‚¸1ã¸é·ç§»ã™ã‚‹å‡¦ç†
     public void OnStage1ButtonClicked()
     {
         SceneManager.LoadScene("PlayerStage1Scene");
 
-        // ƒXƒe[ƒWBGMÄ¶
+        // ã‚¹ãƒ†ãƒ¼ã‚¸BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -112,12 +118,12 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒXƒe[ƒW2‚Ö‘JˆÚ‚·‚éˆ—
+    // ã‚¹ãƒ†ãƒ¼ã‚¸2ã¸é·ç§»ã™ã‚‹å‡¦ç†
     public void OnStage2ButtonClicked()
     {
         SceneManager.LoadScene("PlayerStage2Scene");
 
-        // ƒXƒe[ƒWBGMÄ¶
+        // ã‚¹ãƒ†ãƒ¼ã‚¸BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -125,12 +131,12 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒXƒe[ƒW3‚Ö‘JˆÚ‚·‚éˆ—
+    // ã‚¹ãƒ†ãƒ¼ã‚¸3ã¸é·ç§»ã™ã‚‹å‡¦ç†
     public void OnStage3ButtonClicked()
     {
         SceneManager.LoadScene("PlayerStage3Scene");
 
-        // ƒXƒe[ƒWBGMÄ¶
+        // ã‚¹ãƒ†ãƒ¼ã‚¸BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -138,16 +144,16 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒXƒe[ƒW‘I‘ğ‰æ–Ê‚©‚çƒƒjƒ…[‰æ–Ê‚É–ß‚éƒƒ\ƒbƒh
+    // ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠç”»é¢ã‹ã‚‰ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã«æˆ»ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowMenuAndHideStageSelect()
     {
         if (stageSelectUI != null) stageSelectUI.SetActive(false);
         if (menuUI != null) menuUI.SetActive(true);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(menuUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedMenuButton);
 
-        // ƒƒjƒ…[BGMÄ¶
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -155,11 +161,15 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒŠƒUƒ‹ƒg‰æ–Ê‚©‚çŸ‚ÌƒXƒe[ƒWƒV[ƒ“‚É‘JˆÚ‚·‚é‰¼À‘•ƒƒ\ƒbƒh
-    public void GoToResultScene()
+    // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ã‚’è¡¨ç¤ºã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ï¼ˆè¿½åŠ ï¼‰
+    public void ShowResultUI()
     {
-        SceneManager.LoadScene("ResultScene");
-        // ƒŠƒUƒ‹ƒgBGMÄ¶
+        if (resultUI != null) resultUI.SetActive(true);
+
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedResultButton);
+
+        // ãƒªã‚¶ãƒ«ãƒˆBGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAutoMoveAudio();
@@ -168,15 +178,28 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒ^ƒCƒgƒ‹ƒV[ƒ“‚Ö‘JˆÚ‚µAŒ³‚ÌƒV[ƒ“–¼‚ğ•Û‘¶
+    // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ã‹ã‚‰æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚·ãƒ¼ãƒ³ã«é·ç§»ã™ã‚‹ä»®å®Ÿè£…ãƒ¡ã‚½ãƒƒãƒ‰
+    public void GoToResultScene()
+    {
+        SceneManager.LoadScene("ResultScene");
+        // ãƒªã‚¶ãƒ«ãƒˆBGMå†ç”Ÿ
+        if (soundManager != null)
+        {
+            soundManager.StopAutoMoveAudio();
+            soundManager.StopAllBgmAudio();
+            soundManager.PlayResultBGM();
+        }
+    }
+
+    // ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã¸é·ç§»ã—ã€å…ƒã®ã‚·ãƒ¼ãƒ³åã‚’ä¿å­˜
     public void GoToTitleScene()
     {
         SceneManager.LoadScene("Title");
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(titleUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedTitleButton);
 
-        // ƒ^ƒCƒgƒ‹BGMÄ¶
+        // ã‚¿ã‚¤ãƒˆãƒ«BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -184,18 +207,18 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ”CˆÓ‚ÌƒV[ƒ“–¼‚ÅƒŠƒgƒ‰ƒC‚Å‚«‚éƒƒ\ƒbƒh‚ğ’Ç‰Á
+    // ä»»æ„ã®ã‚·ãƒ¼ãƒ³åã§ãƒªãƒˆãƒ©ã‚¤ã§ãã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ 
     public void RetryScene(string sceneName)
     {
-        if (string.IsNullOrEmpty(sceneName))//‚Æ‚è‚ ‚¦‚¸null‚É
+        if (string.IsNullOrEmpty(sceneName))//ã¨ã‚Šã‚ãˆãšnullã«
         {
-            Debug.LogWarning("RetryScene:‘JˆÚ‚Å‚«‚Ü‚¹‚ñ");
+            Debug.LogWarning("RetryScene:é·ç§»ã§ãã¾ã›ã‚“");
             return;
         }
 
         SceneManager.LoadScene(sceneName);
 
-        // ƒXƒe[ƒWBGMÄ¶
+        // ã‚¹ãƒ†ãƒ¼ã‚¸BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -203,16 +226,16 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ‘€ìà–¾‰æ–Ê‚ğ•\¦‚µAƒƒjƒ…[‚ğ”ñ•\¦‚É‚·‚éƒƒ\ƒbƒh
+    // æ“ä½œèª¬æ˜ç”»é¢ã‚’è¡¨ç¤ºã—ã€ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’éè¡¨ç¤ºã«ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowHowToPlayAndHideMenu()
     {
         if (menuUI != null) menuUI.SetActive(false);
         if (howToPlayUI != null) howToPlayUI.SetActive(true);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(howToPlayUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedHowToPlayButton);
 
-        // ƒƒjƒ…[BGMÄ¶iê—pBGM‚ª‚È‚¯‚ê‚Îƒƒjƒ…[BGMj
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMå†ç”Ÿï¼ˆå°‚ç”¨BGMãŒãªã‘ã‚Œã°ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMï¼‰
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -220,16 +243,16 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ‘€ìà–¾‰æ–Ê‚©‚çƒƒjƒ…[‰æ–Ê‚É–ß‚éƒƒ\ƒbƒh
+    // æ“ä½œèª¬æ˜ç”»é¢ã‹ã‚‰ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã«æˆ»ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowMenuAndHideHowToPlay()
     {
         if (howToPlayUI != null) howToPlayUI.SetActive(false);
         if (menuUI != null) menuUI.SetActive(true);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(menuUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedMenuButton);
 
-        // ƒƒjƒ…[BGMÄ¶
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -237,16 +260,16 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒTƒEƒ“ƒhİ’è‰æ–Ê‚ğ•\¦‚µAƒƒjƒ…[‚ğ”ñ•\¦‚É‚·‚éƒƒ\ƒbƒh
+    // ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šç”»é¢ã‚’è¡¨ç¤ºã—ã€ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’éè¡¨ç¤ºã«ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowSoundSettingsAndHideMenu()
     {
         if (menuUI != null) menuUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(true);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(soundSettingsUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedSoundSettingsButton);
 
-        // ƒƒjƒ…[BGMÄ¶iê—pBGM‚ª‚È‚¯‚ê‚Îƒƒjƒ…[BGMj
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMå†ç”Ÿï¼ˆå°‚ç”¨BGMãŒãªã‘ã‚Œã°ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMï¼‰
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -254,17 +277,17 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒTƒEƒ“ƒhİ’è‰æ–Ê‚©‚çƒƒjƒ…[‰æ–Ê‚É–ß‚éƒƒ\ƒbƒh
+    // ã‚µã‚¦ãƒ³ãƒ‰è¨­å®šç”»é¢ã‹ã‚‰ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã«æˆ»ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ShowMenuAndHideSoundSettings()
     {
-        Debug.Log("ShowMenuAndHideSoundSettings‚ªŒÄ‚Î‚ê‚Ü‚µ‚½");
+        Debug.Log("ShowMenuAndHideSoundSettingsãŒå‘¼ã°ã‚Œã¾ã—ãŸ");
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         if (menuUI != null) menuUI.SetActive(true);
 
-        // ƒRƒ“ƒgƒ[ƒ‰[‘Î‰: Å‰‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğ
-        SelectFirstButton(menuUI);
+        // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å¯¾å¿œ: æœ€åˆã®ãƒœã‚¿ãƒ³ã‚’é¸æŠ
+        SelectFirstButton(firstSelectedMenuButton);
 
-        // ƒƒjƒ…[BGMÄ¶
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼BGMå†ç”Ÿ
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -272,10 +295,10 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ƒ{ƒ^ƒ“‚©‚çŒÄ‚Ño‚·ƒƒ\ƒbƒh
+    // ãƒœã‚¿ãƒ³ã‹ã‚‰å‘¼ã³å‡ºã™ãƒ¡ã‚½ãƒƒãƒ‰
     public void QuitGame()
     {
-        Debug.Log("QuitGameƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ü‚µ‚½");
+        Debug.Log("QuitGameãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
         Application.Quit();
     }
 }

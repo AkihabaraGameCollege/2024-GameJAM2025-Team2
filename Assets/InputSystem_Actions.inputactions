@@ -633,7 +633,7 @@
                 {
                     "name": "",
                     "id": "db9439a2-fa5e-4a5e-91ec-1d0930442929",
-                    "path": "<Gamepad>/select",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

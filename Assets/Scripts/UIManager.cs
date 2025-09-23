@@ -43,6 +43,9 @@ public class UIManager : MonoBehaviour
     // カウントアップ中かどうかを示すフラグ
     public bool IsCountingup { get; private set; } = false;
 
+    // カウントダウン中かどうかを示すフラグ
+    public bool IsCountdown { get; private set; } = false;
+
     // 現在のスコア
     int currentScore = 0;
 
@@ -75,6 +78,7 @@ public class UIManager : MonoBehaviour
         // SoundManagerのインスタンス取得（新推奨方式）
         SoundManager soundManager = Object.FindFirstObjectByType<SoundManager>();
 
+        IsCountdown = true; // カウントダウン開始
         Time.timeScale = 0f;
 
         countdownImage.sprite = sprite3;
@@ -103,6 +107,7 @@ public class UIManager : MonoBehaviour
         countdownImage.gameObject.SetActive(false);
 
         Time.timeScale = 1f;
+        IsCountdown = false; // カウントダウン終了
 
         StartCountup();
     }

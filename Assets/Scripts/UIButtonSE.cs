@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class UIButtonSE : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointerClickHandler
@@ -10,19 +10,19 @@ public class UIButtonSE : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointe
         soundManager = Object.FindFirstObjectByType<SoundManager>();
     }
 
-    // ‘I‘ğiƒRƒ“ƒgƒ[ƒ‰[‚âTabˆÚ“®j
+    // é¸æŠæ™‚ï¼ˆã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚„Tabç§»å‹•æ™‚ï¼‰
     public void OnSelect(BaseEventData eventData)
     {
         soundManager?.PlayUISelectAudio();
     }
 
-    // Œˆ’èiƒRƒ“ƒgƒ[ƒ‰[‚ÌŒˆ’èƒ{ƒ^ƒ“‚âEnterƒL[j
+    // æ±ºå®šæ™‚ï¼ˆã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®æ±ºå®šãƒœã‚¿ãƒ³ã‚„Enterã‚­ãƒ¼ï¼‰
     public void OnSubmit(BaseEventData eventData)
     {
         soundManager?.PlayUIDecideAudio();
     }
 
-    // ƒ}ƒEƒXƒNƒŠƒbƒN
+    // ãƒã‚¦ã‚¹ã‚¯ãƒªãƒƒã‚¯æ™‚
     public void OnPointerClick(PointerEventData eventData)
     {
         soundManager?.PlayUIDecideAudio();
