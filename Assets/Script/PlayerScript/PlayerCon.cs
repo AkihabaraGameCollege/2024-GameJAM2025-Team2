@@ -176,7 +176,7 @@ public class PlayerCon : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (!isGrounded && isAttackMode)
+            if (!isGrounded && isAttackMode && Time.timeScale > 0f)
             {
                 Debug.Log("敵を踏んだ");
                 successJumpActionSe?.Play();
@@ -273,9 +273,10 @@ public class PlayerCon : MonoBehaviour
         canControl = true;
     }
 
-    private void UpdatePlayerBoardColor()
+    private void UpdatePlayerBoardColor(bool withEffect = true)
     {
         if (playerBoardRenderer == null) return;
+
 
         switch (currentLane)
         {
@@ -290,19 +291,21 @@ public class PlayerCon : MonoBehaviour
                 break;
         }
 
-        if (laneChangeEffectPrefab != null && laneEffectPoint != null)
+        if (withEffect && Time.timeScale > 0f)
         {
-            GameObject effect = Instantiate(laneChangeEffectPrefab, laneEffectPoint.position, Quaternion.identity);
-            effect.transform.SetParent(laneEffectPoint); // プレイヤーに追従させたいなら
-            Destroy(effect,2.0f);
+            if (laneChangeEffectPrefab != null && laneEffectPoint != null)
+            {
+                GameObject effect = Instantiate(laneChangeEffectPrefab, laneEffectPoint.position, Quaternion.identity);
+                effect.transform.SetParent(laneEffectPoint); // プレイヤーに追従させたいなら
+                Destroy(effect, 2.0f);
+            }
         }
-
     }
 
     #region INputSystem
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
-        if (canControl && context.performed)
+        if (canControl && context.performed && Time.timeScale > 0f)
         {
             int nextLane = Mathf.Max(0, currentLane - 1);
             float nextX = (nextLane - 1) * laneDistance;
@@ -330,7 +333,7 @@ public class PlayerCon : MonoBehaviour
 
     public void OnMoveRight(InputAction.CallbackContext context)
     {
-        if (canControl && context.performed)
+        if (canControl && context.performed && Time.timeScale > 0f)
         {
             int nextLane = Mathf.Min(2, currentLane + 1);
             float nextX = (nextLane - 1) * laneDistance;
@@ -376,7 +379,7 @@ public class PlayerCon : MonoBehaviour
     // トリックアクション時
     public void OnJumpAction(InputAction.CallbackContext context)
     {
-        if (canControl && context.performed && !isGrounded)
+        if (canControl && context.performed && !isGrounded && Time.timeScale > 0f)
         {
             Debug.Log("ジャンプアクション実行 → 攻撃モードON");
             isAttackMode = true;
