@@ -712,6 +712,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac517f4d108c65c48aa692a6249a0dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &461002771 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4284465578439694555, guid: 4c110a3fad4a6cc4fa5084b3e69e6d6b, type: 3}
+  m_PrefabInstance: {fileID: 1416409015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &484957103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,6 +2787,10 @@ PrefabInstance:
       propertyPath: masterVolumeSlider
       value: 
       objectReference: {fileID: 376007104}
+    - target: {fileID: 8916344777985907283, guid: 4c110a3fad4a6cc4fa5084b3e69e6d6b, type: 3}
+      propertyPath: howToPlayBgmAudioSource
+      value: 
+      objectReference: {fileID: 461002771}
     - target: {fileID: 9174859905409981242, guid: 4c110a3fad4a6cc4fa5084b3e69e6d6b, type: 3}
       propertyPath: m_Name
       value: SoundManager

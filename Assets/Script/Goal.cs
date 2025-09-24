@@ -27,6 +27,7 @@ public class Goal : MonoBehaviour
             if (soundManager != null)
             {
                 soundManager.StopStageBGM();
+                soundManager.StopAutoMoveAudio();
                 soundManager.PlayGoalAudio();
                 StartCoroutine(WaitForGoalSE(soundManager));
             }
@@ -51,6 +52,11 @@ public class Goal : MonoBehaviour
                 yield return null;
             }
         }
+        // リザルト画面遷移時にBGMを再生
         SceneManager.LoadScene("ResultScene");
+        var resultSoundManager = Object.FindFirstObjectByType<SoundManager>();
+        resultSoundManager?.StopAutoMoveAudio();
+        resultSoundManager?.StopAllBgmAudio();
+        resultSoundManager?.PlayResultBGM();
     }
 }
