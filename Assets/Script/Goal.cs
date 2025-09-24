@@ -29,14 +29,30 @@ public class Goal : MonoBehaviour
                 soundManager.StopStageBGM();
                 soundManager.StopAutoMoveAudio();
                 soundManager.PlayGoalAudio();
+                // 直前のステージ名を保存（リザルト画面のUI制御用）
+                SaveLastStageSceneName();
                 StartCoroutine(WaitForGoalSE(soundManager));
             }
             else
             {
+                // 直前のステージ名を保存（リザルト画面のUI制御用）
+                SaveLastStageSceneName();
                 SceneManager.LoadScene("ResultScene");
             }
 
             Debug.Log("ゴールに到達");
+        }
+    }
+
+    // 直前のステージ名を保存するメソッド
+    private void SaveLastStageSceneName()
+    {
+        // ScnenManagerのstatic変数に保存
+        var scnenManagerType = typeof(ScnenManager);
+        var field = scnenManagerType.GetField("lastStageSceneName", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
+        if (field != null)
+        {
+            field.SetValue(null, SceneManager.GetActiveScene().name);
         }
     }
 

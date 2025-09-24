@@ -26,6 +26,9 @@ public class ScnenManager : MonoBehaviour
     [SerializeField] private GameObject firstSelectedStageSelectButton;
     private GameObject firstSelectedResultButton;
 
+    // ネクストステージボタンの参照をInspectorで設定
+    [SerializeField] private GameObject nextStageButton;
+
     // SoundManagerの参照
     private SoundManager soundManager;
 
@@ -71,6 +74,12 @@ public class ScnenManager : MonoBehaviour
         }
         // タイトル画面表示時に最初のボタンを選択
         SelectFirstButton(firstSelectedTitleButton);
+
+        // リザルト画面の場合はShowResultUI()を呼ぶ
+        if (resultUI != null && resultUI.activeSelf)
+        {
+            ShowResultUI();
+        }
     }
 
     void Update()
@@ -193,10 +202,20 @@ public class ScnenManager : MonoBehaviour
         ShowUI("Menu");
     }
 
-    // リザルト画面を表示するメソッド（追加）
+    // リザルト画面を表示するメソッド（修正）
     public void ShowResultUI()
     {
+        Debug.Log("lastStageSceneName: " + lastStageSceneName);
         ShowUI("Result");
+
+        // PlayerStage2Sceneをゴールした場合はネクストステージボタンを非表示
+        if (nextStageButton != null)
+        {
+            if (lastStageSceneName == "PlayerStage2Scene")
+                nextStageButton.SetActive(false);
+            else
+                nextStageButton.SetActive(true);
+        }
     }
 
     // リザルト画面から次のステージシーンに遷移する仮実装メソッド
