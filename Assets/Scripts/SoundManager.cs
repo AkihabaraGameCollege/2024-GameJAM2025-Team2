@@ -454,8 +454,9 @@ public class SoundManager : MonoBehaviour
     // UI選択音（クリック・コントローラー）を再生（ループ防止）
     public void PlayUISelectAudio()
     {
-        if (uiSelectAudioSource != null && !uiSelectAudioSource.isPlaying)
+        if (uiSelectAudioSource != null)
         {
+            uiSelectAudioSource.Stop();
             uiSelectAudioSource.Play();
         }
     }
