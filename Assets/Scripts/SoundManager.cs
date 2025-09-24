@@ -38,6 +38,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource resultBgmAudioSource;
 
+    // 操作説明画面用BGMのAudioSource（追加）
+    [Header("操作説明画面BGM")]
+    [SerializeField]
+    private AudioSource howToPlayBgmAudioSource;
+
     [Header("ゲームクリアのSE")]
     [SerializeField]
     private AudioSource gameClearAudioSource; // ゲームクリアの効果音
@@ -144,6 +149,7 @@ public class SoundManager : MonoBehaviour
         SetupAudioSource(stageBgmAudioSource);
         SetupAudioSource(pauseBgmAudioSource);
         SetupAudioSource(resultBgmAudioSource);
+        SetupAudioSource(howToPlayBgmAudioSource); // 操作説明画面BGMの初期設定（追加）
         SetupAudioSource(gameClearAudioSource);
         SetupAudioSource(clickAudioSource);
         SetupAudioSource(autoMoveAudioSource);
@@ -263,6 +269,16 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // 操作説明画面BGMを再生（追加）
+    public void PlayHowToPlayBGM()
+    {
+        if (howToPlayBgmAudioSource != null)
+        {
+            howToPlayBgmAudioSource.loop = true;
+            howToPlayBgmAudioSource.Play();
+        }
+    }
+
     // クリア時のSEを再生
     public void PlayGameClearAudio()
     {
@@ -275,7 +291,6 @@ public class SoundManager : MonoBehaviour
     // BGMを停止（全BGM停止）
     public void StopAllBgmAudio()
     {
-        
         {
             // 各BGM AudioSource を停止（nullチェック付き）
             if (titleBgmAudioSource != null) titleBgmAudioSource.Stop();
@@ -284,6 +299,7 @@ public class SoundManager : MonoBehaviour
             if (stageBgmAudioSource != null) stageBgmAudioSource.Stop();
             if (pauseBgmAudioSource != null) pauseBgmAudioSource.Stop();
             if (resultBgmAudioSource != null) resultBgmAudioSource.Stop();
+            if (howToPlayBgmAudioSource != null) howToPlayBgmAudioSource.Stop(); // 操作説明画面BGM停止（追加）
         }
     }
 
@@ -478,6 +494,7 @@ public class SoundManager : MonoBehaviour
         if (stageBgmAudioSource != null) stageBgmAudioSource.volume = volume;
         if (pauseBgmAudioSource != null) pauseBgmAudioSource.volume = volume;
         if (resultBgmAudioSource != null) resultBgmAudioSource.volume = volume;
+        if (howToPlayBgmAudioSource != null) howToPlayBgmAudioSource.volume = volume; // 操作説明画面BGM音量（追加）
     }
 
     // 効果音音量を設定（全SEに適用）

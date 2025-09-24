@@ -116,6 +116,8 @@ public class ScnenManager : MonoBehaviour
                 case "Title": soundManager.PlayTitleBGM(); break;
                 case "Menu": soundManager.PlayMenuBGM(); break;
                 case "StageSelect": soundManager.PlayStageSelectBGM(); break;
+                case "HowToPlay": soundManager.PlayHowToPlayBGM(); break;
+                case "SoundSettings": soundManager.PlayMenuBGM(); break; // サウンド設定画面でBGM再生
                 case "Result":
                     soundManager.StopAutoMoveAudio();
                     soundManager.PlayResultBGM();
