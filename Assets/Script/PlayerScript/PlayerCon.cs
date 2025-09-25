@@ -86,6 +86,9 @@ public class PlayerCon : MonoBehaviour
     private bool isAutoMoveSEPlaying = false;
     private UIManager uiManager;            // UIManager参照用
 
+    // --- 追加: ゴール到達フラグ ---
+    private bool isGoalReached = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -125,8 +128,17 @@ public class PlayerCon : MonoBehaviour
 
     private void HandleMovement()
     {
-        float newX = Mathf.Lerp(rb.position.x, targetX, Time.fixedDeltaTime * laneChangeSpeed);
-        rb.position = new Vector3(newX, rb.position.y, rb.position.z);
+        // ゴール後はX座標補間を止める
+        if (!isGoalReached)
+        {
+            float newX = Mathf.Lerp(rb.position.x, targetX, Time.fixedDeltaTime * laneChangeSpeed);
+            rb.position = new Vector3(newX, rb.position.y, rb.position.z);
+        }
+        else
+        {
+            // ゴール後はX座標を固定
+            rb.position = new Vector3(targetX, rb.position.y, rb.position.z);
+        }
 
         // --- 前進方向を地形の法線に沿わせる ---
         Vector3 forwardDir = Vector3.forward;
@@ -419,4 +431,14 @@ public class PlayerCon : MonoBehaviour
         canControl = enabled;
     }
 
+    // ゴール到達時に呼び出す
+    public void OnGoalReached()
+    {
+        isGoalReached = true;
+        // 必要ならX座標をピタッと合わせる
+        rb.position = new Vector3(targetX, rb.position.y, rb.position.z);
+        // Rigidbodyの回転を固定（ぶれ防止）
+        rb.angularVelocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
 }

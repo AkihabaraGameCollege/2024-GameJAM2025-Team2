@@ -40,6 +40,14 @@ public class Goal : MonoBehaviour
                 SceneManager.LoadScene("ResultScene");
             }
 
+            // プレイヤーのぶれ防止
+            var playerCon = other.GetComponent<PlayerCon>();
+            if (playerCon != null)
+            {
+                playerCon.OnGoalReached();
+                playerCon.SetControlEnabled(false); // ← 追加：操作無効化
+            }
+
             Debug.Log("ゴールに到達");
         }
     }
