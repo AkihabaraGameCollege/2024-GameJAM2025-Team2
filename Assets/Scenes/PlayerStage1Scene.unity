@@ -554,6 +554,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1586257344154573827, guid: b4ee07a5d59826e4d87a183934722228, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de419b24234b74d48850ea9be88fbf0c, type: 3}
     - target: {fileID: 7489535056057561111, guid: b4ee07a5d59826e4d87a183934722228, type: 3}
       propertyPath: m_Name
       value: howToPlayUIScreen
@@ -3547,10 +3551,10 @@ PrefabInstance:
     - target: {fileID: 3133431084777422305, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: de419b24234b74d48850ea9be88fbf0c, type: 3}
+      objectReference: {fileID: 21300000, guid: 1c89b94fe4365ec44ba3d98611ea8b59, type: 3}
     - target: {fileID: 4375117767867757220, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -7
+      value: -66
       objectReference: {fileID: 0}
     - target: {fileID: 5026870496393226669, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
@@ -3659,6 +3663,10 @@ PrefabInstance:
     - target: {fileID: 8284009230269950746, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_Name
       value: howToPlayUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284009230269950746, guid: b4cab799bb040a448917e175071784fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
