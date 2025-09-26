@@ -156,6 +156,10 @@ public class PauseManager : MonoBehaviour
         // 操作説明UI・サウンド設定UIの非表示
         if (operationUI != null) operationUI.SetActive(false);
         if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
+
+        // ポーズ中は非表示、解除時は表示
+        if (uiManager != null)
+            uiManager.SetPauseHideImageActive(!isPaused);
     }
 
     /// <summary>
@@ -242,6 +246,9 @@ public class PauseManager : MonoBehaviour
             if (operationUI != null) operationUI.SetActive(false);
             if (soundSettingsUI != null) soundSettingsUI.SetActive(false);
         }
+
+        if (uiManager != null)
+            uiManager.SetPauseHideImageActive(true);
     }
 
     /// <summary>

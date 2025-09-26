@@ -4412,6 +4412,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2133398647}
     - target: {fileID: 2932806372005264968, guid: 70fc0c19065de4f4dbb3e1bcf560135a, type: 3}
+      propertyPath: pauseHideImage
+      value: 
+      objectReference: {fileID: 4359220184668267186}
+    - target: {fileID: 2932806372005264968, guid: 70fc0c19065de4f4dbb3e1bcf560135a, type: 3}
       propertyPath: scorePlusImage
       value: 
       objectReference: {fileID: 1827933191}
@@ -21531,6 +21535,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ee07a5d59826e4d87a183934722228, type: 3}
+--- !u!114 &4359220184668267186 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1586257344154573827, guid: b4ee07a5d59826e4d87a183934722228, type: 3}
+  m_PrefabInstance: {fileID: 4359220184668267185}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4525600079602034957
 GameObject:
   m_ObjectHideFlags: 0

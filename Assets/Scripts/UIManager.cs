@@ -302,4 +302,14 @@ public class UIManager : MonoBehaviour
             countupImages[i].sprite = countupDigitSprites[digit];
         }
     }
+
+    [Header("ポーズ中に非表示にするImage")]
+    [SerializeField] private Image pauseHideImage = null;
+
+    // ポーズ中の表示制御
+    public void SetPauseHideImageActive(bool active)
+    {
+        if (pauseHideImage != null)
+            pauseHideImage.gameObject.SetActive(active);
+    }
 }
