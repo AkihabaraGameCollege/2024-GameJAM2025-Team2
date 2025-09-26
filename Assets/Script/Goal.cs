@@ -48,6 +48,13 @@ public class Goal : MonoBehaviour
                 playerCon.SetControlEnabled(false); // ← 追加：操作無効化
             }
 
+            // ポーズ禁止フラグをセット
+            PauseManager pauseManager = Object.FindFirstObjectByType<PauseManager>();
+            if (pauseManager != null)
+            {
+                pauseManager.SetGoalReached();
+            }
+
             Debug.Log("ゴールに到達");
         }
     }

@@ -52,6 +52,9 @@ public class PauseManager : MonoBehaviour
     // コルーチン管理用
     private Coroutine pauseUICoroutine;
 
+    // ゴール到達済みかどうか
+    private bool isGoalReached = false;
+
     /// <summary>
     /// ポーズ状態かどうかを取得するプロパティ
     /// </summary>
@@ -107,6 +110,13 @@ public class PauseManager : MonoBehaviour
     /// <param name="context">入力アクションのコンテキスト</param>
     private void OnPause(InputAction.CallbackContext context)
     {
+        // ゴール到達済みならポーズ不可
+        if (isGoalReached)
+        {
+            Debug.Log("ゴール到達後のためポーズ不可");
+            return;
+        }
+
         // カウントダウン中はポーズ不可
         if (uiManager != null && uiManager.IsCountdown)
         {
@@ -399,5 +409,13 @@ public class PauseManager : MonoBehaviour
         {
             SceneManager.LoadScene("Title");
         }
+    }
+
+    /// <summary>
+    /// ゴールに到達したことを設定する
+    /// </summary>
+    public void SetGoalReached()
+    {
+        isGoalReached = true;
     }
 }
