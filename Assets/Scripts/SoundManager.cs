@@ -442,13 +442,15 @@ public class SoundManager : MonoBehaviour
     }
 
     // BGM音量を設定（全BGMに適用）
-    public void SetBGMVolume(float volume)
+    public void SetBGMVolume(float sliderValue)
     {
+        // スライダー値にカーブをかけて自然な変化に
+        float volume = Mathf.Pow(sliderValue, 2f); // 2乗カーブ（好みに応じて調整可）
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
         if (audioMixer != null)
         {
             audioMixer.SetFloat("BGMVolume", dbVolume);
-            PlayerPrefs.SetFloat("BGMVolume", volume);
+            PlayerPrefs.SetFloat("BGMVolume", sliderValue); // スライダー値を保存
         }
         if (titleBgmAudioSource != null) titleBgmAudioSource.volume = volume;
         if (menuBgmAudioSource != null) menuBgmAudioSource.volume = volume;
@@ -460,13 +462,14 @@ public class SoundManager : MonoBehaviour
     }
 
     // 効果音音量を設定（全SEに適用）
-    public void SetSEVolume(float volume)
+    public void SetSEVolume(float sliderValue)
     {
+        float volume = Mathf.Pow(sliderValue, 2f); // 2乗カーブ
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
         if (audioMixer != null)
         {
             audioMixer.SetFloat("SEVolume", dbVolume);
-            PlayerPrefs.SetFloat("SEVolume", volume);
+            PlayerPrefs.SetFloat("SEVolume", sliderValue);
         }
         if (gameClearAudioSource != null) gameClearAudioSource.volume = volume;
         if (clickAudioSource != null) clickAudioSource.volume = volume;
@@ -488,13 +491,14 @@ public class SoundManager : MonoBehaviour
     }
 
     // マスター音量を設定
-    public void SetMasterVolume(float volume)
+    public void SetMasterVolume(float sliderValue)
     {
+        float volume = Mathf.Pow(sliderValue, 2f); // 2乗カーブ
         if (audioMixer != null)
         {
             float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20;
             audioMixer.SetFloat("MasterVolume", dbVolume);
-            PlayerPrefs.SetFloat("MasterVolume", volume);
+            PlayerPrefs.SetFloat("MasterVolume", sliderValue);
         }
     }
 
