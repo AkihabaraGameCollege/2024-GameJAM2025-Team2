@@ -1018,6 +1018,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1876916116}
+    - target: {fileID: 244787373960658014, guid: 09d77a882268ce04cb16c0eee636a8f9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a16c3159baf0b1f41821c037af131c58, type: 3}
+    - target: {fileID: 2612492813117464933, guid: 09d77a882268ce04cb16c0eee636a8f9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cf24ca0024e2eb4439913920ccab06f8, type: 3}
     - target: {fileID: 5418940023130789515, guid: 09d77a882268ce04cb16c0eee636a8f9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1098,6 +1106,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5718208002792782411, guid: 09d77a882268ce04cb16c0eee636a8f9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f2ad952af6ac62449b232b6fd0f2c687, type: 3}
     - target: {fileID: 6426921198190114481, guid: 09d77a882268ce04cb16c0eee636a8f9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1114,6 +1126,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1876916116}
+    - target: {fileID: 8914169236277391496, guid: 09d77a882268ce04cb16c0eee636a8f9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e6c902d9d3f112f4c86b61423ce9bcf0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
