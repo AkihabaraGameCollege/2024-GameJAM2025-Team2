@@ -4912,14 +4912,18 @@ PrefabInstance:
     - target: {fileID: 3133431084777422305, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6148bd5f5c1df8b4e97a9f75f813b524, type: 3}
+      objectReference: {fileID: 21300000, guid: 1c89b94fe4365ec44ba3d98611ea8b59, type: 3}
+    - target: {fileID: 3390631500107201568, guid: b4cab799bb040a448917e175071784fe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 419
+      objectReference: {fileID: 0}
     - target: {fileID: 4375117767867757220, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -71
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 4375117767867757220, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -13
+      value: -38
       objectReference: {fileID: 0}
     - target: {fileID: 5026870496393226669, guid: b4cab799bb040a448917e175071784fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
