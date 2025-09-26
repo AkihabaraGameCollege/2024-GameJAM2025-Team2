@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -123,19 +122,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource uiVolumeKnobAudioSource; // UI音量設定つまみ移動時の効果音
 
-    [Header("マスター音量スライダー")]
-    [SerializeField]
-    private Slider masterVolumeSlider; // マスター音量スライダー
-
-    [Header("SE音量スライダー")]
-    [SerializeField]
-    private Slider seVolumeSlider; // 効果音音量スライダー
-
-    [Header("BGM音量スライダー")]
-    [SerializeField]
-    private Slider bgmVolumeSlider; // BGM音量スライダー
-
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -167,30 +153,6 @@ public class SoundManager : MonoBehaviour
         SetupAudioSource(uiSelectAudioSource);
         SetupAudioSource(uiDecideAudioSource);
         SetupAudioSource(uiVolumeKnobAudioSource);
-
-        // マスター音量スライダーの設定
-        if (masterVolumeSlider != null)
-        {
-            masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-            masterVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // 追加
-            masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
-        }
-
-        // 効果音音量スライダーの設定
-        if (seVolumeSlider != null)
-        {
-            seVolumeSlider.onValueChanged.AddListener(SetSEVolume);
-            seVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // 追加
-            seVolumeSlider.value = PlayerPrefs.GetFloat("SEVolume", 1f);
-        }
-
-        // BGM音量スライダーの設定
-        if (bgmVolumeSlider != null)
-        {
-            bgmVolumeSlider.onValueChanged.AddListener(SetBGMVolume);
-            bgmVolumeSlider.onValueChanged.AddListener(_ => PlayUIVolumeKnobAudio()); // 追加
-            bgmVolumeSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
-        }
 
         // シーンをまたいで音量設定を適用
         ApplySavedVolumes();
@@ -478,7 +440,6 @@ public class SoundManager : MonoBehaviour
             uiVolumeKnobAudioSource.Play();
         }
     }
-
 
     // BGM音量を設定（全BGMに適用）
     public void SetBGMVolume(float volume)

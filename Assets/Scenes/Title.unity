@@ -4809,9 +4809,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1542250127}
     - target: {fileID: 4005896865973393752, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: seVolumeSlider
+      value: 
+      objectReference: {fileID: 376007099}
+    - target: {fileID: 4005896865973393752, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: bgmVolumeSlider
+      value: 
+      objectReference: {fileID: 376007103}
+    - target: {fileID: 4005896865973393752, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
       propertyPath: soundSettingsUI
       value: 
       objectReference: {fileID: 586154908}
+    - target: {fileID: 4005896865973393752, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
+      propertyPath: masterVolumeSlider
+      value: 
+      objectReference: {fileID: 376007104}
     - target: {fileID: 4005896865973393752, guid: cdf25d24dfa06af4a960098541bdc364, type: 3}
       propertyPath: firstSelectedMenuButton
       value: 
@@ -5067,18 +5079,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3164437831418444662, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.654902
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164437831418444662, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 0.654902
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164437831418444662, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 0.654902
-      objectReference: {fileID: 0}
     - target: {fileID: 3497184811554382682, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5226,30 +5226,6 @@ PrefabInstance:
     - target: {fileID: 6756541730580270822, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7633692198684564269, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.654902
-      objectReference: {fileID: 0}
-    - target: {fileID: 7633692198684564269, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 0.654902
-      objectReference: {fileID: 0}
-    - target: {fileID: 7633692198684564269, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 0.654902
-      objectReference: {fileID: 0}
-    - target: {fileID: 8883652394904110880, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.654902
-      objectReference: {fileID: 0}
-    - target: {fileID: 8883652394904110880, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 0.654902
-      objectReference: {fileID: 0}
-    - target: {fileID: 8883652394904110880, guid: e3ba976eadc81994f93ee3732888efea, type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 0.654902
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

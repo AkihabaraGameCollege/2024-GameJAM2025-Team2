@@ -500,7 +500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6756541730580270822
 RectTransform:
   m_ObjectHideFlags: 0
@@ -542,7 +542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5356955122856936186
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1122,6 +1122,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4206418766084739795, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206418766084739795, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206418766084739795, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206418766084739795, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.8705883
       objectReference: {fileID: 0}
@@ -1166,6 +1178,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7693122523131195013, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693122523131195013, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693122523131195013, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693122523131195013, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.8705883
       objectReference: {fileID: 0}
@@ -1196,6 +1220,18 @@ PrefabInstance:
     - target: {fileID: 8681311128481428104, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
       propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681311128481428104, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681311128481428104, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681311128481428104, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.654902
       objectReference: {fileID: 0}
     - target: {fileID: 8681311128481428104, guid: 394cf2f258aa5a94d88c9cefe969a64c, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b

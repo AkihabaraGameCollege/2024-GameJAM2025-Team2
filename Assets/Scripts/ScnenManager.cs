@@ -26,8 +26,10 @@ public class ScnenManager : MonoBehaviour
     [SerializeField] private GameObject firstSelectedStageSelectButton;
     private GameObject firstSelectedResultButton;
 
-    // ネクストステージボタンの参照をInspectorで設定
-    [SerializeField] private GameObject nextStageButton;
+    // 各シーンのUIに配置したスライダーをInspectorでアサイン
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private Slider seVolumeSlider;
+    [SerializeField] private Slider bgmVolumeSlider;
 
     // SoundManagerの参照
     private SoundManager soundManager;
@@ -66,6 +68,26 @@ public class ScnenManager : MonoBehaviour
         // SoundManagerをシーン内から取得
         soundManager = Object.FindFirstObjectByType<SoundManager>();
 
+        // 音量スライダーの初期値とイベント登録
+        if (masterVolumeSlider != null)
+        {
+            masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
+            masterVolumeSlider.onValueChanged.AddListener(soundManager.SetMasterVolume);
+            masterVolumeSlider.onValueChanged.AddListener(_ => soundManager.PlayUIVolumeKnobAudio());
+        }
+        if (seVolumeSlider != null)
+        {
+            seVolumeSlider.value = PlayerPrefs.GetFloat("SEVolume", 1f);
+            seVolumeSlider.onValueChanged.AddListener(soundManager.SetSEVolume);
+            seVolumeSlider.onValueChanged.AddListener(_ => soundManager.PlayUIVolumeKnobAudio());
+        }
+        if (bgmVolumeSlider != null)
+        {
+            bgmVolumeSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
+            bgmVolumeSlider.onValueChanged.AddListener(soundManager.SetBGMVolume);
+            bgmVolumeSlider.onValueChanged.AddListener(_ => soundManager.PlayUIVolumeKnobAudio());
+        }
+
         // 最初のタイトル表示時にBGM再生（タイトル画面がアクティブな場合のみ再生）
         if (titleUI != null && titleUI.activeSelf)
         {
@@ -74,12 +96,6 @@ public class ScnenManager : MonoBehaviour
         }
         // タイトル画面表示時に最初のボタンを選択
         SelectFirstButton(firstSelectedTitleButton);
-
-        // リザルト画面の場合はShowResultUI()を呼ぶ
-        if (resultUI != null && resultUI.activeSelf)
-        {
-            ShowResultUI();
-        }
     }
 
     void Update()
@@ -202,20 +218,10 @@ public class ScnenManager : MonoBehaviour
         ShowUI("Menu");
     }
 
-    // リザルト画面を表示するメソッド（修正）
+    // リザルト画面を表示するメソッド（追加）
     public void ShowResultUI()
     {
-        Debug.Log("lastStageSceneName: " + lastStageSceneName);
         ShowUI("Result");
-
-        // PlayerStage2Sceneをゴールした場合はネクストステージボタンを非表示
-        if (nextStageButton != null)
-        {
-            if (lastStageSceneName == "PlayerStage2Scene")
-                nextStageButton.SetActive(false);
-            else
-                nextStageButton.SetActive(true);
-        }
     }
 
     // リザルト画面から次のステージシーンに遷移する仮実装メソッド
