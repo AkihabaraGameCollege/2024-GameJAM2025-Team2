@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class ScnenManager : MonoBehaviour
@@ -26,7 +27,10 @@ public class ScnenManager : MonoBehaviour
     [SerializeField] private GameObject firstSelectedHowToPlayButton;
     [SerializeField] private GameObject firstSelectedSoundSettingsButton;
     [SerializeField] private GameObject firstSelectedStageSelectButton;
-    private GameObject firstSelectedResultButton;
+
+    // リザルト画面の最初に選択するボタン（ステージ1/2用、ステージ3用を別々に設定可能）
+    [SerializeField] private GameObject firstSelectedResultButtonForNormalStages; // ステージ1・2
+    [SerializeField] private GameObject firstSelectedResultButtonForFinalStage;   // ステージ3（最終）
 
     // 各シーンのUIに配置したスライダーをInspectorでアサイン
     [SerializeField] private Slider masterVolumeSlider;
@@ -60,8 +64,8 @@ public class ScnenManager : MonoBehaviour
             { "Title", firstSelectedTitleButton },
             { "HowToPlay", firstSelectedHowToPlayButton },
             { "SoundSettings", firstSelectedSoundSettingsButton },
-            { "StageSelect", firstSelectedStageSelectButton },
-            { "Result", firstSelectedResultButton }
+            { "StageSelect", firstSelectedStageSelectButton }
+            // Result は直前ステージに応じて動的に決定
         };
     }
 
@@ -90,7 +94,7 @@ public class ScnenManager : MonoBehaviour
             bgmVolumeSlider.onValueChanged.AddListener(_ => soundManager.PlayUIVolumeKnobAudio());
         }
 
-        // 最初のタイトル表示時にBGM再生（タイトル画面がアクティブな場合のみ再生）
+        // 最初のタイトル表示時
         if (titleUI != null && titleUI.activeSelf)
         {
             soundManager?.StopAllBgmAudio();
@@ -98,10 +102,11 @@ public class ScnenManager : MonoBehaviour
             SelectFirstButton(firstSelectedTitleButton);
         }
 
-        // Result画面がアクティブな場合はネクストステージボタンの表示制御
+        // Resultがアクティブなら初期選択と可視性制御
         if (resultUI != null && resultUI.activeSelf)
         {
             UpdateNextStageButtonVisibility();
+            SelectFirstButton(GetResultFirstSelectedButton());
         }
     }
 
@@ -109,12 +114,12 @@ public class ScnenManager : MonoBehaviour
     {
     }
 
-    // 指定したGameObjectを選択する共通メソッド
+    // 指定したGameObjectを選択する共通メソッド（1フレーム遅延）
     private void SelectFirstButton(GameObject buttonObj)
     {
         if (buttonObj == null)
         {
-            Debug.LogWarning("FirstSelectedButtonが未設定です: " + buttonObj);
+            Debug.LogWarning("FirstSelectedButtonが未設定です");
             return;
         }
         if (!buttonObj.activeInHierarchy)
@@ -122,7 +127,21 @@ public class ScnenManager : MonoBehaviour
             Debug.LogWarning("FirstSelectedButtonが非アクティブです: " + buttonObj.name);
             return;
         }
-        EventSystem.current.SetSelectedGameObject(buttonObj);
+        if (EventSystem.current == null)
+        {
+            Debug.LogWarning("EventSystemが見つかりません。選択できません。");
+            return;
+        }
+        StartCoroutine(SetSelectedNextFrame(buttonObj));
+    }
+
+    private IEnumerator SetSelectedNextFrame(GameObject buttonObj)
+    {
+        yield return null; // UIのアクティブ化後に1フレーム待つ
+        if (buttonObj != null && buttonObj.activeInHierarchy && EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(buttonObj);
+        }
     }
 
     // 画面名でUIとボタンを切り替える汎用メソッド
@@ -132,14 +151,18 @@ public class ScnenManager : MonoBehaviour
         if (uiDict.TryGetValue(name, out var targetUI)) targetUI?.SetActive(true);
 
         GameObject button = null;
-        if (buttonDict.TryGetValue(name, out button) && button == null && name == "Result")
+        if (name == "Result")
         {
-            // Result画面のファーストセレクトボタンが未設定の場合、firstSelectedResultButtonを設定
-            button = firstSelectedResultButton;
+            button = GetResultFirstSelectedButton();
         }
+        else
+        {
+            buttonDict.TryGetValue(name, out button);
+        }
+
         SelectFirstButton(button);
 
-        // BGM再生（画面名で分岐）
+        // BGM再生
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -149,11 +172,10 @@ public class ScnenManager : MonoBehaviour
                 case "Menu": soundManager.PlayMenuBGM(); break;
                 case "StageSelect": soundManager.PlayStageSelectBGM(); break;
                 case "HowToPlay": soundManager.PlayHowToPlayBGM(); break;
-                case "SoundSettings": soundManager.PlayMenuBGM(); break; // サウンド設定画面でBGM再生
+                case "SoundSettings": soundManager.PlayMenuBGM(); break;
                 case "Result":
                     soundManager.StopAutoMoveAudio();
                     soundManager.PlayResultBGM();
-                    // ネクストステージボタンの表示制御
                     UpdateNextStageButtonVisibility();
                     break;
                 default: break;
@@ -161,12 +183,22 @@ public class ScnenManager : MonoBehaviour
         }
         else
         {
-            // SoundManagerが見つからない場合でもResult表示制御は実施
             if (name == "Result")
             {
                 UpdateNextStageButtonVisibility();
             }
         }
+    }
+
+    // ステージに応じてResultの初期選択ボタンを返す
+    private GameObject GetResultFirstSelectedButton()
+    {
+        // 最終ステージなら最終用、1/2なら通常用。片方未設定時はもう片方をフォールバック。
+        if (lastStageSceneName == "PlayerStage3Scene")
+        {
+            return firstSelectedResultButtonForFinalStage ?? firstSelectedResultButtonForNormalStages;
+        }
+        return firstSelectedResultButtonForNormalStages ?? firstSelectedResultButtonForFinalStage;
     }
 
     // Menuをアクティブ、Titleを非アクティブにするメソッド
@@ -190,10 +222,8 @@ public class ScnenManager : MonoBehaviour
     // ステージ1へ遷移する処理
     public void OnStage1ButtonClicked()
     {
-        lastStageSceneName = "PlayerStage1Scene"; // ステージ名を記憶
+        lastStageSceneName = "PlayerStage1Scene";
         SceneManager.LoadScene(lastStageSceneName);
-
-        // ステージBGM再生
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -204,10 +234,8 @@ public class ScnenManager : MonoBehaviour
     // ステージ2へ遷移する処理
     public void OnStage2ButtonClicked()
     {
-        lastStageSceneName = "PlayerStage2Scene"; // ステージ名を記憶
+        lastStageSceneName = "PlayerStage2Scene";
         SceneManager.LoadScene(lastStageSceneName);
-
-        // ステージBGM再生
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -215,13 +243,11 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // ステージ3へ遷移する処理（追加）
+    // ステージ3へ遷移する処理（最終）
     public void OnStage3ButtonClicked()
     {
-        lastStageSceneName = "PlayerStage3Scene"; // ステージ名を記憶
+        lastStageSceneName = "PlayerStage3Scene";
         SceneManager.LoadScene(lastStageSceneName);
-
-        // ステージBGM再生
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -235,7 +261,7 @@ public class ScnenManager : MonoBehaviour
         ShowUI("Menu");
     }
 
-    // リザルト画面を表示するメソッド（追加）
+    // リザルト画面を表示するメソッド
     public void ShowResultUI()
     {
         ShowUI("Result");
@@ -245,26 +271,20 @@ public class ScnenManager : MonoBehaviour
     public void GoToResultScene()
     {
         SceneManager.LoadScene("ResultScene");
-        // リザルトBGM再生
         if (soundManager != null)
         {
             soundManager.StopAutoMoveAudio();
             soundManager.StopAllBgmAudio();
             soundManager.PlayResultBGM();
         }
-        // ネクストステージボタンの表示制御
         UpdateNextStageButtonVisibility();
     }
 
-    // タイトルシーンへ遷移し、元のシーン名を保存
+    // タイトルシーンへ遷移
     public void GoToTitleScene()
     {
         SceneManager.LoadScene("Title");
-
-        // コントローラー対応: 最初のボタンを選択
         SelectFirstButton(firstSelectedTitleButton);
-
-        // タイトルBGM再生
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -272,18 +292,16 @@ public class ScnenManager : MonoBehaviour
         }
     }
 
-    // 任意のシーン名でリトライできるメソッドを追加
+    // 任意のシーン名でリトライ
     public void RetryScene(string sceneName)
     {
-        if (string.IsNullOrEmpty(sceneName))//とりあえずnullに
+        if (string.IsNullOrEmpty(sceneName))
         {
             Debug.LogWarning("RetryScene:遷移できません");
             return;
         }
 
         SceneManager.LoadScene(sceneName);
-
-        // ステージBGM再生
         if (soundManager != null)
         {
             soundManager.StopAllBgmAudio();
@@ -297,32 +315,30 @@ public class ScnenManager : MonoBehaviour
         RetryScene(lastStageSceneName);
     }
 
-    // 操作説明画面を表示し、メニューを非表示にするメソッド
+    // 操作説明画面の表示/非表示
     public void ShowHowToPlayAndHideMenu()
     {
         ShowUI("HowToPlay");
     }
 
-    // 操作説明画面からメニュー画面に戻るメソッド
     public void ShowMenuAndHideHowToPlay()
     {
         ShowUI("Menu");
     }
 
-    // サウンド設定画面を表示し、メニューを非表示にするメソッド
+    // サウンド設定画面の表示/非表示
     public void ShowSoundSettingsAndHideMenu()
     {
         ShowUI("SoundSettings");
     }
 
-    // サウンド設定画面からメニュー画面に戻るメソッド
     public void ShowMenuAndHideSoundSettings()
     {
         Debug.Log("ShowMenuAndHideSoundSettingsが呼ばれました");
         ShowUI("Menu");
     }
 
-    // ボタンから呼び出すメソッド
+    // 終了
     public void QuitGame()
     {
         Debug.Log("QuitGameボタンが押されました");
@@ -337,7 +353,6 @@ public class ScnenManager : MonoBehaviour
             return;
         }
 
-        // ステージ1とステージ2では表示、ステージ3では非表示
         bool showNext = lastStageSceneName == "PlayerStage1Scene"
                         || lastStageSceneName == "PlayerStage2Scene";
         nextStageButton.SetActive(showNext);
@@ -348,9 +363,15 @@ public class ScnenManager : MonoBehaviour
         string next = null;
         switch (lastStageSceneName)
         {
-            case "PlayerStage1Scene": next = "PlayerStage2Scene"; break;
-            case "PlayerStage2Scene": next = "PlayerStage3Scene"; break;
-            default: Debug.LogWarning("次のステージが定義されていません: " + lastStageSceneName); return;
+            case "PlayerStage1Scene":
+                next = "PlayerStage2Scene";
+                break;
+            case "PlayerStage2Scene":
+                next = "PlayerStage3Scene";
+                break;
+            default:
+                Debug.LogWarning("次のステージが定義されていません: " + lastStageSceneName);
+                return;
         }
 
         SceneManager.LoadScene(next);
